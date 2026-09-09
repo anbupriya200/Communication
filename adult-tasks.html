@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adult English Lounge & Fun Challenges | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link active">🎯 Adult Tasks</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        
+        <!-- IELTS Dropdown -->
+        <div class="nav-item nav-dropdown">
+          <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
+          <div class="dropdown-menu">
+            <a href="listening.html" class="dropdown-item">🎧 Listening Module</a>
+            <a href="reading.html" class="dropdown-item">📖 Reading Module</a>
+            <a href="writing.html" class="dropdown-item">✍️ Writing Module</a>
+            <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
+          </div>
+        </div>
+
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="daily-challenge.html" class="nav-link">🔥 Daily Challenge</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill credits" title="Star Coins">
+          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <div class="stat-pill xp">
+          <span>⭐</span> <span class="user-xp-display">1,850 XP</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Hero Header -->
+      <section class="adult-hub-hero">
+        <div style="max-width: 760px;">
+          <span class="badge badge-vibe" style="padding: 0.4rem 1rem; margin-bottom: 0.75rem; display: inline-block;">
+            🍸 Adult English Lounge & Cognitive Gym
+          </span>
+          <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 0.75rem; line-height: 1.25;">
+            Fun, High-Yield English Tasks for Professionals & Adults
+          </h1>
+          <p style="font-size: 1.1rem; opacity: 0.95; line-height: 1.6; margin-bottom: 1.5rem;">
+            Sharpen your real-world communication with diplomatic scenario simulators, 60-second speed idiom blitzes, rapid-fire tongue-twister accent gyms, anagram scrambles, and impromptu debate arena rebuttals.
+          </p>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="#sec-scenarios" class="btn btn-primary">💼 Workplace Dilemmas</a>
+            <a href="#sec-idiom-blitz" class="btn btn-secondary">⚡ 60s Idiom Blitz</a>
+            <a href="#sec-tongue-twisters" class="btn btn-secondary">👅 Accent & Muscle Gym</a>
+            <a href="#sec-scramble" class="btn btn-secondary">🧩 Word Scramble</a>
+            <a href="#sec-debate" class="btn btn-secondary">🎙️ Debate Arena</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. WORKPLACE & SOCIAL SCENARIO SIMULATOR -->
+      <section id="sec-scenarios" style="margin-bottom: 3.5rem;">
+        <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span class="badge badge-vibe">🎭 Interactive Dialogue Simulator</span>
+            <h2 style="font-size: 1.75rem; font-weight: 800; margin-top: 0.25rem;">Real-World Conversational Dilemmas</h2>
+            <p style="color: var(--text-muted);">Pick the most diplomatically astute, professional English response to handle tricky adult scenarios.</p>
+          </div>
+          <div style="font-weight: 700; color: var(--primary);">
+            Scenario <span id="scenario-current-num">1</span> of 4
+          </div>
+        </div>
+
+        <div class="card" id="scenario-card" style="padding: 2rem;">
+          <!-- Populated by js/adult-tasks.js -->
+        </div>
+      </section>
+
+      <!-- 2. 60-SECOND SPEED IDIOM BLITZ -->
+      <section id="sec-idiom-blitz" style="margin-bottom: 3.5rem;">
+        <div class="card" style="padding: 2.25rem; text-align: center; position: relative; overflow: hidden;">
+          <span class="badge badge-vibe" style="margin-bottom: 0.5rem; display: inline-block;">⚡ Rapid-Fire Cognition</span>
+          <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">60-Second Speed Idiom Blitz</h2>
+          <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 1.5rem;">
+            Test your command of contemporary English idioms against the clock. Earn +10 Star Coins for every correct match!
+          </p>
+
+          <div style="display: flex; justify-content: center; gap: 2rem; align-items: center; margin-bottom: 2rem;">
+            <div>
+              <div class="timer-countdown-circle" id="blitz-timer">60</div>
+              <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Seconds Remaining</div>
+            </div>
+            <div>
+              <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-emerald);" id="blitz-score">0</div>
+              <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">Points Scored</div>
+            </div>
+          </div>
+
+          <div id="blitz-game-area">
+            <button class="btn btn-primary btn-lg" onclick="AdultTasks.startBlitzGame()">
+              🚀 Start 60-Second Challenge
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ACCENT GYM & RAPID TONGUE-TWISTERS -->
+      <section id="sec-tongue-twisters" style="margin-bottom: 3.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <span class="badge badge-vibe">👅 Oral Motor Mastery</span>
+          <h2 style="font-size: 1.75rem; font-weight: 800; margin-top: 0.25rem;">Accent Gym & Tongue-Twister Studio</h2>
+          <p style="color: var(--text-muted);">Elite pronunciation workouts designed to sharpen tongue agility, eliminate mother-tongue influence (MTI), and improve cadence.</p>
+        </div>
+
+        <div class="grid-2" id="twisters-grid" style="gap: 1.5rem;">
+          <!-- Populated by js/adult-tasks.js -->
+        </div>
+      </section>
+
+      <!-- 4. COGNITIVE WORD SCRAMBLE -->
+      <section id="sec-scramble" style="margin-bottom: 3.5rem;">
+        <div class="card" style="padding: 2.25rem; text-align: center;">
+          <span class="badge badge-vibe" style="margin-bottom: 0.5rem; display: inline-block;">🧠 Adult Brain-Teaser</span>
+          <h2 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem;">Sophisticated Word Anagram Buster</h2>
+          <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem;">
+            Unscramble the jumbled letters to reveal high-level professional vocabulary words.
+          </p>
+
+          <div id="scramble-game-box">
+            <!-- Populated by js/adult-tasks.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. DEBATE & PERSUASION ARENA -->
+      <section id="sec-debate" style="margin-bottom: 3.5rem;">
+        <div style="margin-bottom: 1.5rem;">
+          <span class="badge badge-vibe">🎙️ Rhetorical Articulation</span>
+          <h2 style="font-size: 1.75rem; font-weight: 800; margin-top: 0.25rem;">The Impromptu Debate Arena</h2>
+          <p style="color: var(--text-muted);">Listen to a provocative contemporary proposition, analyze the counter-argument, and practice persuasive oratorical rebuttal templates.</p>
+        </div>
+
+        <div class="card" id="debate-card" style="padding: 2rem;">
+          <!-- Populated by js/adult-tasks.js -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-color); padding: 2.5rem 0; margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+    <div class="container">
+      <p>FluentPath Adult English Lounge • High-Impact Professional & Conversational Mastery</p>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/adult-tasks.js"></script>
+</body>
+</html>

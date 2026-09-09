@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Corner – Early English & Fun Learning Games | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link active">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        
+        <!-- IELTS Dropdown -->
+        <div class="nav-item nav-dropdown">
+          <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
+          <div class="dropdown-menu">
+            <a href="listening.html" class="dropdown-item">🎧 Listening Module</a>
+            <a href="reading.html" class="dropdown-item">📖 Reading Module</a>
+            <a href="writing.html" class="dropdown-item">✍️ Writing Module</a>
+            <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
+          </div>
+        </div>
+
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="daily-challenge.html" class="nav-link">🔥 Daily Challenge</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill credits" title="Earn Star Coins by playing games!">
+          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <div class="stat-pill xp">
+          <span>⭐</span> <span class="user-xp-display">1,850 XP</span>
+        </div>
+
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+          <span class="user-name-display" style="font-size: 0.85rem; font-weight: 700; display: none; @media(min-width:992px){display:inline;}">Aarav</span>
+        </a>
+
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Hero Banner with AI Cartoon Animals -->
+      <section class="kids-hero-banner">
+        <div class="kids-hero-content">
+          <span class="badge badge-vibe" style="margin-bottom:0.75rem; display:inline-block; padding:0.4rem 0.9rem;">
+            🐣 Beginner Kids Academy • Learn From Scratch
+          </span>
+          <h1 class="kids-hero-title">Welcome to Kids Corner! 🦁</h1>
+          <p style="font-size: 1.1rem; opacity: 0.95; margin-bottom: 1.5rem; line-height: 1.6;">
+            Learn English from the very beginning with interactive audio alphabets, counting numbers, colors, cartoon animal sound games, and earn <b>Star Coins</b> for every level completed!
+          </p>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <a href="#kids-modules" class="btn btn-secondary btn-lg" style="background:#ffffff; color:#4f46e5; font-weight:800;">
+              🚀 Start Learning
+            </a>
+            <div style="display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.2); padding:0.5rem 1rem; border-radius:var(--radius-full);">
+              <span>🪙 Star Coins Balance:</span>
+              <span class="user-credits-display" style="font-weight:800;">150 Coins</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kids-hero-image-wrapper">
+          <img src="images/kids_learning_hero.jpg" alt="Kids Learning Classroom Cartoon Animals" style="width:100%; display:block;">
+        </div>
+      </section>
+
+      <!-- Kids Corner Navigation Tabs -->
+      <section id="kids-modules" style="margin-bottom: 2rem;">
+        <div class="kids-tabs">
+          <button class="kids-tab-btn active" data-tab="alphabet">🔤 Alphabet A-Z</button>
+          <button class="kids-tab-btn" data-tab="numbers">🔢 Numbers 1-10</button>
+          <button class="kids-tab-btn" data-tab="colors">🎨 Colors & Shapes</button>
+          <button class="kids-tab-btn" data-tab="rhymes">🎵 Sing-Along Rhymes</button>
+          <button class="kids-tab-btn" data-tab="phonics">🧩 Phonics Word Builder</button>
+          <button class="kids-tab-btn" data-tab="stories">📖 Picture Storybook</button>
+          <button class="kids-tab-btn" data-tab="game-memory">🃏 Animal Memory Game</button>
+          <button class="kids-tab-btn" data-tab="game-quiz">❓ Animal & Phonics Quiz</button>
+          <button class="kids-tab-btn" data-tab="rewards">🎁 Star Coins Shop</button>
+        </div>
+      </section>
+
+      <!-- 1. ALPHABET TAB -->
+      <section id="sec-alphabet" class="kids-section-content">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.75rem; font-weight: 800;">🔤 Learn Alphabet & Phonics</h2>
+          <p style="color: var(--text-muted);">Tap any letter card to hear the native English audio pronunciation!</p>
+        </div>
+        <div class="kids-grid" id="alphabet-grid">
+          <!-- Populated dynamically by kids-learning.js -->
+        </div>
+      </section>
+
+      <!-- 2. NUMBERS TAB -->
+      <section id="sec-numbers" class="kids-section-content" style="display: none;">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.75rem; font-weight: 800;">🔢 Learn Numbers & Counting</h2>
+          <p style="color: var(--text-muted);">Tap to count the cute cartoon animals out loud!</p>
+        </div>
+        <div class="kids-grid" id="numbers-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- 3. COLORS & SHAPES TAB -->
+      <section id="sec-colors" class="kids-section-content" style="display: none;">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.75rem; font-weight: 800;">🎨 Colors & Geometric Shapes</h2>
+          <p style="color: var(--text-muted);">Discover vibrant colors and fun shapes with instant TTS sound!</p>
+        </div>
+        <div class="kids-grid" id="colors-grid">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- 4. RHYMES & SING-ALONG TAB -->
+      <section id="sec-rhymes" class="kids-section-content" style="display: none;">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.75rem; font-weight: 800;">🎵 Nursery Rhymes & Sing-Along</h2>
+          <p style="color: var(--text-muted);">Listen to cheerful nursery rhymes, read along with highlighted lyrics, and practice singing!</p>
+        </div>
+        <div class="grid-2" id="rhymes-grid" style="gap: 1.5rem;">
+          <!-- Populated dynamically by kids-learning.js -->
+        </div>
+      </section>
+
+      <!-- 5. PHONICS WORD BUILDER TAB -->
+      <section id="sec-phonics" class="kids-section-content" style="display: none;">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.75rem; font-weight: 800;">🧩 Phonics 3-Letter Word Builder</h2>
+          <p style="color: var(--text-muted);">Tap the letters in the correct order to spell the word for the cartoon image and earn +20 Star Coins!</p>
+        </div>
+        <div id="phonics-container">
+          <!-- Populated dynamically by kids-learning.js -->
+        </div>
+      </section>
+
+      <!-- 6. PICTURE STORYBOOK TAB -->
+      <section id="sec-stories" class="kids-section-content" style="display: none;">
+        <div style="margin-bottom: 1.5rem;">
+          <h2 style="font-size: 1.75rem; font-weight: 800;">📖 Illustrated Picture Storybook</h2>
+          <p style="color: var(--text-muted);">Follow Barnaby Bear on an exciting animated safari adventure with read-aloud voice!</p>
+        </div>
+        <div id="story-container">
+          <!-- Populated dynamically by kids-learning.js -->
+        </div>
+      </section>
+      <section id="sec-game-memory" class="kids-section-content" style="display: none;">
+        <div class="game-container-box">
+          <div style="text-align: center; margin-bottom: 1rem;">
+            <span class="badge badge-vibe">🎮 Educational Mini-Game</span>
+            <h2 style="font-size: 2rem; font-weight: 800; margin-top: 0.5rem;">🃏 Animal Memory Card Match</h2>
+            <p id="memory-status" style="color: var(--text-muted); font-size: 1.1rem; font-weight: 600;">
+              Flip cards to match identical cartoon animals and win +25 Star Coins!
+            </p>
+          </div>
+
+          <div class="memory-grid" id="memory-grid">
+            <!-- Memory cards generated by JS -->
+          </div>
+
+          <div style="text-align: center; margin-top: 1.5rem;">
+            <button onclick="KidsCorner.initMemoryGame()" class="btn btn-primary">
+              🔄 Play Again / Reset Game
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ANIMAL & PHONICS QUIZ TAB -->
+      <section id="sec-game-quiz" class="kids-section-content" style="display: none;">
+        <div class="game-container-box">
+          <div style="text-align: center; margin-bottom: 1rem;">
+            <span class="badge badge-vibe">💡 Sound & Phonics Quiz</span>
+            <h2 style="font-size: 2rem; font-weight: 800; margin-top: 0.5rem;">❓ Cartoon Animal Sound Quiz</h2>
+            <p style="color: var(--text-muted);">Listen carefully and choose the correct answer to earn Star Coins!</p>
+          </div>
+
+          <div id="quiz-container">
+            <!-- Quiz populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. STAR COINS SHOP & CREDITS REWARDS -->
+      <section id="sec-rewards" class="kids-section-content" style="display: none;">
+        <div class="game-container-box">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem; border-bottom:1px solid var(--border-color); padding-bottom:1.5rem;">
+            <div>
+              <h2 style="font-size: 2rem; font-weight: 800;">🎁 Star Coins Shop & Badge Trophies</h2>
+              <p style="color: var(--text-muted);">Spend your game credits to unlock cute animal badges and avatar stickers!</p>
+            </div>
+            <div style="background:var(--vibe-gradient-soft); border:2px solid var(--vibe-pink); padding:0.75rem 1.5rem; border-radius:var(--radius-lg); font-size:1.2rem; font-weight:800;">
+              <span>🪙 Current Coins:</span> <span class="user-credits-display" style="color:var(--accent-amber);">150 Coins</span>
+            </div>
+          </div>
+
+          <div class="grid-3" style="gap:1.5rem;">
+            <!-- Reward 1 -->
+            <div class="card" style="text-align:center; padding:1.5rem;">
+              <div style="width:80px; height:80px; margin:0 auto 1rem; border-radius:50%; background:linear-gradient(135deg, #f59e0b, #d97706); display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(245, 158, 11, 0.35); border:3px solid #fef3c7;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </div>
+              <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:0.25rem;">Golden Wise Owl Badge</h3>
+              <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:1rem;">Master of Phonics & Alphabet</p>
+              <button id="reward-golden-wise-owl-badge" class="btn btn-primary btn-block" onclick="KidsCorner.buyReward(50, 'Golden Wise Owl Badge')">
+                Unlock for 🪙 50 Coins
+              </button>
+            </div>
+
+            <!-- Reward 2 -->
+            <div class="card" style="text-align:center; padding:1.5rem;">
+              <div style="width:80px; height:80px; margin:0 auto 1rem; border-radius:50%; background:linear-gradient(135deg, #ec4899, #be185d); display:flex; align-items:center; justify-content:center; box-shadow:0 8px 18px rgba(236, 72, 153, 0.35); border:3px solid #fce7f3;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+              </div>
+              <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:0.25rem;">Safari Explorer Medal</h3>
+              <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:1rem;">Hero of Animal Sounds & Quiz</p>
+              <button id="reward-safari-explorer-title" class="btn btn-primary btn-block" onclick="KidsCorner.buyReward(100, 'Safari Explorer Medal')">
+                Unlock for 🪙 100 Coins
+              </button>
+            </div>
+
+            <!-- Reward 3 -->
+            <div class="card" style="text-align:center; padding:1.5rem;">
+              <div style="width:80px; height:80px; margin:0 auto 1rem; border-radius:50%; overflow:hidden; border:3px solid #6366f1; box-shadow:0 8px 18px rgba(99, 102, 241, 0.35);">
+                <img src="images/game_credits_mascot.jpg" alt="Super Bear Mascot" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:0.25rem;">Super Bear Mascot Trophy</h3>
+              <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:1rem;">Legendary Kids Corner Champion</p>
+              <button id="reward-super-bear-mascot-avatar" class="btn btn-primary btn-block" onclick="KidsCorner.buyReward(150, 'Super Bear Mascot Trophy')">
+                Unlock for 🪙 150 Coins
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-color); padding: 2rem 0; margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+    <div class="container">
+      <p>FluentPath Kids Corner • Interactive Early English Learning & Game Credits Engine</p>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/kids-learning.js"></script>
+</body>
+</html>

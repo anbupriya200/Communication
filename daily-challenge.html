@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily English Challenge & Achievements | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .challenge-task-card {
+      background: var(--bg-surface-solid);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+    }
+    .challenge-task-card.completed {
+      border-color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.04);
+    }
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .achievement-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .achievement-card.unlocked {
+      border-color: var(--accent-amber);
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="speaking.html" class="nav-link">🎤 Speaking</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="daily-challenge.html" class="nav-link active">🔥 Daily Challenge</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill credits" title="Game Star Coins">
+          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <div class="stat-pill xp">
+          <span>⭐</span> <span class="user-xp-display">1,850 XP</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Page Header -->
+      <div class="page-header" style="text-align: center;">
+        <div class="page-title" style="justify-content: center;">
+          <span class="emoji">🔥</span>
+          <h1>Today's Gamified Daily Challenge</h1>
+        </div>
+        <p class="page-subtitle" style="margin: 0 auto;">
+          Complete all 4 daily mini-missions to earn a +150 XP bonus, maintain your streak, and unlock prestige badges.
+        </p>
+      </div>
+
+      <!-- Challenge Progress Card -->
+      <div class="card glass-card" style="margin-bottom: 2rem; padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h2 style="font-size: 1.4rem;">TODAY'S CHALLENGE PROGRESS</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Resets in 12 hours 45 minutes</p>
+          </div>
+          <span class="badge badge-emerald" style="font-size: 1.1rem; padding: 0.4rem 1rem;" id="challenge-status-text">
+            3 / 4 Completed
+          </span>
+        </div>
+
+        <div class="progress-bar-container" style="height: 12px;">
+          <div class="progress-bar-fill emerald" id="challenge-progress-bar" style="width: 75%;"></div>
+        </div>
+      </div>
+
+      <!-- 4 Challenge Tasks -->
+      <div style="margin-bottom: 3rem;">
+        
+        <!-- Task 1: Speaking -->
+        <div class="challenge-task-card completed" id="task-card-1">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="font-size: 2rem;">🎤</div>
+            <div>
+              <strong style="font-size: 1.1rem; color: var(--text-main); display: block;">
+                Speak for 1 minute
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">
+                Complete a 1-minute impromptu challenge in the Speaking Simulator.
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="badge badge-emerald" id="task-badge-1">✓ Done (+50 XP)</span>
+            <input type="checkbox" checked onchange="toggleTask(1, this.checked)" style="width: 20px; height: 20px; accent-color: var(--accent-emerald);">
+          </div>
+        </div>
+
+        <!-- Task 2: Vocabulary -->
+        <div class="challenge-task-card completed" id="task-card-2">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="font-size: 2rem;">📚</div>
+            <div>
+              <strong style="font-size: 1.1rem; color: var(--text-main); display: block;">
+                Learn 5 vocabulary words
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">
+                Listen to native pronunciations and mark 5 new flashcards as learned.
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="badge badge-emerald" id="task-badge-2">✓ Done (+50 XP)</span>
+            <input type="checkbox" checked onchange="toggleTask(2, this.checked)" style="width: 20px; height: 20px; accent-color: var(--accent-emerald);">
+          </div>
+        </div>
+
+        <!-- Task 3: Grammar -->
+        <div class="challenge-task-card completed" id="task-card-3">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="font-size: 2rem;">🔤</div>
+            <div>
+              <strong style="font-size: 1.1rem; color: var(--text-main); display: block;">
+                Complete 5 grammar questions
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">
+                Take any topic quiz in the Grammar Hub with 80%+ accuracy.
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="badge badge-emerald" id="task-badge-3">✓ Done (+50 XP)</span>
+            <input type="checkbox" checked onchange="toggleTask(3, this.checked)" style="width: 20px; height: 20px; accent-color: var(--accent-emerald);">
+          </div>
+        </div>
+
+        <!-- Task 4: Writing -->
+        <div class="challenge-task-card" id="task-card-4">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="font-size: 2rem;">✍️</div>
+            <div>
+              <strong style="font-size: 1.1rem; color: var(--text-main); display: block;">
+                Write 100 words
+              </strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">
+                Draft at least 100 words in the IELTS Writing Task 1 or 2 editor.
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="badge badge-amber" id="task-badge-4">Incomplete (+50 XP)</span>
+            <input type="checkbox" onchange="toggleTask(4, this.checked)" style="width: 20px; height: 20px; accent-color: var(--accent-emerald);">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Achievement Badges Showcase -->
+      <div class="card" style="margin-bottom: 3rem;">
+        <div class="card-header">
+          <span class="card-title">🏆 Student Achievement Badges</span>
+          <span class="badge badge-amber">4 / 6 Unlocked</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          Earn badges through consistent practice streaks, mock tests, and vocabulary mastery:
+        </p>
+
+        <div class="badge-grid">
+          
+          <div class="achievement-card unlocked">
+            <div style="font-size: 2.25rem; margin-bottom: 0.35rem;">🔥</div>
+            <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">7-Day Streak Master</strong>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Maintained study streak for 7 consecutive days.</p>
+            <span class="badge badge-emerald" style="margin-top: 0.5rem;">Unlocked</span>
+          </div>
+
+          <div class="achievement-card unlocked">
+            <div style="font-size: 2.25rem; margin-bottom: 0.35rem;">📚</div>
+            <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Vocab Pioneer</strong>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Mastered over 200 advanced academic words.</p>
+            <span class="badge badge-emerald" style="margin-top: 0.5rem;">Unlocked</span>
+          </div>
+
+          <div class="achievement-card unlocked">
+            <div style="font-size: 2.25rem; margin-bottom: 0.35rem;">✍️</div>
+            <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Essay Strategist</strong>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Drafted 5 full IELTS Task 2 discursive essays.</p>
+            <span class="badge badge-emerald" style="margin-top: 0.5rem;">Unlocked</span>
+          </div>
+
+          <div class="achievement-card unlocked">
+            <div style="font-size: 2.25rem; margin-bottom: 0.35rem;">🎙️</div>
+            <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Speaking Maverick</strong>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Completed 10 impromptu speech challenges.</p>
+            <span class="badge badge-emerald" style="margin-top: 0.5rem;">Unlocked</span>
+          </div>
+
+          <div class="achievement-card">
+            <div style="font-size: 2.25rem; margin-bottom: 0.35rem; opacity: 0.5;">🌟</div>
+            <strong style="font-size: 0.95rem; color: var(--text-muted); display: block;">Band 8.0 Champion</strong>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Attain an overall practice band of 8.0 in a mock test.</p>
+            <span class="badge badge-neutral" style="margin-top: 0.5rem;">Locked</span>
+          </div>
+
+          <div class="achievement-card">
+            <div style="font-size: 2.25rem; margin-bottom: 0.35rem; opacity: 0.5;">⚡</div>
+            <strong style="font-size: 0.95rem; color: var(--text-muted); display: block;">30-Day Legend</strong>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Reach 30 uninterrupted days of practice.</p>
+            <span class="badge badge-neutral" style="margin-top: 0.5rem;">Locked (14/30)</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Gamified Daily Challenges</div>
+        <div><a href="dashboard.html" style="color: var(--primary);">Return to Dashboard ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    let completedState = { 1: true, 2: true, 3: true, 4: false };
+
+    function toggleTask(taskNum, isChecked) {
+      completedState[taskNum] = isChecked;
+      const card = document.getElementById(`task-card-${taskNum}`);
+      const badge = document.getElementById(`task-badge-${taskNum}`);
+
+      if (isChecked) {
+        card.classList.add("completed");
+        badge.className = "badge badge-emerald";
+        badge.textContent = "✓ Done (+50 XP)";
+        FluentPath.playSuccessChime();
+        FluentPath.showToast("Mission completed! +50 XP awarded!", "success");
+
+        const user = FluentPath.getUser();
+        if (user) {
+          user.xp = (user.xp || 1850) + 50;
+          FluentPath.saveUser(user);
+        }
+      } else {
+        card.classList.remove("completed");
+        badge.className = "badge badge-amber";
+        badge.textContent = "Incomplete (+50 XP)";
+      }
+
+      updateDailyProgress();
+    }
+
+    function updateDailyProgress() {
+      const doneCount = Object.values(completedState).filter(Boolean).length;
+      document.getElementById("challenge-status-text").textContent = `${doneCount} / 4 Completed`;
+      const pct = (doneCount / 4) * 100;
+      document.getElementById("challenge-progress-bar").style.width = `${pct}%`;
+
+      if (doneCount === 4) {
+        FluentPath.showToast("🎉 AMAZING! All 4 daily challenges completed! +100 Bonus XP!", "success");
+        const user = FluentPath.getUser();
+        if (user) {
+          user.xp = (user.xp || 1850) + 100;
+          FluentPath.saveUser(user);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

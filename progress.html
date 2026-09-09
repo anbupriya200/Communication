@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Progress & Analytics Dashboard | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .streak-calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .streak-day-box {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      font-weight: 700;
+    }
+    .streak-day-box.active {
+      background: rgba(234, 88, 12, 0.15);
+      border-color: rgba(234, 88, 12, 0.35);
+      color: #ea580c;
+    }
+    .chart-container-card {
+      background: var(--bg-surface-solid);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link active">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill credits" title="Game Star Coins">
+          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Page Header -->
+      <div class="page-header page-header-flex">
+        <div>
+          <div class="page-title">
+            <span class="emoji">📊</span>
+            <h1>Learning Progress & Skill Analytics</h1>
+          </div>
+          <p class="page-subtitle">
+            Comprehensive breakdown of study time, individual skill masteries, mock exam scores, and streak consistency.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="daily-challenge.html" class="btn btn-emerald">
+            🔥 Daily Challenge (3/4)
+          </a>
+        </div>
+      </div>
+
+      <!-- Overall Progress Hero Bar -->
+      <div class="card glass-card" style="margin-bottom: 2rem; padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">Overall Syllabus Mastery</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Aggregated completion across English Communication and IELTS curriculum.</p>
+          </div>
+          <span style="font-size: 2rem; font-weight: 800; color: var(--primary);">76%</span>
+        </div>
+        <div class="progress-bar-container" style="height: 12px;">
+          <div class="progress-bar-fill" style="width: 76%;"></div>
+        </div>
+      </div>
+
+      <!-- Skill-by-Skill Progress Bars Grid -->
+      <div class="card" style="margin-bottom: 2.5rem;">
+        <div class="card-header">
+          <span class="card-title">🎯 Competency Breakdown by Module</span>
+          <span class="badge badge-primary">6 Core Areas</span>
+        </div>
+
+        <div class="grid-2" style="gap: 1.5rem; margin-top: 0.5rem;">
+          
+          <!-- 1. Listening -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              <span>🎧 Listening (Sections 1–4)</span>
+              <span style="color: var(--primary);">78%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 78%;"></div>
+            </div>
+          </div>
+
+          <!-- 2. Reading -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              <span>📖 Reading (Academic Passages)</span>
+              <span style="color: var(--secondary);">72%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 72%; background: linear-gradient(90deg, #7c3aed, #a855f7);"></div>
+            </div>
+          </div>
+
+          <!-- 3. Writing -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              <span>✍️ Writing (Task 1 & Task 2)</span>
+              <span style="color: var(--accent-amber);">65%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill amber" style="width: 65%;"></div>
+            </div>
+          </div>
+
+          <!-- 4. Speaking -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              <span>🎤 Speaking Fluency & Prompts</span>
+              <span style="color: var(--accent-emerald);">70%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill emerald" style="width: 70%;"></div>
+            </div>
+          </div>
+
+          <!-- 5. Vocabulary -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              <span>📚 Vocabulary Flashcards Mastered</span>
+              <span style="color: var(--primary);">84%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 84%;"></div>
+            </div>
+          </div>
+
+          <!-- 6. Grammar -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem;">
+              <span>🔤 Grammar Rules & Practice Quizzes</span>
+              <span style="color: var(--accent-emerald);">80%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill emerald" style="width: 80%;"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Charts Section: Weekly Activity & Band Trajectory -->
+      <div class="grid-2" style="margin-bottom: 2.5rem;">
+        
+        <!-- Chart 1: Weekly Study Activity -->
+        <div class="chart-container-card">
+          <div class="card-header">
+            <span class="card-title" style="font-size: 1.1rem;">📅 Weekly Learning Activity</span>
+            <span class="badge badge-emerald">13.9 Hours Total</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Daily study time recorded across speech practice, quizzes, and reading.
+          </p>
+          <canvas id="weekly-activity-canvas" width="480" height="240" style="width: 100%; height: 240px;"></canvas>
+        </div>
+
+        <!-- Chart 2: Practice Band Trajectory -->
+        <div class="chart-container-card">
+          <div class="card-header">
+            <span class="card-title" style="font-size: 1.1rem;">📈 IELTS Band Score Trajectory</span>
+            <span class="badge badge-primary">Target: Band 7.5</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Progression from diagnostic baseline (5.5) toward target band (7.5).
+          </p>
+          <canvas id="band-trajectory-canvas" width="480" height="240" style="width: 100%; height: 240px;"></canvas>
+        </div>
+
+      </div>
+
+      <!-- Streak & Test History Row -->
+      <div class="grid-2" style="margin-bottom: 3rem;">
+        
+        <!-- Daily Streak Calendar -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🔥 14-Day Study Streak</span>
+            <span class="badge badge-amber">Active Streak</span>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Study every day for at least 15 minutes to preserve your streak multiplier!
+          </p>
+          <div class="streak-calendar-grid">
+            <div class="streak-day-box active"><span>Mon</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Tue</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Wed</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Thu</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Fri</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Sat</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Sun</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Mon</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Tue</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Wed</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Thu</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Fri</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Sat</span><span>✓</span></div>
+            <div class="streak-day-box active"><span>Sun</span><span>🔥</span></div>
+          </div>
+        </div>
+
+        <!-- Recent Mock Exam History -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📝 Completed Mock Tests</span>
+            <a href="mocktest.html" class="btn btn-secondary btn-sm">Take New Test</a>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+              <div>
+                <strong style="display: block; font-size: 0.9rem;">Full Mock Exam #6</strong>
+                <span style="font-size: 0.775rem; color: var(--text-muted);">Yesterday • 42 mins</span>
+              </div>
+              <span class="badge badge-emerald">Band 6.5</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+              <div>
+                <strong style="display: block; font-size: 0.9rem;">Academic Reading Drill #4</strong>
+                <span style="font-size: 0.775rem; color: var(--text-muted);">3 days ago • 18 mins</span>
+              </div>
+              <span class="badge badge-primary">Band 7.0</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+              <div>
+                <strong style="display: block; font-size: 0.9rem;">Writing Task 1 & 2 Session</strong>
+                <span style="font-size: 0.775rem; color: var(--text-muted);">5 days ago • 55 mins</span>
+              </div>
+              <span class="badge badge-amber">Band 6.0</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Progress & Learning Analytics</div>
+        <div><a href="dashboard.html" style="color: var(--primary);">Return to Dashboard ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/progress.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Path & Duolingo Levels | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link active">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        
+        <!-- IELTS Dropdown -->
+        <div class="nav-item nav-dropdown">
+          <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
+          <div class="dropdown-menu">
+            <a href="listening.html" class="dropdown-item">🎧 Listening Module</a>
+            <a href="reading.html" class="dropdown-item">📖 Reading Module</a>
+            <a href="writing.html" class="dropdown-item">✍️ Writing Module</a>
+            <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
+          </div>
+        </div>
+
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="daily-challenge.html" class="nav-link">🔥 Daily Challenge</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill credits" title="Star Coins">
+          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <div class="stat-pill xp">
+          <span>⭐</span> <span class="user-xp-display">1,850 XP</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+
+      <!-- Duolingo-style Top Stats Bar -->
+      <div class="duo-header-bar">
+        <div class="duo-stat-item" style="color: #ef4444;">
+          <img src="images/icon-heart.svg" class="stat-icon-img" alt="Hearts">
+          <span id="duo-hearts-display">5 / 5 Lives</span>
+        </div>
+        <div class="duo-stat-item" style="color: #f59e0b;">
+          <img src="images/icon-flame.svg" class="stat-icon-img" alt="Streak">
+          <span id="duo-streak-display">14 Day Streak</span>
+        </div>
+        <div class="duo-stat-item" style="color: #6366f1;">
+          <img src="images/icon-star.svg" class="stat-icon-img" alt="XP">
+          <span id="duo-xp-display">1,850 XP</span>
+        </div>
+        <div class="duo-stat-item" style="color: #10b981;">
+          <img src="images/icon-coin.svg" class="stat-icon-img" alt="Coins">
+          <span id="duo-coins-display">150 Coins</span>
+        </div>
+      </div>
+
+      <!-- Page Header Banner -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="badge badge-vibe" style="padding: 0.4rem 1rem; font-size: 0.85rem; margin-bottom: 0.75rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+          <img src="images/icon-star.svg" style="width:16px; height:16px;" alt="Path"> Fluency Learning Trail
+        </span>
+        <h1 style="font-size: 2.4rem; font-weight: 800; margin-bottom: 0.5rem;">English Mastery Journey</h1>
+        <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto;">
+          Follow the stepping-stone learning trail. Complete bite-sized challenges, protect your lives, earn crowns, and guide Cleo the Cat to ultimate IELTS mastery!
+        </p>
+      </div>
+
+      <!-- Companion Banner Card featuring AI Cleo Cat -->
+      <div class="kangaroo-mascot-card">
+        <div class="kangaroo-avatar-container" style="display:flex; gap:0.5rem; align-items:center;">
+          <img src="images/cleo-cat-jump.jpg" alt="Cleo the Cat Jumping" class="kangaroo-img ai-generated-card-img" style="width:70px; height:70px; border-radius:var(--radius-md);">
+          <img src="images/kangaroo-mascot.svg" alt="Joey the Kangaroo" class="kangaroo-img" style="width:60px; height:60px;">
+        </div>
+        <div class="kangaroo-speech-bubble">
+          <div class="kangaroo-title">
+            <span>🐱 Cleo the Cat & 🦘 Joey the Kangaroo</span>
+            <span class="badge badge-vibe" style="font-size:0.7rem; padding:0.15rem 0.5rem;">AI Interactive Guides</span>
+          </div>
+          <p class="kangaroo-text">
+            "Watch <b>Cleo the Cat</b> jump forward to the next level node when you complete a level! Listen as questions & explanations are spoken automatically!"
+          </p>
+        </div>
+      </div>
+
+      <!-- Path Render Target -->
+      <div id="duo-units-container">
+        <!-- Rendered dynamically by js/levels.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Duolingo Lesson / Quiz Modal -->
+  <div class="duo-modal-backdrop" id="duo-lesson-modal">
+    <div class="duo-modal-box">
+      
+      <!-- Modal Top Bar -->
+      <div class="duo-modal-top">
+        <button class="btn btn-sm" id="duo-modal-close" style="background:transparent; font-size:1.4rem; color:var(--text-muted); cursor:pointer;">✕</button>
+        <button class="btn btn-sm" id="duo-voice-toggle" onclick="DuoLevels.toggleVoice()" style="background:var(--vibe-gradient-soft); font-size:0.8rem; font-weight:700; color:var(--primary); cursor:pointer; border-radius:var(--radius-full); padding:0.25rem 0.65rem; border:1px solid var(--border-color);" title="Toggle automatic question voice">🔊 Auto-Voice ON</button>
+        <div class="duo-progress-line">
+          <div class="duo-progress-fill" id="duo-quiz-progress" style="width: 25%;"></div>
+        </div>
+        <div style="font-weight:800; color:#ef4444; display:flex; align-items:center; gap:0.35rem;">
+          <img src="images/icon-heart.svg" class="stat-icon-img" alt="Hearts" style="width:22px; height:22px;">
+          <span id="duo-modal-hearts">5</span>
+        </div>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="duo-modal-body" id="duo-modal-body">
+        <!-- Rendered dynamically by js/levels.js -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="duo-modal-footer">
+        <div id="duo-feedback-text" style="font-weight:700; font-size:1rem;"></div>
+        <button class="btn btn-primary btn-lg" id="duo-submit-btn" style="min-width: 140px;">
+          Check Answer ➔
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-color); padding: 2.5rem 0; margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+    <div class="container">
+      <p>FluentPath Duolingo-Style Fluency Path • Gamified English & IELTS Mastery</p>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/levels.js"></script>
+</body>
+</html>

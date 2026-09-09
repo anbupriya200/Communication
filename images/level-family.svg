@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="famGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="12" width="76" height="76" rx="18" fill="url(#famGrad)"/>
+  <!-- Two People Heads & Shoulders -->
+  <circle cx="36" cy="38" r="12" fill="#ffffff"/>
+  <circle cx="64" cy="38" r="12" fill="#ffffff"/>
+  <path d="M 18 76 C 18 55 54 55 54 76 Z" fill="#ffffff"/>
+  <path d="M 46 76 C 46 55 82 55 82 76 Z" fill="#ffffff" opacity="0.85"/>
+</svg>

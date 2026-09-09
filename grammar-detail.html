@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Lesson & Quiz – FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .grammar-rule-box {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link active">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Back Link & Header -->
+      <div style="margin-bottom: 1.5rem;">
+        <a href="grammar.html" class="btn btn-secondary btn-sm" style="margin-bottom: 1rem;">
+          ← Back to All Grammar Topics
+        </a>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div class="page-title" style="margin-bottom: 0;">
+            <span class="emoji" id="grammar-icon">⏳</span>
+            <h1 id="grammar-title">Tenses & Aspect</h1>
+          </div>
+          <span class="badge badge-primary" id="grammar-badge">Core Grammar</span>
+        </div>
+      </div>
+
+      <!-- Quick Switcher Dropdown for All 10 Grammar Topics -->
+      <div style="margin-bottom: 2rem; background: var(--bg-surface); padding: 0.85rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);">Jump to Topic:</span>
+        <select id="grammar-selector" class="form-control" style="width: auto; font-weight: 600;">
+          <option value="tenses">1. Tenses & Aspect</option>
+          <option value="articles">2. Articles (A, An, The)</option>
+          <option value="prepositions">3. Prepositions of Time & Place</option>
+          <option value="modals">4. Modal Verbs & Hedging</option>
+          <option value="subject-verb-agreement">5. Subject-Verb Agreement</option>
+          <option value="active-passive-voice">6. Active & Passive Voice</option>
+          <option value="conditionals">7. Conditionals (Zero to Mixed)</option>
+          <option value="reported-speech">8. Reported Speech</option>
+          <option value="relative-clauses">9. Relative Clauses</option>
+          <option value="conjunctions">10. Conjunctions & Cohesion</option>
+        </select>
+      </div>
+
+      <!-- 1. EXPLANATION -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">📖 1. Explanation & Core Principles</span>
+          <span class="badge badge-primary">Theory</span>
+        </div>
+        <p style="font-size: 1.05rem; color: var(--text-main); line-height: 1.7; margin-bottom: 1.25rem;" id="grammar-explanation">
+          Loading explanation...
+        </p>
+
+        <h4 style="font-size: 0.95rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem;">Structural Rules:</h4>
+        <div id="grammar-rules-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 2. EXAMPLES -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">💡 2. Authentic Sentence Examples</span>
+          <span class="badge badge-secondary">In Context</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Carefully analyze how these structures operate in formal academic and conversational contexts:
+        </p>
+        <div id="grammar-examples-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 3. PRACTICE -->
+      <div class="card" style="margin-bottom: 2rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));">
+        <div class="card-header">
+          <span class="card-title">✏️ 3. Practice Activity</span>
+          <span class="badge badge-emerald">Interactive</span>
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-main); line-height: 1.6; margin-bottom: 1rem;">
+          Rewrite the following sentence by applying this grammar principle to enhance clarity and academic rigor:
+        </p>
+        <blockquote style="font-style: italic; border-left: 3px solid var(--primary); padding-left: 1rem; margin-bottom: 1rem; color: var(--text-muted);" id="grammar-practice-prompt">
+          "Many people use cars and pollution goes up every day."
+        </blockquote>
+        <textarea id="practice-rewrite-input" class="form-control" rows="3" placeholder="Type your improved sentence here..."></textarea>
+        <div style="display: flex; justify-content: flex-end; margin-top: 0.75rem;">
+          <button class="btn btn-secondary btn-sm" onclick="checkPracticeRewrite()">Verify Sentence Improvement</button>
+        </div>
+      </div>
+
+      <!-- 4. QUIZ -->
+      <div class="card" style="margin-bottom: 2.5rem;">
+        <div class="card-header">
+          <span class="card-title">📝 4. Mastery Quiz</span>
+          <span class="badge badge-amber">Knowledge Check</span>
+        </div>
+        <div id="grammar-quiz-container">
+          <!-- Rendered by js/quiz.js -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Grammar Hub</div>
+        <div><a href="grammar.html" style="color: var(--primary);">Return to All Topics ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/grammar-data.js"></script>
+  <script>
+    let quizApp;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let topicKey = urlParams.get("topic") || "tenses";
+      if (!grammarDatabase[topicKey]) topicKey = "tenses";
+
+      const selector = document.getElementById("grammar-selector");
+      if (selector) {
+        selector.value = topicKey;
+        selector.addEventListener("change", (e) => {
+          window.location.href = `grammar-detail.html?topic=${e.target.value}`;
+        });
+      }
+
+      const topicData = grammarDatabase[topicKey];
+      renderGrammarLesson(topicData);
+    });
+
+    function renderGrammarLesson(data) {
+      document.getElementById("grammar-icon").textContent = data.icon;
+      document.getElementById("grammar-title").textContent = data.title;
+      document.getElementById("grammar-explanation").textContent = data.explanation;
+
+      // Rules
+      const rulesList = document.getElementById("grammar-rules-list");
+      rulesList.innerHTML = data.rules.map(r => `
+        <div class="grammar-rule-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <strong style="color: var(--primary); font-size: 0.95rem;">${r.name}</strong>
+            <code style="font-size: 0.85rem; background: var(--bg-card); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm);">${r.formula}</code>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">${r.use}</p>
+        </div>
+      `).join("");
+
+      // Examples
+      const examplesList = document.getElementById("grammar-examples-list");
+      examplesList.innerHTML = data.examples.map(ex => `
+        <div style="background: var(--bg-surface); padding: 1.1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 0.85rem;">
+          <p style="font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.35rem;">
+            "${ex.sentence}"
+          </p>
+          <span style="font-size: 0.85rem; color: var(--primary); font-weight: 500;">
+            🔍 Analysis: ${ex.highlight}
+          </span>
+        </div>
+      `).join("");
+
+      // Quiz Engine
+      quizApp = new QuizEngine("grammar-quiz-container", data.quiz, {
+        title: `${data.title} Quiz`,
+        sectionName: "Grammar Quiz"
+      });
+      quizApp.init();
+    }
+
+    function checkPracticeRewrite() {
+      const input = document.getElementById("practice-rewrite-input");
+      if (!input || !input.value.trim()) {
+        FluentPath.showToast("Please write an improved sentence first!", "error");
+        return;
+      }
+      FluentPath.playSuccessChime();
+      FluentPath.showToast("Great sentence refinement! Practice recorded (+20 XP).", "success");
+      const user = FluentPath.getUser();
+      if (user) {
+        user.xp = (user.xp || 1850) + 20;
+        FluentPath.saveUser(user);
+      }
+    }
+  </script>
+</body>
+</html>

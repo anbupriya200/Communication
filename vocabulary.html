@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Vocabulary Flashcards & Audio Pronunciation | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .vocab-category-strip {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <div class="nav-item nav-dropdown">
+          <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
+          <div class="dropdown-menu">
+            <a href="listening.html" class="dropdown-item">🎧 Listening Module</a>
+            <a href="reading.html" class="dropdown-item">📖 Reading Module</a>
+            <a href="writing.html" class="dropdown-item">✍️ Writing Module</a>
+            <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
+          </div>
+        </div>
+        <a href="vocabulary.html" class="nav-link active">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill credits" title="Game Star Coins">
+          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Page Header -->
+      <div class="page-header" style="text-align: center;">
+        <div class="page-title" style="justify-content: center;">
+          <span class="emoji">📚</span>
+          <h1>Interactive Vocabulary Builder</h1>
+        </div>
+        <p class="page-subtitle" style="margin: 0 auto;">
+          Expand your lexical resource with native British audio pronunciation, clear contextual definitions, synonyms, antonyms, and practical usage examples.
+        </p>
+      </div>
+
+      <!-- Category Filter Strip (All 7 categories) -->
+      <div class="vocab-category-strip">
+        <button class="btn btn-primary vocab-cat-btn active" data-category="all">
+          ✨ All Categories (52 Words)
+        </button>
+        <button class="btn btn-secondary vocab-cat-btn" data-category="ielts">
+          🎓 IELTS Vocabulary
+        </button>
+        <button class="btn btn-secondary vocab-cat-btn" data-category="academic">
+          🔬 Academic English
+        </button>
+        <button class="btn btn-secondary vocab-cat-btn" data-category="daily">
+          ☕ Daily English
+        </button>
+        <button class="btn btn-secondary vocab-cat-btn" data-category="education">
+          🏫 Education
+        </button>
+        <button class="btn btn-secondary vocab-cat-btn" data-category="travel">
+          ✈️ Travel
+        </button>
+        <button class="btn btn-secondary vocab-cat-btn" data-category="workplace">
+          💼 Workplace
+        </button>
+        <button class="btn btn-secondary vocab-cat-btn" data-category="idioms">
+          💡 Idioms & Phrases
+        </button>
+      </div>
+
+      <!-- Search Input & Progress Indicator -->
+      <div class="card" style="margin-bottom: 2rem; padding: 1.25rem 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div class="input-icon-wrapper" style="flex: 1; min-width: 240px;">
+            <span class="input-icon">🔍</span>
+            <input type="text" id="vocab-search" class="form-control" placeholder="Search words, synonyms, or definitions...">
+          </div>
+
+          <div style="font-size: 0.875rem; font-weight: 700; color: var(--text-muted);">
+            Viewing: <span id="vocab-progress-text" style="color: var(--primary);">1 of 16 words</span>
+          </div>
+        </div>
+
+        <div class="progress-bar-container">
+          <div id="vocab-progress-bar" class="progress-bar-fill" style="width: 10%;"></div>
+        </div>
+      </div>
+
+      <!-- Main Flashcard Render Target -->
+      <div class="vocab-card-container" id="vocab-card-display">
+        <!-- Rendered by js/vocabulary.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Vocabulary Builder</div>
+        <div><a href="grammar.html" style="color: var(--primary);">Proceed to Grammar Lessons ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/vocabulary.js"></script>
+</body>
+</html>

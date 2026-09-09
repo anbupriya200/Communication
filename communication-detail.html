@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Communication Lesson – FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .phrase-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      margin-bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .sentence-compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .sentence-compare-table th, .sentence-compare-table td {
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+    .sentence-compare-table th {
+      background: var(--bg-surface);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link active">🗣️ Communication</a>
+        <a href="speaking.html" class="nav-link">🎤 Speaking</a>
+        <a href="ielts.html" class="nav-link">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Back Link & Category Header -->
+      <div style="margin-bottom: 1.5rem;">
+        <a href="communication.html" class="btn btn-secondary btn-sm" style="margin-bottom: 1rem;">
+          ← Back to All 10 Categories
+        </a>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div class="page-title" style="margin-bottom: 0;">
+            <span class="emoji" id="lesson-icon">☕</span>
+            <h1 id="lesson-title">Daily Conversation</h1>
+          </div>
+          <span class="badge badge-emerald" id="lesson-level">Beginner to Intermediate</span>
+        </div>
+      </div>
+
+      <!-- Quick Switcher Dropdown for All 10 Categories -->
+      <div style="margin-bottom: 2rem; background: var(--bg-surface); padding: 0.85rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-muted);">Switch Scenario:</span>
+        <select id="category-selector" class="form-control" style="width: auto; font-weight: 600;">
+          <option value="daily-conversation">1. Daily Conversation</option>
+          <option value="college-english">2. College English</option>
+          <option value="workplace-english">3. Workplace English</option>
+          <option value="travel-english">4. Travel English</option>
+          <option value="shopping-english">5. Shopping English</option>
+          <option value="restaurant-english">6. Restaurant English</option>
+          <option value="telephone-english">7. Telephone English</option>
+          <option value="public-speaking">8. Public Speaking</option>
+          <option value="group-discussion">9. Group Discussion</option>
+          <option value="interview-english">10. Interview English</option>
+        </select>
+      </div>
+
+      <!-- 1. Situation Card -->
+      <div class="card" style="margin-bottom: 2rem; border-left: 5px solid var(--primary);">
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--primary);">📍 The Realistic Situation</h3>
+        <p style="font-size: 1.05rem; color: var(--text-main); line-height: 1.7;" id="lesson-situation">
+          Loading scenario details...
+        </p>
+      </div>
+
+      <!-- 2. Sample Conversation with Speech Audio Playback -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">💬 Sample Conversation (Interactive Audio)</span>
+          <button class="btn btn-outline-primary btn-sm" id="listen-all-dialogue-btn">
+            🔊 Listen to Full Dialogue
+          </button>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Click the sound icon on any line to listen with native pronunciation.
+        </p>
+
+        <div id="dialogue-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 3. Useful Phrases -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">💡 Essential Phrases & Idioms</span>
+          <span class="badge badge-primary">Key Expressions</span>
+        </div>
+        <div id="phrases-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 4. Vocabulary in Context -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">📚 Topic Vocabulary</span>
+        </div>
+        <div id="vocabulary-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 5. Better Sentence Suggestions (Weak vs. Polished) -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">✨ Better Sentence Suggestions</span>
+          <span class="badge badge-amber">Upgrade Your English</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Compare casual or awkward phrasing against polished, natural native expressions.
+        </p>
+        <div style="overflow-x: auto;">
+          <table class="sentence-compare-table">
+            <thead>
+              <tr>
+                <th style="color: var(--accent-rose);">❌ Casual / Weak Phrasing</th>
+                <th style="color: var(--accent-emerald);">✅ Fluent & Polished Alternative</th>
+              </tr>
+            </thead>
+            <tbody id="sentence-compare-body">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 6. Practice Activity -->
+      <div class="card" style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.07), rgba(124, 58, 237, 0.07)); border: 1px solid var(--primary); margin-bottom: 2.5rem;">
+        <div class="card-header">
+          <span class="card-title" style="color: var(--primary);">🎯 Interactive Practice Activity</span>
+          <span class="badge badge-primary">Challenge</span>
+        </div>
+        <p style="font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 1.25rem;" id="practice-activity-text">
+          Loading practice activity prompt...
+        </p>
+
+        <div class="form-group">
+          <label class="form-label" for="practice-response-input">Type your spoken response or practice recording:</label>
+          <textarea id="practice-response-input" class="form-control" rows="4" placeholder="Draft your spoken dialogue response here..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap;">
+          <a href="speaking.html" class="btn btn-secondary">
+            🎤 Open Speaking Recorder
+          </a>
+          <button class="btn btn-emerald" id="submit-practice-btn">
+            Submit Practice Activity (+30 XP)
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – English Communication & IELTS Preparation Portal</div>
+        <div><a href="communication.html" style="color: var(--primary);">Back to Categories ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/communication-data.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let catKey = urlParams.get("cat") || "daily-conversation";
+      if (!communicationDatabase[catKey]) catKey = "daily-conversation";
+
+      const selector = document.getElementById("category-selector");
+      if (selector) {
+        selector.value = catKey;
+        selector.addEventListener("change", (e) => {
+          window.location.href = `communication-detail.html?cat=${e.target.value}`;
+        });
+      }
+
+      const catData = communicationDatabase[catKey];
+      renderLesson(catData);
+    });
+
+    function renderLesson(data) {
+      document.getElementById("lesson-icon").textContent = data.icon;
+      document.getElementById("lesson-title").textContent = data.title;
+      document.getElementById("lesson-level").textContent = data.level;
+      document.getElementById("lesson-situation").textContent = data.situation;
+      document.getElementById("practice-activity-text").textContent = data.practiceActivity;
+
+      // Dialogue
+      const dialogueContainer = document.getElementById("dialogue-container");
+      dialogueContainer.innerHTML = data.dialogue.map((line, idx) => {
+        const isSpeakerA = idx % 2 === 0;
+        return `
+          <div class="dialogue-bubble ${isSpeakerA ? 'speaker-a' : 'speaker-b'}">
+            <div class="dialogue-speaker-name">${line.speaker}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;">
+              <span style="font-size: 1rem;">"${line.text}"</span>
+              <button class="btn btn-sm btn-icon-only" style="background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); color: var(--primary);" 
+                onclick="FluentPath.speakText('${line.text.replace(/'/g, "\\'")}')" title="Listen line">
+                🔊
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // Full dialogue listener
+      const listenAllBtn = document.getElementById("listen-all-dialogue-btn");
+      if (listenAllBtn) {
+        listenAllBtn.onclick = () => {
+          const fullText = data.dialogue.map(d => `${d.speaker} says: ${d.text}`).join(". ");
+          FluentPath.speakText(fullText);
+        };
+      }
+
+      // Phrases
+      const phrasesContainer = document.getElementById("phrases-container");
+      phrasesContainer.innerHTML = data.usefulPhrases.map(p => `
+        <div class="phrase-card">
+          <div>
+            <strong style="color: var(--primary); font-size: 1.05rem; display: block; margin-bottom: 0.25rem;">
+              "${p.phrase}"
+            </strong>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">${p.meaning}</p>
+          </div>
+          <button class="btn btn-sm btn-secondary" onclick="FluentPath.speakText('${p.phrase.replace(/'/g, "\\'")}')">
+            🔊 Listen
+          </button>
+        </div>
+      `).join("");
+
+      // Vocabulary
+      const vocabContainer = document.getElementById("vocabulary-container");
+      vocabContainer.innerHTML = data.vocabulary.map(v => `
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 1rem; border-radius: var(--radius-md);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+            <strong style="color: var(--text-main); font-size: 1rem;">${v.word}</strong>
+            <button class="btn btn-sm btn-icon-only" style="width: 28px; height: 28px; font-size: 0.8rem;" onclick="FluentPath.speakText('${v.word}')">🔊</button>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">${v.def}</p>
+        </div>
+      `).join("");
+
+      // Better sentence comparison table
+      const sentenceBody = document.getElementById("sentence-compare-body");
+      sentenceBody.innerHTML = data.betterSentences.map(s => `
+        <tr>
+          <td style="color: var(--text-muted);">"${s.weak}"</td>
+          <td style="color: var(--text-main); font-weight: 600;">
+            "${s.polished}"
+            <button class="btn btn-sm btn-icon-only" style="margin-left: 0.5rem; width: 26px; height: 26px; font-size: 0.75rem;" onclick="FluentPath.speakText('${s.polished.replace(/'/g, "\\'")}')">🔊</button>
+          </td>
+        </tr>
+      `).join("");
+
+      // Submit practice response
+      const submitBtn = document.getElementById("submit-practice-btn");
+      if (submitBtn) {
+        submitBtn.onclick = () => {
+          const input = document.getElementById("practice-response-input");
+          if (!input || !input.value.trim()) {
+            FluentPath.showToast("Please type a response before submitting!", "error");
+            return;
+          }
+          const user = FluentPath.getUser();
+          if (user) {
+            user.xp = (user.xp || 1850) + 30;
+            FluentPath.saveUser(user);
+          }
+          FluentPath.playSuccessChime();
+          FluentPath.showToast("Practice activity completed! +30 XP gained!", "success");
+          input.value = "";
+        };
+      }
+    }
+  </script>
+</body>
+</html>

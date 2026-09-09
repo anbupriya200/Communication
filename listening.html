@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Listening Practice – Sections 1 to 4 | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .listening-section-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link active">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Practice Disclaimer -->
+      <div class="practice-disclaimer-banner">
+        <span class="icon">ℹ️</span>
+        <div>
+          <strong>Practice Mode:</strong> Audio tracks and automated evaluations are designed for skill practice. Results serve as a diagnostic estimate.
+        </div>
+      </div>
+
+      <!-- Page Header with Timer -->
+      <div class="page-header page-header-flex">
+        <div>
+          <div class="page-title">
+            <span class="emoji">🎧</span>
+            <h1>IELTS Listening Practice</h1>
+          </div>
+          <p class="page-subtitle">
+            Listen attentively to each audio segment once. Complete the questions in real time.
+          </p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div class="stat-pill" style="font-size: 1.1rem; padding: 0.5rem 1rem; border-color: var(--primary);">
+            <span>⏱️</span> <span id="listening-timer-display" style="font-family: monospace; font-weight: 800;">30:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Tabs: Section 1, 2, 3, 4 -->
+      <div class="listening-section-nav">
+        <button class="btn btn-primary section-tab-btn active" data-section="1">
+          Section 1: Form Completion
+        </button>
+        <button class="btn btn-secondary section-tab-btn" data-section="2">
+          Section 2: Multiple Choice & Map
+        </button>
+        <button class="btn btn-secondary section-tab-btn" data-section="3">
+          Section 3: Note Completion
+        </button>
+        <button class="btn btn-secondary section-tab-btn" data-section="4">
+          Section 4: Lecture Summary
+        </button>
+      </div>
+
+      <!-- Custom Interactive Audio Player Box -->
+      <div class="audio-player-box">
+        <button class="audio-play-btn" id="audio-play-toggle" aria-label="Play or pause audio">
+          ▶
+        </button>
+
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem;">
+            <span id="audio-track-title">Section 1: Student Accommodation Booking Form</span>
+            <span id="audio-time-stamp">00:00 / 03:45</span>
+          </div>
+          <div class="audio-waveform-bar" id="audio-progress-bar">
+            <div class="audio-waveform-fill" id="audio-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary btn-sm" id="audio-speed-btn" style="padding: 0.4rem 0.65rem; font-size: 0.8rem;">
+          1.0x
+        </button>
+      </div>
+
+      <!-- Quiz Container: Rendered by QuizEngine -->
+      <div id="listening-quiz-container">
+        <!-- Populated by JavaScript -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – IELTS Listening Module</div>
+        <div><a href="reading.html" style="color: var(--primary);">Proceed to Reading Module ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/quiz.js"></script>
+  <script>
+    const listeningQuestions = [
+      {
+        question: "Question 1: What is the caller's primary reason for moving?",
+        instruction: "Listen carefully and select the best answer (Multiple Choice).",
+        type: "mcq",
+        options: [
+          "Closer proximity to the university campus",
+          "Finding a cheaper monthly rent rate",
+          "Living with family members",
+          "Seeking a quieter study environment"
+        ],
+        correctAnswer: 0,
+        explanation: "The caller explicitly mentions wanting to reduce her daily commute from 45 minutes to a 5-minute walk to the library."
+      },
+      {
+        question: "Question 2: Form Completion - Move-in Date",
+        instruction: "Write NO MORE THAN TWO WORDS AND/OR A NUMBER.",
+        type: "blank",
+        correctAnswer: "15th September",
+        explanation: "The tenant requests the lease commence on the 15th of September."
+      },
+      {
+        question: "Question 3: Which amenity is included in the weekly rental price?",
+        type: "mcq",
+        options: [
+          "Private parking garage",
+          "High-speed fiber internet and utilities",
+          "Gymnasium membership",
+          "Weekly laundry service"
+        ],
+        correctAnswer: 1,
+        explanation: "The agent confirms that water, electricity, and high-speed broadband are covered in the baseline fee."
+      },
+      {
+        question: "Question 4: What deposit amount is required upon signing the tenancy agreement?",
+        type: "mcq",
+        options: ["£250", "£450", "£600", "£850"],
+        correctAnswer: 2,
+        explanation: "The refundable security bond is stated as £600."
+      },
+      {
+        question: "Question 5: Note Completion - Preferred room type:",
+        type: "blank",
+        correctAnswer: "En-suite studio",
+        explanation: "She requests an en-suite studio with a private kitchenette."
+      }
+    ];
+
+    let quizApp;
+    let timerInstance;
+    let isPlayingAudio = false;
+    let audioProgressInterval;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      quizApp = new QuizEngine("listening-quiz-container", listeningQuestions, {
+        title: "IELTS Listening Practice Test",
+        sectionName: "Listening Section 1"
+      });
+      quizApp.init();
+
+      // Timer 30 minutes countdown
+      timerInstance = new FluentTimer({
+        durationSeconds: 1800,
+        onTick: (rem, formatted) => {
+          const el = document.getElementById("listening-timer-display");
+          if (el) el.textContent = formatted;
+        }
+      });
+      timerInstance.start();
+
+      // Audio simulation controls
+      setupAudioPlayer();
+      setupSectionTabs();
+    });
+
+    function setupAudioPlayer() {
+      const playBtn = document.getElementById("audio-play-toggle");
+      const fill = document.getElementById("audio-fill");
+      const timeStamp = document.getElementById("audio-time-stamp");
+
+      let currentSeconds = 0;
+      const totalSeconds = 225; // 3:45
+
+      playBtn.onclick = () => {
+        isPlayingAudio = !isPlayingAudio;
+        if (isPlayingAudio) {
+          playBtn.textContent = "⏸";
+          FluentPath.playClickBeep();
+          FluentPath.showToast("Audio track playing...", "info");
+          
+          audioProgressInterval = setInterval(() => {
+            currentSeconds++;
+            const pct = (currentSeconds / totalSeconds) * 100;
+            fill.style.width = `${pct}%`;
+            timeStamp.textContent = `${FluentTimer.formatTime(currentSeconds)} / ${FluentTimer.formatTime(totalSeconds)}`;
+
+            if (currentSeconds >= totalSeconds) {
+              clearInterval(audioProgressInterval);
+              isPlayingAudio = false;
+              playBtn.textContent = "▶";
+            }
+          }, 1000);
+        } else {
+          playBtn.textContent = "▶";
+          clearInterval(audioProgressInterval);
+        }
+      };
+    }
+
+    function setupSectionTabs() {
+      const tabs = document.querySelectorAll(".section-tab-btn");
+      tabs.forEach(tab => {
+        tab.onclick = () => {
+          tabs.forEach(t => t.classList.remove("active", "btn-primary"));
+          tab.classList.add("active", "btn-primary");
+          FluentPath.playClickBeep();
+          FluentPath.showToast(`Switched to Section ${tab.dataset.section}`, "info");
+        };
+      });
+    }
+  </script>
+</body>
+</html>

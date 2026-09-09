@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Speaking Interview Simulator – Parts 1, 2 & 3 | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cue-card-box {
+      border: 2px dashed var(--primary);
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .stepper-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .stepper-step {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem 0.5rem;
+      border-bottom: 3px solid var(--border-color);
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .stepper-step.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .stepper-step.completed {
+      color: var(--accent-emerald);
+      border-bottom-color: var(--accent-emerald);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link active">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Practice Disclaimer -->
+      <div class="practice-disclaimer-banner">
+        <span class="icon">ℹ️</span>
+        <div>
+          <strong>Practice Estimate Disclaimer:</strong> The feedback and band scores provided are diagnostic practice estimates based on simulated interview responses and do not constitute an official IELTS test certificate.
+        </div>
+      </div>
+
+      <!-- Page Header -->
+      <div class="page-header page-header-flex">
+        <div>
+          <div class="page-title">
+            <span class="emoji">🎤</span>
+            <h1>IELTS Speaking Interview Simulator</h1>
+          </div>
+          <p class="page-subtitle">
+            Complete the authentic three-stage speaking test: Introduction & Interview (Part 1), Individual Long Turn Cue Card (Part 2), and Two-Way Discussion (Part 3).
+          </p>
+        </div>
+      </div>
+
+      <!-- Stepper Indicator -->
+      <div class="stepper-nav">
+        <div class="stepper-step active" id="step-btn-1" onclick="speakingSim.goToStep(1)">
+          1. Part 1: Familiar Topics
+        </div>
+        <div class="stepper-step" id="step-btn-2" onclick="speakingSim.goToStep(2)">
+          2. Part 2: Cue Card
+        </div>
+        <div class="stepper-step" id="step-btn-3" onclick="speakingSim.goToStep(3)">
+          3. Part 3: Discussion
+        </div>
+        <div class="stepper-step" id="step-btn-4" onclick="speakingSim.goToStep(4)">
+          4. Practice Feedback
+        </div>
+      </div>
+
+      <!-- STAGE 1: PART 1 (Familiar Topics) -->
+      <div id="stage-part-1" class="stage-container">
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <span class="card-title">Part 1: Introduction & Everyday Topics</span>
+            <span class="badge badge-primary">4–5 Minutes</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+            The examiner asks general questions about your life, studies, family, and habits. Select a topic category below to practice:
+          </p>
+
+          <!-- Category Selector -->
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+            <button class="btn btn-primary btn-sm part1-topic-pill active" data-topic="studies">Studies / Work</button>
+            <button class="btn btn-secondary btn-sm part1-topic-pill" data-topic="family">Family & Friends</button>
+            <button class="btn btn-secondary btn-sm part1-topic-pill" data-topic="hobbies">Hobbies</button>
+            <button class="btn btn-secondary btn-sm part1-topic-pill" data-topic="home">Home & Hometown</button>
+            <button class="btn btn-secondary btn-sm part1-topic-pill" data-topic="food">Food & Cooking</button>
+            <button class="btn btn-secondary btn-sm part1-topic-pill" data-topic="travel">Travel</button>
+            <button class="btn btn-secondary btn-sm part1-topic-pill" data-topic="daily">Daily Life</button>
+          </div>
+
+          <!-- Dynamic Questions List -->
+          <div id="part1-questions-list">
+            <!-- Populated by JS -->
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+            <button class="btn btn-primary" onclick="speakingSim.goToStep(2)">
+              Proceed to Part 2 (Cue Card) ➔
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 2: PART 2 (Cue Card with 1m Prep & 2m Speak) -->
+      <div id="stage-part-2" class="stage-container" style="display: none;">
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <span class="card-title">Part 2: Individual Long Turn (Cue Card)</span>
+            <span class="badge badge-secondary">3–4 Minutes</span>
+          </div>
+
+          <div class="cue-card-box">
+            <h3 style="color: var(--primary); font-size: 1.35rem; margin-bottom: 0.75rem;">
+              Candidate Task Card
+            </h3>
+            <h4 style="font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--text-main);">
+              Describe an environmental initiative in your hometown that improved the local area.
+            </h4>
+            <p style="font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">You should say:</p>
+            <ul style="font-size: 0.95rem; line-height: 1.8; padding-left: 1.25rem; color: var(--text-main);">
+              <li>• What the initiative was and who organized it</li>
+              <li>• When and where it took place</li>
+              <li>• What challenges organizers faced</li>
+              <li>• And explain why you believe it was beneficial to the community.</li>
+            </ul>
+          </div>
+
+          <!-- Preparation & Speaking Timers -->
+          <div class="grid-2" style="margin-bottom: 1.5rem;">
+            
+            <!-- 1 Minute Prep Box -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center;">
+              <h4 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.5rem;">⏱️ Preparation Time (1 Minute)</h4>
+              <div style="font-size: 2rem; font-weight: 800; font-family: monospace;" id="prep-timer-display">01:00</div>
+              <button class="btn btn-secondary btn-sm" id="start-prep-btn" style="margin-top: 0.75rem;" onclick="speakingSim.startPrepTimer()">
+                Start 1-Min Prep
+              </button>
+              <textarea class="form-control" style="margin-top: 1rem; font-size: 0.9rem;" rows="3" placeholder="Draft bullet notes for your talk..."></textarea>
+            </div>
+
+            <!-- 2 Minutes Speaking Box -->
+            <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center;">
+              <h4 style="font-size: 1rem; color: var(--accent-emerald); margin-bottom: 0.5rem;">🎤 Speaking Time (2 Minutes)</h4>
+              <div style="font-size: 2rem; font-weight: 800; font-family: monospace;" id="speak-timer-display">02:00</div>
+              <button class="btn btn-emerald btn-sm" id="start-speak-btn" style="margin-top: 0.75rem;" onclick="speakingSim.startSpeakTimer()">
+                Start 2-Min Speech
+              </button>
+              <div id="part2-speak-status" style="font-size: 0.825rem; color: var(--text-muted); margin-top: 1rem;">
+                Speak continuously until the timer reaches zero.
+              </div>
+            </div>
+
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn btn-secondary" onclick="speakingSim.goToStep(1)">← Back to Part 1</button>
+            <button class="btn btn-primary" onclick="speakingSim.goToStep(3)">Proceed to Part 3 ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 3: PART 3 (Discussion Questions) -->
+      <div id="stage-part-3" class="stage-container" style="display: none;">
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <span class="card-title">Part 3: Two-Way Abstract Discussion</span>
+            <span class="badge badge-amber">4–5 Minutes</span>
+          </div>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+            The examiner asks deeper, more speculative questions connected to the Part 2 topic (Environmental Sustainability):
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.75rem;">
+            <div style="background: var(--bg-surface); padding: 1.1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+              <div>
+                <strong style="color: var(--primary); display: block; margin-bottom: 0.25rem;">Question 1:</strong>
+                <p style="font-size: 1rem; color: var(--text-main);">"Do you think individuals or national governments carry greater responsibility for reducing carbon footprints?"</p>
+              </div>
+              <button class="btn btn-sm btn-icon-only btn-secondary" onclick="FluentPath.speakText('Do you think individuals or national governments carry greater responsibility for reducing carbon footprints?')">🔊</button>
+            </div>
+
+            <div style="background: var(--bg-surface); padding: 1.1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+              <div>
+                <strong style="color: var(--primary); display: block; margin-bottom: 0.25rem;">Question 2:</strong>
+                <p style="font-size: 1rem; color: var(--text-main);">"How can primary schools instill environmental stewardship in young children effectively?"</p>
+              </div>
+              <button class="btn btn-sm btn-icon-only btn-secondary" onclick="FluentPath.speakText('How can primary schools instill environmental stewardship in young children effectively?')">🔊</button>
+            </div>
+
+            <div style="background: var(--bg-surface); padding: 1.1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+              <div>
+                <strong style="color: var(--primary); display: block; margin-bottom: 0.25rem;">Question 3:</strong>
+                <p style="font-size: 1rem; color: var(--text-main);">"In what ways might technological innovations mitigate climate challenges over the next three decades?"</p>
+              </div>
+              <button class="btn btn-sm btn-icon-only btn-secondary" onclick="FluentPath.speakText('In what ways might technological innovations mitigate climate challenges over the next three decades?')">🔊</button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn btn-secondary" onclick="speakingSim.goToStep(2)">← Back to Part 2</button>
+            <button class="btn btn-emerald btn-lg" onclick="speakingSim.finishInterview()">Complete Interview & View Feedback ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 4: PRACTICE FEEDBACK REPORT -->
+      <div id="stage-part-4" class="stage-container" style="display: none;">
+        <div class="card" style="text-align: center; padding: 2.5rem 2rem; margin-bottom: 2rem;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎙️</div>
+          <h2 style="font-size: 1.85rem; margin-bottom: 0.25rem;">Speaking Practice Evaluation</h2>
+          <span class="badge badge-amber" style="margin-bottom: 1.5rem;">Diagnostic Practice Estimate</span>
+
+          <!-- Big Band Display -->
+          <div class="band-hero-circle">
+            <span class="band-hero-number">6.5</span>
+            <span class="band-hero-label">Estimated Band</span>
+          </div>
+
+          <!-- 4 IELTS Speaking Criteria -->
+          <div class="grid-2" style="text-align: left; gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: var(--bg-surface); padding: 1.2rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <strong style="color: var(--text-main);">Fluency & Coherence</strong>
+                <span class="badge badge-emerald">6.5</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Willing to speak at length with good continuity. Occasional self-correction and hesitation when searching for content.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-surface); padding: 1.2rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <strong style="color: var(--text-main);">Lexical Resource</strong>
+                <span class="badge badge-primary">7.0</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Demonstrates flexible vocabulary with effective idiomatic collocations relating to the environment and society.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-surface); padding: 1.2rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <strong style="color: var(--text-main);">Grammatical Range & Accuracy</strong>
+                <span class="badge badge-emerald">6.5</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Frequent error-free complex sentences with good command of modals, conditionals, and passive voice.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-surface); padding: 1.2rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <strong style="color: var(--text-main);">Pronunciation</strong>
+                <span class="badge badge-emerald">6.5</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Clear enunciation, natural rhythm, and appropriate sentence stress throughout both short and long responses.
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-secondary" onclick="speakingSim.goToStep(1)">
+              Practice Another Topic
+            </button>
+            <a href="results.html" class="btn btn-primary">
+              View Global Results Report ➔
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – IELTS Speaking Simulator</div>
+        <div><a href="vocabulary.html" style="color: var(--primary);">Explore Vocabulary Flashcards ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
+  <script>
+    const part1Topics = {
+      studies: [
+        "What subject are you currently studying or what line of work are you in?",
+        "Why did you choose that particular discipline or career?",
+        "What do you enjoy most about your daily academic or professional tasks?"
+      ],
+      family: [
+        "Do you come from a large family or a small family?",
+        "Who in your family are you most similar to in personality?",
+        "How often do you spend weekends or festive occasions together?"
+      ],
+      hobbies: [
+        "What hobbies do you enjoy pursuing in your free leisure time?",
+        "Did you have any different hobbies when you were a child?",
+        "Is there a new hobby or creative skill you would love to learn?"
+      ],
+      home: [
+        "Can you describe the house or apartment you currently live in?",
+        "What is your favorite room in your home and why?",
+        "What facilities are available in your local neighborhood?"
+      ],
+      food: [
+        "What kinds of food do you most enjoy eating?",
+        "Do you prefer dining out at restaurants or preparing home-cooked meals?",
+        "Is there any traditional food from your country you would recommend to visitors?"
+      ],
+      travel: [
+        "Do you enjoy traveling to new destinations?",
+        "What has been the most memorable place you have visited so far?",
+        "Do you prefer traveling independently or as part of an organized tour?"
+      ],
+      daily: [
+        "What does your typical morning routine look like?",
+        "Which part of the day do you find yourself most productive?",
+        "How do you usually unwind and relax after a busy schedule?"
+      ]
+    };
+
+    class SpeakingSimulatorApp {
+      constructor() {
+        this.currentStep = 1;
+        this.prepTimer = null;
+        this.speakTimer = null;
+      }
+
+      init() {
+        this.renderPart1Questions("studies");
+        this.setupTopicPills();
+      }
+
+      setupTopicPills() {
+        const pills = document.querySelectorAll(".part1-topic-pill");
+        pills.forEach(pill => {
+          pill.onclick = () => {
+            pills.forEach(p => p.classList.remove("active", "btn-primary"));
+            pill.classList.add("active", "btn-primary");
+            this.renderPart1Questions(pill.dataset.topic);
+            FluentPath.playClickBeep();
+          };
+        });
+      }
+
+      renderPart1Questions(topicKey) {
+        const list = document.getElementById("part1-questions-list");
+        const questions = part1Topics[topicKey] || part1Topics.studies;
+        list.innerHTML = questions.map((q, idx) => `
+          <div style="background: var(--bg-surface); padding: 1.1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 0.85rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+            <div>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">Question ${idx + 1}</span>
+              <p style="font-size: 1rem; color: var(--text-main); font-weight: 500; margin-top: 0.2rem;">"${q}"</p>
+            </div>
+            <button class="btn btn-sm btn-icon-only btn-secondary" onclick="FluentPath.speakText('${q.replace(/'/g, "\\'")}')" title="Listen to Examiner">
+              🔊
+            </button>
+          </div>
+        `).join("");
+      }
+
+      goToStep(stepNum) {
+        this.currentStep = stepNum;
+        for (let i = 1; i <= 4; i++) {
+          const stageEl = document.getElementById(`stage-part-${i}`);
+          const stepBtn = document.getElementById(`step-btn-${i}`);
+          if (stageEl) stageEl.style.display = i === stepNum ? "block" : "none";
+          if (stepBtn) {
+            stepBtn.classList.remove("active");
+            if (i === stepNum) stepBtn.classList.add("active");
+            if (i < stepNum) stepBtn.classList.add("completed");
+          }
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      startPrepTimer() {
+        const btn = document.getElementById("start-prep-btn");
+        btn.disabled = true;
+        btn.textContent = "Prep in Progress...";
+        this.prepTimer = new FluentTimer({
+          durationSeconds: 60,
+          onTick: (rem, formatted) => {
+            const el = document.getElementById("prep-timer-display");
+            if (el) el.textContent = formatted;
+          },
+          onComplete: () => {
+            FluentPath.playSuccessChime();
+            FluentPath.showToast("Preparation time complete! Begin speaking now.", "info");
+            btn.textContent = "Prep Finished";
+            this.startSpeakTimer();
+          }
+        });
+        this.prepTimer.start();
+        FluentPath.playClickBeep();
+      }
+
+      startSpeakTimer() {
+        const btn = document.getElementById("start-speak-btn");
+        const status = document.getElementById("part2-speak-status");
+        btn.disabled = true;
+        btn.textContent = "Recording Speech...";
+        status.innerHTML = `<span style="color: var(--accent-rose); font-weight: 700;">● Recording live response...</span>`;
+
+        this.speakTimer = new FluentTimer({
+          durationSeconds: 120,
+          onTick: (rem, formatted) => {
+            const el = document.getElementById("speak-timer-display");
+            if (el) el.textContent = formatted;
+          },
+          onComplete: () => {
+            FluentPath.playSuccessChime();
+            FluentPath.showToast("Part 2 Speech complete!", "success");
+            btn.textContent = "Speech Finished";
+            status.textContent = "Done! You spoke for the full 2 minutes.";
+          }
+        });
+        this.speakTimer.start();
+      }
+
+      finishInterview() {
+        // Award XP
+        const user = FluentPath.getUser();
+        if (user) {
+          user.xp = (user.xp || 1850) + 100;
+          FluentPath.saveUser(user);
+        }
+        FluentPath.playSuccessChime();
+        FluentPath.showToast("Speaking Simulator complete! +100 XP", "success");
+        this.goToStep(4);
+      }
+    }
+
+    let speakingSim;
+    document.addEventListener("DOMContentLoaded", () => {
+      speakingSim = new SpeakingSimulatorApp();
+      speakingSim.init();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile & Account Settings | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn" style="border-color: var(--primary);">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Profile Header Hero Card -->
+      <div class="card glass-card" style="padding: 2.5rem 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+          <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <div class="student-hero-avatar user-avatar-initial" style="width: 84px; height: 84px; font-size: 2.25rem;">
+              A
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem;">
+                <h1 style="font-size: 1.85rem;" id="profile-name">Aarav Sharma</h1>
+                <span class="badge badge-primary">Active Scholar</span>
+              </div>
+              <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.25rem;">
+                <strong>Student ID:</strong> <span id="profile-id">FP-2026-88</span>
+              </p>
+              <p style="color: var(--text-muted); font-size: 0.95rem;">
+                <strong>Registered Mobile:</strong> <span id="profile-mobile">+91 ••••• ••210</span>
+              </p>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" onclick="openEditProfileModal()">
+              ✏️ Edit Profile
+            </button>
+            <button class="btn btn-rose" onclick="FluentPath.logout()">
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Learning Stats Grid -->
+      <div class="stat-box-grid" style="margin-bottom: 2rem;">
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: var(--primary-light); color: var(--primary);">🎯</div>
+          <div>
+            <div class="stat-box-value" id="profile-band">6.5</div>
+            <div class="stat-box-label">Practice Band</div>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">🔥</div>
+          <div>
+            <div class="stat-box-value" id="profile-streak">14 Days</div>
+            <div class="stat-box-label">Daily Streak</div>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">📚</div>
+          <div>
+            <div class="stat-box-value" id="profile-vocab">248</div>
+            <div class="stat-box-label">Words Learned</div>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">📝</div>
+          <div>
+            <div class="stat-box-value" id="profile-tests">6</div>
+            <div class="stat-box-label">Mock Exams</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning Progress Overview -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">📈 Overall Learning Progress</span>
+          <span class="badge badge-emerald">76% Completed</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Progress calculated across 10 communication units, 10 grammar lessons, and 4 IELTS skills.
+        </p>
+        <div class="progress-bar-container" style="height: 10px; margin-bottom: 1.5rem;">
+          <div class="progress-bar-fill emerald" style="width: 76%;"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Completed Lessons</strong>
+            <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">18 Lessons</div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Total Study Time</strong>
+            <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary);">48.5 Hours</div>
+          </div>
+          <div>
+            <strong style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">Total XP Points</strong>
+            <div style="font-size: 1.25rem; font-weight: 800; color: var(--accent-amber);" id="profile-xp">1,850 XP</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements List -->
+      <div class="card" style="margin-bottom: 3rem;">
+        <div class="card-header">
+          <span class="card-title">🏆 Unlocked Achievements</span>
+          <a href="daily-challenge.html" class="btn btn-secondary btn-sm">View Challenge Hub</a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.1rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <div style="display: flex; align-items: center; gap: 0.85rem;">
+              <span style="font-size: 1.5rem;">🔥</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.95rem;">7-Day Consistency Master</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Practiced without missing a single day for a full week.</p>
+              </div>
+            </div>
+            <span class="badge badge-emerald">Unlocked</span>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.1rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <div style="display: flex; align-items: center; gap: 0.85rem;">
+              <span style="font-size: 1.5rem;">📚</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.95rem;">Academic Lexicon Pioneer</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Mastered 200+ high-frequency academic vocabulary words.</p>
+              </div>
+            </div>
+            <span class="badge badge-emerald">Unlocked</span>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.1rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+            <div style="display: flex; align-items: center; gap: 0.85rem;">
+              <span style="font-size: 1.5rem;">✍️</span>
+              <div>
+                <strong style="color: var(--text-main); font-size: 0.95rem;">Essay Strategist</strong>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Completed 5 writing submissions evaluated by the scoring engine.</p>
+              </div>
+            </div>
+            <span class="badge badge-emerald">Unlocked</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Edit Profile Modal -->
+  <div id="edit-profile-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="closeEditProfileModal()">✕</button>
+
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.5rem; color: var(--text-main);">Edit Student Profile</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Update your profile details and target practice goals</p>
+      </div>
+
+      <form id="edit-profile-form">
+        <div class="form-group">
+          <label class="form-label" for="edit-name">Full Student Name</label>
+          <input type="text" id="edit-name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="edit-mobile">Mobile Number</label>
+          <input type="tel" id="edit-mobile" class="form-control" maxlength="10" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="edit-target-band">Target IELTS Band</label>
+          <select id="edit-target-band" class="form-control">
+            <option value="6.5">Band 6.5</option>
+            <option value="7.0">Band 7.0</option>
+            <option value="7.5" selected>Band 7.5</option>
+            <option value="8.0">Band 8.0</option>
+            <option value="8.5">Band 8.5</option>
+          </select>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeEditProfileModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Student Profile Portal</div>
+        <div><a href="dashboard.html" style="color: var(--primary);">Return to Dashboard ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const user = FluentPath.getUser() || FluentPath.defaultUser;
+
+      document.getElementById("profile-name").textContent = user.name;
+      document.getElementById("profile-id").textContent = user.id;
+      
+      // Mask mobile: +91 ••••• ••[last 3]
+      const mob = user.mobile || "9876543210";
+      const masked = `+91 ••••• ••${mob.slice(-3)}`;
+      document.getElementById("profile-mobile").textContent = masked;
+
+      document.getElementById("profile-band").textContent = user.currentBand || "6.5";
+      document.getElementById("profile-streak").textContent = `${user.streak} Days`;
+      document.getElementById("profile-vocab").textContent = user.vocabLearned || 248;
+      document.getElementById("profile-tests").textContent = user.completedTests || 6;
+      document.getElementById("profile-xp").textContent = `${(user.xp || 1850).toLocaleString()} XP`;
+
+      // Avatar initials
+      const initial = (user.name || "S").charAt(0).toUpperCase();
+      document.querySelectorAll(".user-avatar-initial").forEach(el => el.textContent = initial);
+    });
+
+    function openEditProfileModal() {
+      const user = FluentPath.getUser() || FluentPath.defaultUser;
+      document.getElementById("edit-name").value = user.name;
+      document.getElementById("edit-mobile").value = user.mobile;
+      document.getElementById("edit-profile-modal").classList.add("active");
+    }
+
+    function closeEditProfileModal() {
+      document.getElementById("edit-profile-modal").classList.remove("active");
+    }
+
+    document.getElementById("edit-profile-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const newName = document.getElementById("edit-name").value.trim();
+      const newMobile = document.getElementById("edit-mobile").value.trim();
+
+      if (!newName || newMobile.length !== 10) {
+        FluentPath.showToast("Please enter a valid name and 10-digit mobile number.", "error");
+        return;
+      }
+
+      const user = FluentPath.getUser() || FluentPath.defaultUser;
+      user.name = newName;
+      user.mobile = newMobile;
+      FluentPath.saveUser(user);
+
+      FluentPath.playSuccessChime();
+      FluentPath.showToast("Profile updated successfully!", "success");
+      closeEditProfileModal();
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 400);
+    });
+  </script>
+</body>
+</html>

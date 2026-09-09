@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dedicated Speaking Practice & Impromptu Challenges | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .challenge-pills {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="speaking.html" class="nav-link active">🎤 Speaking</a>
+        <div class="nav-item nav-dropdown">
+          <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
+          <div class="dropdown-menu">
+            <a href="listening.html" class="dropdown-item">🎧 Listening Module</a>
+            <a href="reading.html" class="dropdown-item">📖 Reading Module</a>
+            <a href="writing.html" class="dropdown-item">✍️ Writing Module</a>
+            <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
+          </div>
+        </div>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Page Header -->
+      <div class="page-header" style="text-align: center;">
+        <div class="page-title" style="justify-content: center;">
+          <span class="emoji">🎤</span>
+          <h1>Speaking Practice Challenge</h1>
+        </div>
+        <p class="page-subtitle" style="margin: 0 auto;">
+          Sharpen verbal fluency, reduce hesitation pauses, and build impromptu articulation with timed spontaneous speech challenges.
+        </p>
+      </div>
+
+      <!-- Challenge Duration Switcher -->
+      <div class="challenge-pills">
+        <button class="btn btn-secondary duration-btn" data-duration="30">
+          ⚡ 30-Second Rapid Fire
+        </button>
+        <button class="btn btn-primary duration-btn active" data-duration="60">
+          ⏱️ 1-Minute Challenge
+        </button>
+        <button class="btn btn-secondary duration-btn" data-duration="120">
+          🔥 2-Minute In-Depth
+        </button>
+      </div>
+
+      <!-- Speaking Topic Card -->
+      <div class="card glass-card" style="margin-bottom: 2rem; text-align: center; padding: 2.5rem 2rem;">
+        <span class="badge badge-primary" id="topic-category" style="margin-bottom: 1rem;">Personal Experience</span>
+        
+        <h2 id="topic-title" style="font-size: 1.85rem; margin-bottom: 1.25rem; color: var(--text-main);">
+          "Describe your favorite hobby."
+        </h2>
+
+        <!-- Prompts / Bullet points -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem; max-width: 540px; margin: 0 auto 1.75rem; text-align: left;">
+          <h4 style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem;">Speaking Prompts:</h4>
+          <ul id="topic-prompts" style="font-size: 0.95rem; color: var(--text-main); line-height: 1.7;">
+            <li>• What is the hobby and how long have you been doing it?</li>
+            <li>• Why did you start and how often do you practice?</li>
+            <li>• Explain why you enjoy it and how it makes you feel.</li>
+          </ul>
+        </div>
+
+        <!-- SVG Countdown Circular Timer -->
+        <div class="timer-circle-wrap">
+          <svg class="timer-svg" viewBox="0 0 180 180">
+            <circle class="timer-circle-bg" cx="90" cy="90" r="80"></circle>
+            <circle id="timer-progress-ring" class="timer-circle-progress" cx="90" cy="90" r="80"></circle>
+          </svg>
+          <div class="timer-text-display" id="timer-display">01:00</div>
+        </div>
+
+        <!-- Microphone Waveform Visualizer Canvas -->
+        <div style="margin-bottom: 1.5rem;">
+          <canvas id="mic-visualizer-canvas" width="480" height="60" style="width: 100%; max-width: 480px; height: 60px; border-radius: var(--radius-md); background: var(--bg-surface); border: 1px solid var(--border-color);"></canvas>
+          <div id="recording-status" style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-muted); font-weight: 600;">
+            Ready to record. Click "Start Practice" below.
+          </div>
+        </div>
+
+        <!-- Controls Action Row -->
+        <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-secondary" onclick="speakingApp.generateRandomTopic()">
+            🎲 Generate Topic
+          </button>
+          
+          <button id="start-practice-btn" class="btn btn-primary btn-lg" onclick="speakingApp.startPractice()">
+            <span>▶️ Start Practice</span>
+          </button>
+          
+          <button id="finish-practice-btn" class="btn btn-rose btn-lg" style="display: none;" onclick="speakingApp.finishPractice()">
+            <span>⏹️ Finish</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Speaking Instructions Box -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>📋</span> Practice Instructions
+        </h3>
+        <ol style="padding-left: 1.25rem; font-size: 0.95rem; color: var(--text-muted); line-height: 1.8;">
+          <li><strong>Select your target duration:</strong> 30 seconds for rapid spontaneity, 1 minute for balanced structure, or 2 minutes for full IELTS Part 2 cue cards.</li>
+          <li><strong>Take 10 seconds to glance at the prompts:</strong> Organize your introduction, two supporting details, and an emotional or reflective conclusion.</li>
+          <li><strong>Speak continuously without pausing:</strong> If you lose track of a specific word, use paraphrase or circumlocution rather than stopping.</li>
+        </ol>
+      </div>
+
+      <!-- Practice History -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📜 Practice History</span>
+          <span class="badge badge-primary">Recent Sessions</span>
+        </div>
+        <ul id="speaking-history-list" style="margin-top: 0.5rem;">
+          <!-- Populated by js/speaking.js -->
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Dedicated Speaking Practice Portal</div>
+        <div><a href="ielts-speaking.html" style="color: var(--primary);">Go to IELTS Speaking Simulator ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/speaking.js"></script>
+</body>
+</html>

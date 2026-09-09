@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Full-Length Mock Examination (40 Questions) | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .mock-palette-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 0.4rem;
+      margin: 1rem 0;
+    }
+    .palette-btn {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .palette-btn.current {
+      box-shadow: 0 0 0 2px var(--primary);
+      font-weight: 800;
+    }
+    .palette-btn.answered {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .palette-btn.flagged {
+      background: var(--accent-amber);
+      color: #fff;
+      border-color: var(--accent-amber);
+    }
+    .palette-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .legend-box {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
+        <a href="ielts.html" class="nav-link">🎓 IELTS</a>
+        <a href="mocktest.html" class="nav-link active">📝 Mock Test</a>
+        <a href="results.html" class="nav-link">🏆 Results</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Live Exam Timer -->
+        <div class="stat-pill" style="border-color: var(--accent-amber); color: var(--accent-amber); font-size: 0.95rem; font-weight: 800; padding: 0.4rem 0.9rem;">
+          <span>⏱️ Remaining:</span>
+          <span id="exam-timer-display" style="font-family: monospace;">58:45</span>
+        </div>
+
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="btn btn-emerald btn-sm" onclick="mockExam.submitExam()">Submit Exam</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Exam Control Bar -->
+      <div class="card" style="margin-bottom: 1.5rem; padding: 1.1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-primary" id="exam-section-name">Section: Reading</span>
+          <h2 style="font-size: 1.35rem; margin-top: 0.35rem;">IELTS Official Simulated Mock Exam</h2>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1rem; font-weight: 700; color: var(--text-main);" id="question-tracker-text">
+            Question 1 / 40
+          </span>
+          <button class="btn btn-secondary btn-sm" id="flag-review-btn" onclick="mockExam.toggleFlag()">
+            🚩 Flag for Review
+          </button>
+        </div>
+      </div>
+
+      <!-- Split Layout: Question Drawer & Navigation Palette -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.75rem; align-items: start;">
+        
+        <!-- Left: Question Area -->
+        <div class="card" style="padding: 2.25rem 2rem;">
+          <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+            <span class="badge badge-secondary" id="question-skill-tag">Skill: Reading</span>
+            <h3 style="font-size: 1.25rem; margin-top: 0.5rem;" id="q-text">
+              Loading question...
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.4rem;" id="q-instruction">
+              Select the one best response from the options below.
+            </p>
+          </div>
+
+          <!-- Options List -->
+          <div id="q-options-container" style="margin-bottom: 2rem;">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Navigation Action Row -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+            <button class="btn btn-secondary" id="prev-btn" onclick="mockExam.prev()">
+              ← Previous
+            </button>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-secondary" onclick="mockExam.toggleFlag()">
+                Review Later
+              </button>
+              <button class="btn btn-primary" id="next-btn" onclick="mockExam.next()">
+                Next Question →
+              </button>
+              <button class="btn btn-emerald" id="submit-btn" style="display: none;" onclick="mockExam.submitExam()">
+                Submit Complete Mock Test ➔
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 40-Question Navigation Palette -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title" style="font-size: 1rem;">Questions Palette (1–40)</span>
+            <span class="badge badge-neutral" id="answered-count-badge">0/40 Done</span>
+          </div>
+
+          <p style="font-size: 0.8rem; color: var(--text-muted);">
+            Click any question number to jump directly to it:
+          </p>
+
+          <!-- 40-Number Grid -->
+          <div class="mock-palette-grid" id="palette-grid">
+            <!-- 40 buttons generated by JS -->
+          </div>
+
+          <!-- Legend -->
+          <div class="palette-legend">
+            <div class="legend-item">
+              <div class="legend-box" style="background: var(--primary);"></div>
+              <span>Answered</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box" style="background: var(--accent-amber);"></div>
+              <span>Flagged</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box" style="background: var(--bg-card); border: 1px solid var(--border-color);"></div>
+              <span>Unanswered</span>
+            </div>
+          </div>
+
+          <!-- Exam Progress Bar -->
+          <div style="margin-top: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.35rem;">
+              <span>Completion:</span>
+              <span id="exam-percent-text">0%</span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" id="exam-progress-bar" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Full-Length IELTS Mock Exam Interface</div>
+        <div>*Practice test with automated scoring and instant feedback.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
+  <script>
+    // 40 Realistic Questions spanning Listening, Reading, Writing, Speaking
+    const mockQuestions = [
+      // 1 to 10: Listening Module
+      { id: 1, skill: "Listening", text: "What time does the morning campus orientation tour commence?", options: ["8:30 AM", "9:00 AM", "9:45 AM", "10:15 AM"], correct: 1 },
+      { id: 2, skill: "Listening", text: "Which identification document is mandatory for registration?", options: ["Passport", "Driver's license", "Student library card", "Birth certificate"], correct: 0 },
+      { id: 3, skill: "Listening", text: "What is the fee for the student union annual membership?", options: ["£15", "£25", "£35", "Free"], correct: 1 },
+      { id: 4, skill: "Listening", text: "Where is the main seminar hall located?", options: ["Opposite the sports complex", "Next to the chemistry lab", "Above the bookstore", "In the humanities quad"], correct: 2 },
+      { id: 5, skill: "Listening", text: "How long is the library borrowing period for undergraduate textbooks?", options: ["7 days", "14 days", "21 days", "30 days"], correct: 1 },
+      { id: 6, skill: "Listening", text: "Which language elective has the highest enrollment?", options: ["Mandarin", "Spanish", "German", "French"], correct: 1 },
+      { id: 7, skill: "Listening", text: "What emergency number connects directly to campus security?", options: ["Extension 222", "Extension 444", "Extension 777", "Extension 999"], correct: 3 },
+      { id: 8, skill: "Listening", text: "What special dietary option must be booked 24 hours in advance?", options: ["Gluten-free meals", "Halal hot buffet", "Vegan banquet", "Kosher lunch boxes"], correct: 3 },
+      { id: 9, skill: "Listening", text: "What is the primary topic of the guest lecture on Thursday?", options: ["Renewable biofuels", "Quantum cryptography", "Urban forestry", "Medieval architecture"], correct: 0 },
+      { id: 10, skill: "Listening", text: "Where can students collect their discounted public transit passes?", options: ["Student services desk", "Metro station kiosk", "Admissions lobby", "Finance office"], correct: 0 },
+
+      // 11 to 20: Reading Module
+      { id: 11, skill: "Reading", text: "Paragraph 1: What caused the rapid expansion of early maritime trade routes?", options: ["Advancements in stellar navigation", "Depletion of overland silk routes", "Introduction of steam engines", "Monarchical subsidies"], correct: 0 },
+      { id: 12, skill: "Reading", text: "True/False/Not Given: Spices were primarily utilized for embalming rather than seasoning.", options: ["TRUE", "FALSE", "NOT GIVEN"], correct: 1 },
+      { id: 13, skill: "Reading", text: "What mineral was valued as equal in worth to silver during the Roman Empire?", options: ["Rock salt", "Lapis lazuli", "Volcanic sulfur", "Ambergris"], correct: 0 },
+      { id: 14, skill: "Reading", text: "Which civilization pioneered the deep-water magnetic compass?", options: ["Song Dynasty China", "Phoenicians", "Ancient Greeks", "Ottomans"], correct: 0 },
+      { id: 15, skill: "Reading", text: "True/False/Not Given: Overland caravans carried heavier bulk tonnage than galleons.", options: ["TRUE", "FALSE", "NOT GIVEN"], correct: 1 },
+      { id: 16, skill: "Reading", text: "What is the central focus of the third paragraph?", options: ["Economic impact of monsoons", "Shipbuilding materials", "Port harbor taxation", "Naval warfare tactics"], correct: 0 },
+      { id: 17, skill: "Reading", text: "True/False/Not Given: Pirates targeted merchant vessels more often in winter months.", options: ["TRUE", "FALSE", "NOT GIVEN"], correct: 2 },
+      { id: 18, skill: "Reading", text: "Complete the sentence: 'The invention of the astrolabe enabled sailors to calculate _______ accurately.'", options: ["Latitude", "Longitude", "Wind speed", "Ocean depth"], correct: 0 },
+      { id: 19, skill: "Reading", text: "Which trade route connected the Mediterranean basin with East Asia?", options: ["The Silk Road", "The Amber Way", "The Incense Route", "The Trans-Saharan trail"], correct: 0 },
+      { id: 20, skill: "Reading", text: "What was the author's primary objective in the concluding passage?", options: ["To highlight modern supply chain fragility", "To praise ancient cartographers", "To dismiss overland trade", "To predict space navigation"], correct: 0 },
+
+      // 21 to 30: Writing Module (Grammar & Cohesion Focus)
+      { id: 21, skill: "Writing", text: "Identify the best introductory overview statement for a Task 1 line graph:", options: ["Overall, it is clear that renewable energy generation experienced substantial growth over the period, whereas coal usage fell markedly.", "First, in 2000 coal was high and then in 2020 it was low.", "I like renewable energy because it stops global warming.", "There are many lines on this graph with different colors."], correct: 0 },
+      { id: 22, skill: "Writing", text: "Select the cohesive device demonstrating contrast:", options: ["Furthermore", "Conversely", "Consequently", "In addition"], correct: 1 },
+      { id: 23, skill: "Writing", text: "Which sentence displays the highest grammatical range for Task 2?", options: ["Were governments to subsidize public transportation, urban congestion would diminish dramatically.", "If governments subsidize buses, traffic goes down.", "Governments must do something about cars because traffic is bad.", "Traffic is bad and everyone hates sitting in cars."], correct: 0 },
+      { id: 24, skill: "Writing", text: "Choose the accurate academic collocation: 'The survey yielded _______ data regarding student study habits.'", options: ["substantial", "big", "heavy", "tall"], correct: 0 },
+      { id: 25, skill: "Writing", text: "Identify the sentence with correct punctuation:", options: ["However, despite significant investments, the problem persisted.", "However despite significant investments the problem persisted.", "However; despite significant investments the problem persisted.", "However, despite significant investments; the problem persisted."], correct: 0 },
+      { id: 26, skill: "Writing", text: "What is the minimum recommended word count for IELTS Writing Task 2?", options: ["150 words", "200 words", "250 words", "350 words"], correct: 2 },
+      { id: 27, skill: "Writing", text: "Which word best replaces 'get' in formal writing: 'The university _______ international recognition.'", options: ["acquired", "took", "had", "caught"], correct: 0 },
+      { id: 28, skill: "Writing", text: "Identify the passive sentence suitable for a Process diagram:", options: ["Workers harvest the tea leaves before drying them.", "The tea leaves are harvested by hand before being dried.", "You must pick the tea leaves and dry them.", "They pick leaves and then dry leaves."], correct: 1 },
+      { id: 29, skill: "Writing", text: "Select the phrase that expresses hedging appropriately:", options: ["This undoubtedly proves", "This might suggest that", "This is 100% true that", "Everyone knows that"], correct: 1 },
+      { id: 30, skill: "Writing", text: "What is the primary function of a thesis statement in the introduction paragraph?", options: ["To define every obscure word", "To state the author's central stance and essay roadmap", "To write the conclusion early", "To ask rhetorical questions"], correct: 1 },
+
+      // 31 to 40: Speaking Practice & Lexical Resource
+      { id: 31, skill: "Speaking", text: "What is the examiner evaluating under 'Fluency and Coherence'?", options: ["Speaking without hesitation and linking thoughts logically", "Speaking as fast as possible without breathing", "Using only vocabulary words longer than 10 letters", "Speaking in a strict British accent"], correct: 0 },
+      { id: 32, skill: "Speaking", text: "If you do not understand an examiner's question in Part 3, you should:", options: ["Remain completely silent", "Politely ask: 'Could you rephrase that question, please?'", "Guess randomly without context", "Complain about test difficulty"], correct: 1 },
+      { id: 33, skill: "Speaking", text: "What is the allotted preparation time for Part 2 (Cue Card)?", options: ["30 seconds", "1 minute", "2 minutes", "3 minutes"], correct: 1 },
+      { id: 34, skill: "Speaking", text: "Which filler expression is most natural when organizing thoughts?", options: ["That is an intriguing question; let me consider that for a moment...", "Uhhhh, ummm, like, like...", "I don't know the answer to this.", "Wait wait wait..."], correct: 0 },
+      { id: 35, skill: "Speaking", text: "What is the target speaking duration for Part 2 Long Turn?", options: ["30 seconds", "1 to 2 minutes", "Exactly 5 minutes", "As long as you want"], correct: 1 },
+      { id: 36, skill: "Speaking", text: "Select the idiom that means 'to face a difficult situation with courage':", options: ["Bite the bullet", "Spill the beans", "Break the ice", "Hit the roof"], correct: 0 },
+      { id: 37, skill: "Speaking", text: "In Part 1, how long should typical answers be?", options: ["1 word ('Yes' or 'No')", "2 to 4 complete sentences with explanations", "A 10-minute speech", "Recited memorized paragraphs"], correct: 1 },
+      { id: 38, skill: "Speaking", text: "What does 'circumlocution' mean in the speaking test?", options: ["Explaining a concept when you forget the exact word", "Speaking in circles to waste time", "Arguing with the examiner", "Whispering answers"], correct: 0 },
+      { id: 39, skill: "Speaking", text: "Which factor affects your Pronunciation score most?", options: ["Word stress, rhythm, and clear phoneme enunciation", "Speaking with a high pitch", "Mimicking an American movie actor", "Speaking extremely loudly"], correct: 0 },
+      { id: 40, skill: "Speaking", text: "In Part 3, questions are characterized as:", options: ["Personal questions about your family", "Abstract, analytical, and broader societal questions", "Spelling and grammar memory quizzes", "True or False trivia"], correct: 1 }
+    ];
+
+    class MockExamController {
+      constructor() {
+        this.questions = mockQuestions;
+        this.currentIndex = 0;
+        this.userAnswers = {};
+        this.flagged = {};
+        this.timer = null;
+      }
+
+      init() {
+        this.renderPalette();
+        this.renderQuestion();
+        this.startTimer();
+      }
+
+      startTimer() {
+        this.timer = new FluentTimer({
+          durationSeconds: 3600,
+          onTick: (rem, formatted) => {
+            const el = document.getElementById("exam-timer-display");
+            if (el) el.textContent = formatted;
+          },
+          onComplete: () => {
+            this.submitExam();
+          }
+        });
+        this.timer.start();
+      }
+
+      renderPalette() {
+        const grid = document.getElementById("palette-grid");
+        if (!grid) return;
+        grid.innerHTML = this.questions.map((q, i) => {
+          let classes = "palette-btn";
+          if (i === this.currentIndex) classes += " current";
+          if (this.flagged[i]) classes += " flagged";
+          else if (this.userAnswers[i] !== undefined) classes += " answered";
+
+          return `<button class="${classes}" onclick="mockExam.jumpTo(${i})">${i + 1}</button>`;
+        }).join("");
+
+        const answeredCount = Object.keys(this.userAnswers).length;
+        const total = this.questions.length;
+        document.getElementById("answered-count-badge").textContent = `${answeredCount}/${total} Done`;
+        const pct = Math.round((answeredCount / total) * 100);
+        document.getElementById("exam-percent-text").textContent = `${pct}%`;
+        document.getElementById("exam-progress-bar").style.width = `${pct}%`;
+      }
+
+      renderQuestion() {
+        const q = this.questions[this.currentIndex];
+        document.getElementById("question-tracker-text").textContent = `Question ${this.currentIndex + 1} / ${this.questions.length}`;
+        document.getElementById("q-text").textContent = q.text;
+        document.getElementById("question-skill-tag").textContent = `Skill: ${q.skill}`;
+        document.getElementById("exam-section-name").textContent = `Section: ${q.skill}`;
+
+        const container = document.getElementById("q-options-container");
+        container.innerHTML = q.options.map((opt, idx) => {
+          const isSelected = this.userAnswers[this.currentIndex] === idx;
+          const letter = String.fromCharCode(65 + idx);
+          return `
+            <label style="
+              display: flex;
+              align-items: center;
+              gap: 0.85rem;
+              padding: 0.95rem 1.25rem;
+              margin-bottom: 0.75rem;
+              border-radius: var(--radius-md);
+              border: 1px solid ${isSelected ? 'var(--primary)' : 'var(--border-color)'};
+              background: ${isSelected ? 'var(--primary-light)' : 'var(--bg-surface)'};
+              cursor: pointer;
+              transition: all 0.15s ease;
+            ">
+              <input type="radio" name="mock_q" value="${idx}" ${isSelected ? 'checked' : ''} 
+                style="accent-color: var(--primary);"
+                onchange="mockExam.selectOption(${idx})" />
+              <strong style="color: var(--primary);">${letter}.</strong>
+              <span style="color: var(--text-main); font-size: 1rem;">${opt}</span>
+            </label>
+          `;
+        }).join("");
+
+        // Button visibility
+        document.getElementById("prev-btn").disabled = this.currentIndex === 0;
+        const nextBtn = document.getElementById("next-btn");
+        const submitBtn = document.getElementById("submit-btn");
+
+        if (this.currentIndex === this.questions.length - 1) {
+          nextBtn.style.display = "none";
+          submitBtn.style.display = "inline-flex";
+        } else {
+          nextBtn.style.display = "inline-flex";
+          submitBtn.style.display = "none";
+        }
+
+        this.renderPalette();
+      }
+
+      selectOption(optionIndex) {
+        this.userAnswers[this.currentIndex] = optionIndex;
+        FluentPath.playClickBeep();
+        this.renderPalette();
+        this.renderQuestion();
+      }
+
+      toggleFlag() {
+        this.flagged[this.currentIndex] = !this.flagged[this.currentIndex];
+        FluentPath.playClickBeep();
+        this.renderPalette();
+        FluentPath.showToast(this.flagged[this.currentIndex] ? `Question ${this.currentIndex + 1} flagged for review.` : `Flag removed for Question ${this.currentIndex + 1}.`, "info");
+      }
+
+      next() {
+        if (this.currentIndex < this.questions.length - 1) {
+          this.currentIndex++;
+          this.renderQuestion();
+        }
+      }
+
+      prev() {
+        if (this.currentIndex > 0) {
+          this.currentIndex--;
+          this.renderQuestion();
+        }
+      }
+
+      jumpTo(idx) {
+        this.currentIndex = idx;
+        this.renderQuestion();
+      }
+
+      submitExam() {
+        let correctCount = 0;
+        const sectionScores = { Listening: 0, Reading: 0, Writing: 0, Speaking: 0 };
+        const sectionTotals = { Listening: 10, Reading: 10, Writing: 10, Speaking: 10 };
+
+        this.questions.forEach((q, i) => {
+          if (this.userAnswers[i] === q.correct) {
+            correctCount++;
+            sectionScores[q.skill]++;
+          }
+        });
+
+        // Compute simulated bands
+        const calcBand = (score, total) => {
+          const pct = score / total;
+          if (pct >= 0.9) return 8.5;
+          if (pct >= 0.8) return 7.5;
+          if (pct >= 0.7) return 7.0;
+          if (pct >= 0.6) return 6.5;
+          if (pct >= 0.5) return 6.0;
+          return 5.5;
+        };
+
+        const listeningBand = calcBand(sectionScores.Listening, 10);
+        const readingBand = calcBand(sectionScores.Reading, 10);
+        const writingBand = calcBand(sectionScores.Writing, 10);
+        const speakingBand = calcBand(sectionScores.Speaking, 10);
+        const overallBand = ((listeningBand + readingBand + writingBand + speakingBand) / 4).toFixed(1);
+
+        const examResult = {
+          title: "Full-Length IELTS Simulated Mock Exam",
+          total: 40,
+          correctCount,
+          incorrectCount: 40 - correctCount,
+          accuracy: Math.round((correctCount / 40) * 100),
+          timeTaken: "42 mins 18 secs",
+          listeningBand,
+          readingBand,
+          writingBand,
+          speakingBand,
+          overallBand,
+          timestamp: new Date().toISOString()
+        };
+
+        localStorage.setItem("fluentpath_last_result", JSON.stringify(examResult));
+
+        // Increment user stats
+        const user = FluentPath.getUser();
+        if (user) {
+          user.completedTests = (user.completedTests || 6) + 1;
+          user.currentBand = parseFloat(overallBand);
+          user.xp = (user.xp || 1850) + 150;
+          FluentPath.saveUser(user);
+        }
+
+        FluentPath.playSuccessChime();
+        FluentPath.showToast("Mock Exam submitted! Opening your practice results dashboard...", "success");
+
+        setTimeout(() => {
+          window.location.href = "results.html";
+        }, 900);
+      }
+    }
+
+    let mockExam;
+    document.addEventListener("DOMContentLoaded", () => {
+      mockExam = new MockExamController();
+      mockExam.init();
+    });
+  </script>
+</body>
+</html>

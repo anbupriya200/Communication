@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Reading Practice – Academic Reading Passage & Questions | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link active">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Top Test Banner with 60-min Timer & Palette -->
+      <div class="card" style="margin-bottom: 1.5rem; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-primary">Academic Reading Passage 1</span>
+          <h2 style="font-size: 1.25rem; margin-top: 0.25rem;">The Architecture of Coral Reef Ecosystems</h2>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <!-- Font Size Adjusters -->
+          <div style="display: flex; gap: 0.25rem;">
+            <button class="btn btn-secondary btn-sm" id="font-dec-btn" title="Decrease font size">A-</button>
+            <button class="btn btn-secondary btn-sm" id="font-inc-btn" title="Increase font size">A+</button>
+          </div>
+
+          <!-- 60-Minute Countdown Timer -->
+          <div class="stat-pill" style="font-size: 1.1rem; padding: 0.45rem 1rem; border-color: var(--primary);">
+            <span>⏱️</span> <span id="reading-timer-display" style="font-family: monospace; font-weight: 800;">60:00</span>
+          </div>
+
+          <button class="btn btn-emerald btn-sm" onclick="quizApp.submitQuiz()">
+            Submit Test ➔
+          </button>
+        </div>
+      </div>
+
+      <!-- Split Layout: Left Passage | Right Questions -->
+      <div class="reading-split-container">
+        
+        <!-- Left Panel: Reading Passage -->
+        <div class="reading-passage-panel" id="reading-passage-text">
+          <h2 style="font-size: 1.45rem; margin-bottom: 1rem; color: var(--primary);">
+            The Architecture of Coral Reef Ecosystems
+          </h2>
+
+          <p>
+            <strong>Paragraph A:</strong> Coral reefs occupy less than 0.1% of the world's ocean floor, yet they harbor approximately 25% of all documented marine life. Often heralded as the rainforests of the sea, these intricate biological architectures are constructed primarily by tiny polyps belonging to the phylum Cnidaria. Over millennia, millions of these minuscule organisms secrete calcium carbonate skeletons, slowly building monolithic limestone barriers that buffer coastal regions against tempestuous oceanic surges.
+          </p>
+
+          <p>
+            <strong>Paragraph B:</strong> The biological cornerstone of tropical reef vitality is an obligate mutualistic symbiosis between reef-building scleractinian corals and photosynthetic dinoflagellates known collectively as zooxanthellae. These single-celled microalgae reside intracellularly within the coral gastrodermis, transforming solar irradiance into organic carbon compounds through photosynthesis. In return for donating up to 90% of their photosynthetic harvest to the coral host, the algae gain shelter and access to coral nitrogenous waste products vital for cellular replication.
+          </p>
+
+          <p>
+            <strong>Paragraph C:</strong> However, this intricate ecological equilibrium is acutely sensitive to thermal anomalies. When ambient sea surface temperatures elevate by as little as 1 to 2 degrees Celsius above long-term summer maxima, the photosynthetic apparatus of zooxanthellae becomes photo-inhibited, producing toxic reactive oxygen species. To protect their cellular tissues, the coral host expels the microalgae, causing the colony to turn stark white—a catastrophic phenomenon termed coral bleaching. Without their photosynthetic partners, corals face progressive nutritional starvation and heightened mortality unless water temperatures rapidly normalize.
+          </p>
+
+          <p>
+            <strong>Paragraph D:</strong> In recent decades, marine ecologists have documented widespread mass bleaching episodes across the Indo-Pacific and Caribbean basins. Compounding thermal stress are localized anthropogenic disturbances, notably destructive overfishing, chemical runoff from coastal agriculture, and ocean acidification driven by atmospheric carbon absorption. In response, conservationists are accelerating artificial reef restoration using assisted gene flow and micro-fragmentation cultivation techniques to propagate thermally resilient coral strains.
+          </p>
+        </div>
+
+        <!-- Right Panel: Questions & Interactive Palette -->
+        <div class="reading-questions-panel">
+          <div style="margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <h3 style="font-size: 1.15rem;">Question Navigation</h3>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Questions 1 to 6</span>
+            </div>
+
+            <!-- Question Palette 1-6 -->
+            <div class="question-nav-grid" style="grid-template-columns: repeat(6, 1fr);">
+              <button class="question-nav-btn answered" onclick="quizApp.jumpTo(0)">1</button>
+              <button class="question-nav-btn" onclick="quizApp.jumpTo(1)">2</button>
+              <button class="question-nav-btn" onclick="quizApp.jumpTo(2)">3</button>
+              <button class="question-nav-btn" onclick="quizApp.jumpTo(3)">4</button>
+              <button class="question-nav-btn" onclick="quizApp.jumpTo(4)">5</button>
+              <button class="question-nav-btn" onclick="quizApp.jumpTo(5)">6</button>
+            </div>
+          </div>
+
+          <!-- Question Engine Target -->
+          <div id="reading-quiz-container">
+            <!-- Rendered by js/quiz.js -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – IELTS Reading Module</div>
+        <div><a href="writing.html" style="color: var(--primary);">Proceed to Writing Module ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/quiz.js"></script>
+  <script>
+    const readingQuestions = [
+      {
+        question: "Question 1: What proportion of marine species relies on coral reefs?",
+        instruction: "Multiple Choice: Refer to Paragraph A.",
+        type: "mcq",
+        options: [
+          "Less than 0.1%",
+          "Approximately 25%",
+          "More than 50%",
+          "Exactly 90%"
+        ],
+        correctAnswer: 1,
+        explanation: "Paragraph A explicitly indicates reefs 'harbor approximately 25% of all documented marine life'."
+      },
+      {
+        question: "Question 2: True / False / Not Given",
+        instruction: "Statement: Zooxanthellae supply the majority of their photosynthetic energy to the host coral.",
+        type: "tfng",
+        options: ["TRUE", "FALSE", "NOT GIVEN"],
+        correctAnswer: 0,
+        explanation: "Paragraph B states the algae donate 'up to 90% of their photosynthetic harvest to the coral host', which represents a vast majority."
+      },
+      {
+        question: "Question 3: True / False / Not Given",
+        instruction: "Statement: Coral bleaching immediately and irreversibly kills coral polyps within 24 hours.",
+        type: "tfng",
+        options: ["TRUE", "FALSE", "NOT GIVEN"],
+        correctAnswer: 1,
+        explanation: "Paragraph C explains that bleached corals face starvation, but can recover if water temperatures normalize rapidly."
+      },
+      {
+        question: "Question 4: Matching Headings - What is the primary theme of Paragraph C?",
+        type: "mcq",
+        options: [
+          "The mechanical benefits of coastal wave breakers",
+          "Thermal sensitivity and the mechanism of coral bleaching",
+          "Historical origins of photosynthetic dinoflagellates",
+          "Governmental maritime fisheries legislation"
+        ],
+        correctAnswer: 1,
+        explanation: "Paragraph C details how temperature anomalies trigger photo-inhibition and algal expulsion."
+      },
+      {
+        question: "Question 5: Sentence Completion",
+        instruction: "Write ONE WORD ONLY from the passage: 'Reef architectures are composed primarily of _______ carbonate skeletons.'",
+        type: "blank",
+        correctAnswer: "calcium",
+        explanation: "Paragraph A refers directly to 'calcium carbonate skeletons'."
+      },
+      {
+        question: "Question 6: Summary Completion",
+        instruction: "Which innovative methodology is mentioned in Paragraph D to preserve coral strains?",
+        type: "mcq",
+        options: [
+          "Micro-fragmentation cultivation",
+          "Cold water oceanic pumping",
+          "Deep sea synthetic shading",
+          "Chemical nutrient supplementation"
+        ],
+        correctAnswer: 0,
+        explanation: "Paragraph D states conservationists are 'propagating thermally resilient coral strains using assisted gene flow and micro-fragmentation cultivation'."
+      }
+    ];
+
+    let quizApp;
+    let readingTimer;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      quizApp = new QuizEngine("reading-quiz-container", readingQuestions, {
+        title: "IELTS Academic Reading Test",
+        sectionName: "Reading Passage 1",
+        onAnswerChange: (answers) => {
+          const navBtns = document.querySelectorAll(".question-nav-btn");
+          navBtns.forEach((btn, idx) => {
+            if (answers[idx] !== undefined) {
+              btn.classList.add("answered");
+            } else {
+              btn.classList.remove("answered");
+            }
+          });
+        }
+      });
+      quizApp.init();
+
+      // 60-minute countdown timer
+      readingTimer = new FluentTimer({
+        durationSeconds: 3600,
+        onTick: (rem, formatted) => {
+          const el = document.getElementById("reading-timer-display");
+          if (el) el.textContent = formatted;
+        }
+      });
+      readingTimer.start();
+
+      // Font size adjustment handlers
+      let currentFontSize = 1.05;
+      const passageEl = document.getElementById("reading-passage-text");
+      document.getElementById("font-inc-btn").onclick = () => {
+        if (currentFontSize < 1.35) {
+          currentFontSize += 0.1;
+          passageEl.style.fontSize = `${currentFontSize}rem`;
+        }
+      };
+      document.getElementById("font-dec-btn").onclick = () => {
+        if (currentFontSize > 0.85) {
+          currentFontSize -= 0.1;
+          passageEl.style.fontSize = `${currentFontSize}rem`;
+        }
+      };
+    });
+  </script>
+</body>
+</html>

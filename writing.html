@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Writing Practice – Task 1 & Task 2 Editor | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .task-switcher-bar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.75rem;
+    }
+    .chart-type-selector {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link active">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Practice Disclaimer -->
+      <div class="practice-disclaimer-banner">
+        <span class="icon">ℹ️</span>
+        <div>
+          <strong>Practice Feedback Notice:</strong> Automated feedback and band estimates for IELTS Writing are generated for self-directed practice and do not represent certified official test results.
+        </div>
+      </div>
+
+      <!-- Task Tab Bar: Task 1 vs Task 2 -->
+      <div class="task-switcher-bar">
+        <button class="btn btn-primary task-tab-btn active" data-task="1">
+          📊 Task 1: Visual Report (150 Words)
+        </button>
+        <button class="btn btn-secondary task-tab-btn" data-task="2">
+          ✍️ Task 2: Academic Essay (250 Words)
+        </button>
+      </div>
+
+      <!-- TASK 1 SECTION -->
+      <div id="task1-controls">
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Select Visual Format:</h3>
+          <div class="chart-type-selector">
+            <button class="btn btn-primary btn-sm task1-type-btn active" data-chart="line">📈 Line Graph</button>
+            <button class="btn btn-secondary btn-sm task1-type-btn" data-chart="bar">📊 Bar Chart</button>
+            <button class="btn btn-secondary btn-sm task1-type-btn" data-chart="pie">🥧 Pie Chart</button>
+            <button class="btn btn-secondary btn-sm task1-type-btn" data-chart="process">🔄 Process / Flow</button>
+          </div>
+
+          <!-- HTML5 Canvas Visual Chart -->
+          <div class="chart-canvas-wrapper">
+            <canvas id="task1-chart-canvas" width="560" height="280" style="width: 100%; max-width: 560px; height: 280px;"></canvas>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <strong style="color: var(--primary); display: block; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.25rem;">Prompt:</strong>
+            <p id="task1-prompt-display" style="font-size: 0.95rem; color: var(--text-main); line-height: 1.6;">
+              Loading graph prompt...
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 2 SECTION -->
+      <div id="task2-controls" style="display: none;">
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="task2-type-select">Essay Prompt Category:</label>
+            <select id="task2-type-select" class="form-control" style="font-weight: 600;">
+              <option value="opinion">1. Opinion Essay (Agree or Disagree)</option>
+              <option value="discussion">2. Discussion Essay (Discuss Both Views)</option>
+              <option value="advantages">3. Advantages & Disadvantages</option>
+              <option value="problem">4. Problem & Solution</option>
+              <option value="twopart">5. Two-Part Direct Question</option>
+            </select>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary);">
+            <strong style="color: var(--secondary); display: block; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.4rem;">Essay Question:</strong>
+            <p id="task2-prompt-display" style="font-size: 1.05rem; font-weight: 600; color: var(--text-main); line-height: 1.6;">
+              Some people believe that universities should focus exclusively on providing graduates with job skills, while others believe that the primary goal of higher education is wider academic knowledge. What is your opinion?
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Writing Editor Panel -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header" style="flex-wrap: wrap; gap: 0.75rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="card-title">📝 Writing Area</span>
+            <span class="badge badge-primary" id="target-words-badge">Target: 150+ Words</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div class="word-count-badge">
+              <span>Words:</span>
+              <strong id="word-counter-value" style="color: var(--primary); font-size: 1.1rem;">0</strong>
+            </div>
+
+            <div class="stat-pill" style="padding: 0.35rem 0.75rem;">
+              <span>⏱️</span> <span id="writing-timer-display" style="font-family: monospace;">00:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Word count progress bar -->
+        <div class="progress-bar-container" style="margin-bottom: 1rem;">
+          <div id="word-count-progress" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+
+        <!-- Large text area -->
+        <textarea id="essay-textarea" class="writing-textarea" placeholder="Type your response here. Aim for clear paragraphing, varied vocabulary, and logical cohesion..."></textarea>
+
+        <!-- Editor Toolbar Controls -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem; flex-wrap: wrap; gap: 0.75rem;">
+          <button id="save-draft-btn" class="btn btn-secondary">
+            💾 Save Draft
+          </button>
+          
+          <button id="submit-essay-btn" class="btn btn-emerald btn-lg">
+            Submit for Practice Feedback ➔
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Automated Practice Feedback Modal -->
+  <div id="feedback-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close-btn" onclick="writingApp.closeModal()">✕</button>
+
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎉</div>
+        <h2 style="font-size: 1.6rem; color: var(--text-main);">Practice Feedback Report</h2>
+        <span class="badge badge-amber" style="margin-top: 0.5rem;">Simulated Practice Feedback</span>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--text-muted); text-align: center; margin-bottom: 1.5rem;">
+        This automated evaluation highlights key strengths and priority focus areas based on standard IELTS band descriptors.
+      </p>
+
+      <!-- 4 Rubric Categories -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 0.9rem;">Task Response</strong>
+            <span class="badge badge-emerald">Band 6.5</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;">
+            Addresses all parts of the prompt with a clear position throughout.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 0.9rem;">Coherence & Cohesion</strong>
+            <span class="badge badge-primary">Band 7.0</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;">
+            Logical sequencing of ideas with balanced paragraphing and linking words.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 0.9rem;">Lexical Resource</strong>
+            <span class="badge badge-emerald">Band 6.5</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;">
+            Uses sufficient range with some awareness of style and collocation.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <strong style="font-size: 0.9rem;">Grammatical Range</strong>
+            <span class="badge badge-amber">Band 6.0</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;">
+            Mix of simple and complex sentence structures with occasional minor errors.
+          </p>
+        </div>
+      </div>
+
+      <div style="background: var(--primary-light); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(79, 70, 229, 0.2); margin-bottom: 1.5rem;">
+        <strong style="color: var(--primary); font-size: 0.9rem;">💡 Key Area to Improve:</strong>
+        <p style="font-size: 0.875rem; color: var(--text-main); margin-top: 0.25rem;">
+          Incorporate more complex conditional clauses and passive structures to push your Grammatical Accuracy score to Band 7.0+.
+        </p>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button class="btn btn-secondary" onclick="writingApp.closeModal()">Close</button>
+        <a href="results.html" class="btn btn-primary">View Global Results Dashboard ➔</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – IELTS Writing Module</div>
+        <div><a href="ielts-speaking.html" style="color: var(--primary);">Proceed to Speaking Simulator ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/timer.js"></script>
+  <script src="js/writing.js"></script>
+</body>
+</html>

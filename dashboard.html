@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – FluentPath Student Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link active">🏠 Dashboard</a>
+        <a href="levels.html" class="nav-link">🗺️ Levels</a>
+        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
+        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        
+        <!-- IELTS Dropdown -->
+        <div class="nav-item nav-dropdown">
+          <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
+          <div class="dropdown-menu">
+            <a href="listening.html" class="dropdown-item">🎧 Listening Module</a>
+            <a href="reading.html" class="dropdown-item">📖 Reading Module</a>
+            <a href="writing.html" class="dropdown-item">✍️ Writing Module</a>
+            <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
+          </div>
+        </div>
+
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="daily-challenge.html" class="nav-link">🔥 Daily Challenge</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill credits" title="Game Star Coins">
+          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        </div>
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <div class="stat-pill xp">
+          <span>⭐</span> <span class="user-xp-display">1,850 XP</span>
+        </div>
+
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+          <span class="user-name-display" style="font-size: 0.85rem; font-weight: 700; display: none; @media(min-width:992px){display:inline;}">Aarav</span>
+        </a>
+
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Student Hero Profile Banner -->
+      <section class="student-hero-card">
+        <div class="student-hero-profile">
+          <div class="student-hero-avatar user-avatar-initial" id="dash-avatar-letter">A</div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.25rem;">
+              <h1 style="font-size: 1.85rem;" id="dashboard-greeting">Good Morning, Aarav! 👋</h1>
+              <span class="badge badge-emerald">Enrolled Student</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem;" id="dash-student-id">Student ID: FP-2026-88</p>
+            <p style="font-size: 0.875rem; color: var(--text-muted); font-style: italic; margin-top: 0.4rem;" id="daily-quote-text">
+              "Small daily improvements over time lead to stunning IELTS band score leaps."
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="daily-challenge.html" class="btn btn-emerald">
+            <span>🔥 Daily Challenge (3/4)</span>
+          </a>
+          <a href="mocktest.html" class="btn btn-primary">
+            <span>📝 Take Full Mock Test</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Stat Box Grid -->
+      <section class="stat-box-grid">
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: var(--primary-light); color: var(--primary);">🏆</div>
+          <div>
+            <div class="stat-box-value" id="dash-current-band">6.5</div>
+            <div class="stat-box-label">Practice Band</div>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: rgba(234, 88, 12, 0.15); color: #ea580c;">🔥</div>
+          <div>
+            <div class="stat-box-value" id="dash-streak-count">14 Days</div>
+            <div class="stat-box-label">Daily Streak</div>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">📚</div>
+          <div>
+            <div class="stat-box-value" id="dash-vocab-count">248</div>
+            <div class="stat-box-label">Vocab Mastered</div>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-box-icon" style="background: var(--accent-amber-light); color: var(--accent-amber);">📝</div>
+          <div>
+            <div class="stat-box-value" id="dash-tests-count">6</div>
+            <div class="stat-box-label">Mock Tests Done</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Progress Trackers -->
+      <div class="grid-2" style="margin-bottom: 2.25rem;">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🎓 IELTS Preparation Progress</span>
+            <span class="badge badge-primary">74% Ready</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            Tracking performance across Listening, Reading, Writing, and Speaking modules.
+          </p>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: 74%;"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🗣️ English Communication Mastery</span>
+            <span class="badge badge-emerald">68% Fluency</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            Completed 7 out of 10 conversation categories with interactive roleplay activities.
+          </p>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill emerald" style="width: 68%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Learning Features Grid (Clickable Cards to Separate Pages) -->
+      <section style="margin-bottom: 3rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem;">
+          <div>
+            <h2>Explore Learning Modules</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Select any section to continue your personalized learning journey.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <!-- Card 1: Communication -->
+          <a href="communication.html" class="card card-interactive">
+            <div class="category-icon-wrapper" style="background: var(--primary-light); color: var(--primary);">🗣️</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">English Communication</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              10 real-world scenarios: Daily small talk, college, workplace meetings, interviews, and public speaking.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-primary">10 Categories</span>
+              <span style="font-weight: 700; color: var(--primary); font-size: 0.9rem;">Start Speaking ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 2: IELTS -->
+          <a href="ielts.html" class="card card-interactive">
+            <div class="category-icon-wrapper" style="background: var(--secondary-light); color: var(--secondary);">🎓</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">IELTS Portal</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              All four skills covered in detail: Academic & General Listening, Reading, Writing Task 1/2, and Speaking.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-secondary">4 Modules</span>
+              <span style="font-weight: 700; color: var(--secondary); font-size: 0.9rem;">View IELTS ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 3: Vocabulary -->
+          <a href="vocabulary.html" class="card card-interactive">
+            <div class="category-icon-wrapper" style="background: var(--accent-emerald-light); color: var(--accent-emerald);">📚</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Vocabulary Flashcards</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              Interactive cards with native audio pronunciation, definitions, synonyms, antonyms, and context examples.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-emerald">6 Categories</span>
+              <span style="font-weight: 700; color: var(--accent-emerald); font-size: 0.9rem;">Study Vocab ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 4: Grammar -->
+          <a href="grammar.html" class="card card-interactive">
+            <div class="category-icon-wrapper" style="background: var(--accent-amber-light); color: var(--accent-amber);">🔤</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Grammar Hub</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              10 structured grammar lessons: Tenses, Modals, Passive Voice, Conditionals, and instant practice quizzes.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-amber">10 Topics</span>
+              <span style="font-weight: 700; color: var(--accent-amber); font-size: 0.9rem;">Practice Grammar ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 5: Mock Test -->
+          <a href="mocktest.html" class="card card-interactive">
+            <div class="category-icon-wrapper" style="background: var(--accent-cyan-light); color: var(--accent-cyan);">📝</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">IELTS Mock Exam</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              Full exam simulator with timed sections, 40 questions navigation palette, and comprehensive results report.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-primary">Timed Exam</span>
+              <span style="font-weight: 700; color: var(--accent-cyan); font-size: 0.9rem;">Take Test ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 6: Progress & Analytics -->
+          <a href="progress.html" class="card card-interactive">
+            <div class="category-icon-wrapper" style="background: var(--accent-rose-light); color: var(--accent-rose);">📊</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Learning Analytics</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              Visual skill breakdowns, weekly study hours canvas graph, band trajectory charts, and test histories.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-rose">Detailed Stats</span>
+              <span style="font-weight: 700; color: var(--accent-rose); font-size: 0.9rem;">View Progress ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 7: Duolingo Levels Path -->
+          <a href="levels.html" class="card card-interactive" style="border: 2px solid var(--vibe-indigo);">
+            <div class="category-icon-wrapper" style="background: var(--primary-light); color: var(--primary);">🗺️</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Duolingo Levels Path</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              Gamified stepping-stone journey with 5 units, 25 levels, hearts system, crowns, and streak rewards.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-primary">25 Levels</span>
+              <span style="font-weight: 700; color: var(--primary); font-size: 0.9rem;">Play Path ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 8: Adult Tasks Lounge -->
+          <a href="adult-tasks.html" class="card card-interactive" style="border: 2px solid var(--vibe-pink);">
+            <div class="category-icon-wrapper" style="background: var(--accent-rose-light); color: var(--vibe-pink);">🎯</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Adult English Tasks</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              Workplace dilemmas, 60s speed idiom blitz, accent tongue-twister gym, and debate arena.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-rose">5 Fun Modules</span>
+              <span style="font-weight: 700; color: var(--vibe-pink); font-size: 0.9rem;">Enter Lounge ➔</span>
+            </div>
+          </a>
+
+          <!-- Card 9: Kids Corner -->
+          <a href="kids-learning.html" class="card card-interactive" style="border: 2px solid var(--accent-amber);">
+            <div class="category-icon-wrapper" style="background: var(--accent-amber-light); color: var(--accent-amber);">🐣</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Kids Learning Corner</h3>
+            <p style="color: var(--text-muted); font-size: 0.925rem; margin-bottom: 1rem; flex: 1;">
+              Illustrated cartoon animals, nursery sing-alongs, 3-letter phonics builder, stories, and Star Coins shop.
+            </p>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span class="badge badge-amber">Ages 4-10</span>
+              <span style="font-weight: 700; color: var(--accent-amber); font-size: 0.9rem;">Explore Kids ➔</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Reusable Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+            <span>Fluent<span class="brand-highlight">Path</span></span>
+          </div>
+          <p>
+            Empowering students worldwide to achieve English fluency and target band scores in IELTS Academic & General Training.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Learning Modules</h4>
+          <ul class="footer-links">
+            <li><a href="communication.html">English Communication</a></li>
+            <li><a href="speaking.html">Speaking Practice</a></li>
+            <li><a href="vocabulary.html">Vocabulary Builder</a></li>
+            <li><a href="grammar.html">Grammar Lessons</a></li>
+            <li><a href="daily-challenge.html">Daily Challenge</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">IELTS Preparation</h4>
+          <ul class="footer-links">
+            <li><a href="listening.html">Listening Module</a></li>
+            <li><a href="reading.html">Reading Module</a></li>
+            <li><a href="writing.html">Writing Task 1 & 2</a></li>
+            <li><a href="ielts-speaking.html">Speaking Simulator</a></li>
+            <li><a href="mocktest.html">Full Mock Exam</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Student Account</h4>
+          <ul class="footer-links">
+            <li><a href="profile.html">Student Profile</a></li>
+            <li><a href="progress.html">Performance Analytics</a></li>
+            <li><a href="about.html">About FluentPath</a></li>
+            <li><a href="contact.html">Help & FAQ</a></li>
+            <li><a href="#" onclick="FluentPath.logout()">Logout Session</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath Education Technologies. All rights reserved.</div>
+        <div class="footer-disclaimer">
+          *Notice: FluentPath provides practice preparation materials and simulated estimations. It is not affiliated with or endorsed by Cambridge Assessment English, IDP, or British Council.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

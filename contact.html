@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Help Center & FAQ | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .faq-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.85rem;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 1.1rem 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--transition-fast);
+    }
+    .faq-question:hover {
+      background: var(--bg-card-hover);
+    }
+    .faq-answer {
+      padding: 0 1.4rem 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      display: none;
+    }
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+    .faq-item.open .faq-toggle-icon {
+      transform: rotate(180deg);
+    }
+    .faq-toggle-icon {
+      transition: transform var(--transition-fast);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="communication.html" class="nav-link">🗣️ Communication</a>
+        <a href="ielts.html" class="nav-link">🎓 IELTS</a>
+        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
+        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
+        <a href="about.html" class="nav-link">📄 About</a>
+        <a href="contact.html" class="nav-link active">📞 Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="dashboard.html" class="btn btn-secondary btn-sm">Student Dashboard</a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Page Header -->
+      <div class="page-header" style="text-align: center;">
+        <div class="page-title" style="justify-content: center;">
+          <span class="emoji">📞</span>
+          <h1>Student Support & Help Center</h1>
+        </div>
+        <p class="page-subtitle" style="margin: 0 auto;">
+          Have questions about your mock exam evaluation, speech simulator audio, or student profile? Our support team and knowledge base are here to help.
+        </p>
+      </div>
+
+      <!-- Help Categories Grid -->
+      <div class="grid-4" style="margin-bottom: 2.5rem;">
+        <div class="card" style="text-align: center; padding: 1.25rem 1rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛠️</div>
+          <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Technical & Audio</strong>
+          <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Mic input & Web Speech synthesis.</p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 1.25rem 1rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎓</div>
+          <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">IELTS Syllabus</strong>
+          <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Academic & General Training guidelines.</p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 1.25rem 1rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+          <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Practice Scoring</strong>
+          <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">Rubric diagnostics & band conversion.</p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 1.25rem 1rem;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">👤</div>
+          <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Student Account</strong>
+          <p style="font-size: 0.775rem; color: var(--text-muted); margin-top: 0.25rem;">ID credentials & profile settings.</p>
+        </div>
+      </div>
+
+      <!-- Contact Form & Support Box -->
+      <div class="card glass-card" style="padding: 2.5rem 2rem; margin-bottom: 3rem;">
+        <h2 style="font-size: 1.45rem; margin-bottom: 0.5rem; color: var(--primary);">
+          Send a Support Inquiry
+        </h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.75rem;">
+          Submit your question and our academic counseling team will respond promptly to your registered email.
+        </p>
+
+        <form id="contact-support-form">
+          <div class="grid-2" style="gap: 1.25rem; margin-bottom: 1.25rem;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="contact-name">Student Name</label>
+              <input type="text" id="contact-name" class="form-control" placeholder="e.g. Aarav Sharma" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="contact-email">Email Address</label>
+              <input type="email" id="contact-email" class="form-control" placeholder="e.g. aarav@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-category">Help Category</label>
+            <select id="contact-category" class="form-control">
+              <option value="technical">Technical Support (Mic / Audio Playback)</option>
+              <option value="ielts-scoring">IELTS Practice Scoring & Evaluation</option>
+              <option value="curriculum">Grammar & Communication Curriculum</option>
+              <option value="account">Student Profile & Streak Tracking</option>
+              <option value="other">Other Inquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-message">Your Message / Query</label>
+            <textarea id="contact-message" class="form-control" rows="5" placeholder="Describe your question or technical issue in detail..." required></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end;">
+            <button type="submit" id="contact-submit-btn" class="btn btn-primary btn-lg">
+              <span>Send Message</span> <span>➔</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Frequently Asked Questions (Accordion) -->
+      <div class="card" style="margin-bottom: 3.5rem;">
+        <div class="card-header">
+          <span class="card-title">❓ Frequently Asked Questions</span>
+          <span class="badge badge-primary">FAQ</span>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          
+          <div class="faq-item open">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Are FluentPath band scores official IELTS certificates?</span>
+              <span class="faq-toggle-icon">▾</span>
+            </div>
+            <div class="faq-answer">
+              No. All scores and diagnostic rubrics on FluentPath are practice simulations designed to benchmark your current preparation level. Official IELTS test score reports (TRF) can only be awarded by taking the exam at an authorized British Council, IDP, or Cambridge Assessment testing center.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How does native audio pronunciation work?</span>
+              <span class="faq-toggle-icon">▾</span>
+            </div>
+            <div class="faq-answer">
+              FluentPath uses the browser's built-in Web Speech API (SpeechSynthesis) to voice vocabulary cards and conversation dialogue lines in natural British and international English accents. Make sure your browser audio is unmuted.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Can I retake full-length mock exams?</span>
+              <span class="faq-toggle-icon">▾</span>
+            </div>
+            <div class="faq-answer">
+              Yes, absolutely! You can retake the mock exams as many times as you like. Your latest test results, accuracy rates, and completed test counts are automatically synchronized to your progress tracker.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How is my daily study streak maintained?</span>
+              <span class="faq-toggle-icon">▾</span>
+            </div>
+            <div class="faq-answer">
+              Completing any learning activity—such as learning 5 vocabulary flashcards, doing a 1-minute speaking challenge, or submitting a quiz—records activity for that day and extends your streak multiplier.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Does the portal support both Light and Dark mode?</span>
+              <span class="faq-toggle-icon">▾</span>
+            </div>
+            <div class="faq-answer">
+              Yes! You can toggle between dark and light themes at any time by clicking the sun/moon icon in the navigation bar. Your theme choice is automatically saved and synchronized across all pages.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Student Help & Support Center</div>
+        <div><a href="dashboard.html" style="color: var(--primary);">Return to Dashboard ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    function toggleFaq(headerEl) {
+      const item = headerEl.parentElement;
+      item.classList.toggle("open");
+    }
+
+    document.getElementById("contact-support-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("contact-submit-btn");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner"></span> <span>Sending...</span>`;
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = `<span>Send Message</span> <span>➔</span>`;
+        FluentPath.playSuccessChime();
+        FluentPath.showToast("Your support inquiry has been submitted! We will respond within 24 hours.", "success");
+        document.getElementById("contact-message").value = "";
+      }, 700);
+    });
+  </script>
+</body>
+</html>

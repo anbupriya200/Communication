@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FluentPath – Student Portal Login | English Communication & IELTS Preparation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-bg-blob {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.28;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .auth-bg-blob-1 {
+      top: -100px;
+      left: -100px;
+      background: #4f46e5;
+    }
+    .auth-bg-blob-2 {
+      bottom: -100px;
+      right: -100px;
+      background: #7c3aed;
+    }
+    .shake-animation {
+      animation: shake 0.35s ease-in-out;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-bg-blob auth-bg-blob-1"></div>
+    <div class="auth-bg-blob auth-bg-blob-2"></div>
+
+    <!-- Theme toggle in top right -->
+    <div style="position: absolute; top: 1.5rem; right: 1.5rem; z-index: 20;">
+      <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+    </div>
+
+    <div class="auth-card">
+      <div style="margin-bottom: 1.75rem;">
+        <div class="brand-logo" style="justify-content: center; margin-bottom: 0.75rem;">
+          <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+          <span>Fluent<span class="brand-highlight">Path</span></span>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">
+          English Communication & IELTS Preparation Portal
+        </p>
+      </div>
+
+      <!-- Animated Cartoon Animal Welcoming Card -->
+      <div class="welcome-mascot-card" id="mascot-welcome-box">
+        <div class="mascot-avatar-container">
+          <img src="images/game_credits_mascot.jpg" alt="Welcoming Mascot" class="mascot-img-circle" id="mascot-img">
+          <div class="mascot-waving-paw" id="mascot-paw">👋</div>
+        </div>
+        <div class="mascot-speech-bubble" id="mascot-speech">
+          Hello! I'm Barnaby the Learning Bear 🐻<br>
+          <span style="font-size:0.85rem; font-weight:500; color:var(--text-muted);">Enter your Student ID to start your learning journey!</span>
+        </div>
+      </div>
+
+      <form id="login-form">
+        <!-- Student ID Input -->
+        <div class="form-group">
+          <label class="form-label" for="student-id">Student ID</label>
+          <div class="input-icon-wrapper">
+            <span class="input-icon">🆔</span>
+            <input type="text" id="student-id" class="form-control" placeholder="e.g. FP-2026-88" autocomplete="username" required>
+          </div>
+          <div id="id-error" class="form-feedback"></div>
+        </div>
+
+        <!-- Student Mobile Input -->
+        <div class="form-group">
+          <label class="form-label" for="mobile-number">Student Mobile Number</label>
+          <div class="input-icon-wrapper">
+            <span class="input-icon">📱</span>
+            <input type="tel" id="mobile-number" class="form-control" placeholder="10-digit mobile number" maxlength="10" autocomplete="tel" required>
+          </div>
+          <div id="mobile-error" class="form-feedback"></div>
+        </div>
+
+        <!-- Remember Me & Forgot ID -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.875rem;">
+          <label class="checkbox-label">
+            <input type="checkbox" id="remember-me">
+            <span>Remember Me</span>
+          </label>
+          <button type="button" id="demo-fill-btn" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 0.35rem 0.65rem;">
+            ⚡ Demo Quick-Fill
+          </button>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" id="login-btn" class="btn btn-primary btn-block btn-lg" style="margin-bottom: 1.25rem;">
+          <span>Login to Dashboard</span> <span>➔</span>
+        </button>
+      </form>
+
+      <!-- Security & Help Links -->
+      <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem; font-size: 0.825rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+        <a href="about.html" style="color: var(--primary); font-weight: 600;">About FluentPath</a>
+        <span>•</span>
+        <a href="contact.html" style="color: var(--text-muted);">Need Help / Support?</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

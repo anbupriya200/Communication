@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practice Exam Results & Band Analytics | FluentPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .band-score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .skill-band-card {
+      background: var(--bg-surface-solid);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+        <span>Fluent<span class="brand-highlight">Path</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="ielts.html" class="nav-link">🎓 IELTS</a>
+        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
+        <a href="results.html" class="nav-link active">🏆 Results</a>
+        <a href="progress.html" class="nav-link">📊 Progress</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="stat-pill streak">
+          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <a href="profile.html" class="user-avatar-btn">
+          <div class="user-avatar-img user-avatar-initial">A</div>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container container-narrow">
+      
+      <!-- Mandatory Practice Estimate Disclaimer -->
+      <div class="practice-disclaimer-banner">
+        <span class="icon">ℹ️</span>
+        <div>
+          <strong>Official Notice:</strong> "This is a practice estimate and is not an official IELTS result." All band ratings are diagnostic simulations generated for educational guidance.
+        </div>
+      </div>
+
+      <!-- Hero Results Banner -->
+      <div class="card glass-card" style="text-align: center; padding: 2.75rem 2rem; margin-bottom: 2.5rem;">
+        <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎉</div>
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;" id="results-headline">YOUR PRACTICE RESULT 🎉</h1>
+        <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem;" id="results-exam-title">
+          Full-Length IELTS Simulated Mock Examination
+        </p>
+
+        <!-- Big Overall Band Badge -->
+        <div class="band-hero-circle">
+          <span class="band-hero-number" id="overall-band-val">6.5</span>
+          <span class="band-hero-label">Overall Practice Band</span>
+        </div>
+
+        <!-- 4 Skill Bands Breakdown -->
+        <div class="band-score-grid">
+          <div class="skill-band-card">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">🎧</div>
+            <strong style="font-size: 0.9rem; color: var(--text-muted); display: block;">Listening</strong>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--primary);" id="band-listening">7.0</div>
+          </div>
+
+          <div class="skill-band-card">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">📖</div>
+            <strong style="font-size: 0.9rem; color: var(--text-muted); display: block;">Reading</strong>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--secondary);" id="band-reading">6.5</div>
+          </div>
+
+          <div class="skill-band-card">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">✍️</div>
+            <strong style="font-size: 0.9rem; color: var(--text-muted); display: block;">Writing</strong>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--accent-emerald);" id="band-writing">6.0</div>
+          </div>
+
+          <div class="skill-band-card">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">🎤</div>
+            <strong style="font-size: 0.9rem; color: var(--text-muted); display: block;">Speaking</strong>
+            <div style="font-size: 1.75rem; font-weight: 800; color: var(--accent-amber);" id="band-speaking">6.5</div>
+          </div>
+        </div>
+
+        <!-- Metric Details Row -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; text-align: center;">
+          <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Correct</span>
+            <div style="font-size: 1.35rem; font-weight: 800; color: var(--accent-emerald);" id="res-correct">28 / 40</div>
+          </div>
+          <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Incorrect</span>
+            <div style="font-size: 1.35rem; font-weight: 800; color: var(--accent-rose);" id="res-incorrect">12 / 40</div>
+          </div>
+          <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Accuracy</span>
+            <div style="font-size: 1.35rem; font-weight: 800; color: var(--primary);" id="res-accuracy">70%</div>
+          </div>
+          <div>
+            <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Time Taken</span>
+            <div style="font-size: 1.35rem; font-weight: 800; color: var(--text-main);" id="res-time">42m 18s</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actionable Areas to Improve -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-header">
+          <span class="card-title">💡 Targeted Areas to Improve</span>
+          <span class="badge badge-amber">Action Plan</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-emerald);">
+            <strong style="color: var(--text-main); font-size: 1rem; display: block; margin-bottom: 0.25rem;">
+              1. IELTS Writing Task 2 Grammatical Complexity
+            </strong>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+              Your current estimated writing score is Band 6.0. To elevate into Band 7.0+, transition away from simple coordinating clauses and integrate inverted conditionals (e.g. <em>"Had the policy been implemented..."</em>) and concessive clauses (e.g. <em>"Notwithstanding recent improvements..."</em>).
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--secondary);">
+            <strong style="color: var(--text-main); font-size: 1rem; display: block; margin-bottom: 0.25rem;">
+              2. Reading Skimming Precision & True/False/Not Given Trap Avoidance
+            </strong>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+              Watch out for subtle absolute qualifiers like <em>"exclusively"</em>, <em>"always"</em>, and <em>"unconditionally"</em>. In IELTS Reading, when the text mentions a possibility but does not confirm certainty, the correct answer is frequently <strong>NOT GIVEN</strong>.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary);">
+            <strong style="color: var(--text-main); font-size: 1rem; display: block; margin-bottom: 0.25rem;">
+              3. Speaking Fluency Continuity
+            </strong>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+              Practice 2-minute impromptu speaking using our dedicated timer. Replace hesitation pauses ("ummm", "uhhh") with discourse anchors like <em>"To examine this from another angle..."</em>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+        <a href="mocktest.html" class="btn btn-secondary">
+          🔄 Retake Mock Exam
+        </a>
+        <a href="progress.html" class="btn btn-primary">
+          📊 View Learning Analytics ➔
+        </a>
+        <a href="dashboard.html" class="btn btn-emerald">
+          🏠 Return to Dashboard
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 FluentPath – Practice Results Analytics</div>
+        <div class="footer-disclaimer">
+          *Disclaimer: This practice estimate is not an official IELTS result.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Load saved result from localStorage or use realistic default demo results
+      const stored = localStorage.getItem("fluentpath_last_result");
+      let result = {
+        title: "Full-Length IELTS Simulated Mock Examination",
+        overallBand: "6.5",
+        listeningBand: "7.0",
+        readingBand: "6.5",
+        writingBand: "6.0",
+        speakingBand: "6.5",
+        correctCount: 28,
+        incorrectCount: 12,
+        accuracy: 70,
+        timeTaken: "42 mins 18 secs"
+      };
+
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          result = { ...result, ...parsed };
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      document.getElementById("overall-band-val").textContent = result.overallBand;
+      document.getElementById("band-listening").textContent = result.listeningBand || "7.0";
+      document.getElementById("band-reading").textContent = result.readingBand || "6.5";
+      document.getElementById("band-writing").textContent = result.writingBand || "6.0";
+      document.getElementById("band-speaking").textContent = result.speakingBand || "6.5";
+
+      document.getElementById("res-correct").textContent = `${result.correctCount} / ${result.total || 40}`;
+      document.getElementById("res-incorrect").textContent = `${result.incorrectCount} / ${result.total || 40}`;
+      document.getElementById("res-accuracy").textContent = `${result.accuracy}%`;
+      document.getElementById("res-time").textContent = result.timeTaken || "38m 20s";
+      document.getElementById("results-exam-title").textContent = result.title;
+    });
+  </script>
+</body>
+</html>
