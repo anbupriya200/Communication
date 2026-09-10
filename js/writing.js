@@ -114,7 +114,7 @@ class WritingSimulator {
       }
 
       // Line 1: Country A
-      ctx.strokeStyle = "#4f46e5";
+      ctx.strokeStyle = "#06b6d4";
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.moveTo(80, 220);
@@ -145,7 +145,7 @@ class WritingSimulator {
       ctx.fillText("2024", 470, 260);
 
       // Legend
-      ctx.fillStyle = "#4f46e5"; ctx.fillRect(100, 20, 15, 10);
+      ctx.fillStyle = "#06b6d4"; ctx.fillRect(100, 20, 15, 10);
       ctx.fillStyle = textCol; ctx.fillText("Country A", 125, 29);
       ctx.fillStyle = "#10b981"; ctx.fillRect(220, 20, 15, 10);
       ctx.fillStyle = textCol; ctx.fillText("Country B", 245, 29);
@@ -160,10 +160,10 @@ class WritingSimulator {
       cities.forEach((city, i) => {
         const x = 90 + i * 110;
         // Bar A
-        ctx.fillStyle = "#4f46e5";
+        ctx.fillStyle = "#06b6d4";
         ctx.fillRect(x, 240 - valsA[i], 30, valsA[i]);
         // Bar B
-        ctx.fillStyle = "#7c3aed";
+        ctx.fillStyle = "#10b981";
         ctx.fillRect(x + 35, 240 - valsB[i], 30, valsB[i]);
 
         ctx.fillStyle = textCol;
@@ -172,9 +172,9 @@ class WritingSimulator {
       });
 
       // Legend
-      ctx.fillStyle = "#4f46e5"; ctx.fillRect(120, 18, 15, 10);
+      ctx.fillStyle = "#06b6d4"; ctx.fillRect(120, 18, 15, 10);
       ctx.fillStyle = textCol; ctx.fillText("Rent", 145, 27);
-      ctx.fillStyle = "#7c3aed"; ctx.fillRect(220, 18, 15, 10);
+      ctx.fillStyle = "#10b981"; ctx.fillRect(220, 18, 15, 10);
       ctx.fillStyle = textCol; ctx.fillText("Food & Dining", 245, 27);
 
     } else if (this.task1Type === "pie") {
@@ -199,11 +199,11 @@ class WritingSimulator {
         ctx.fillText(title, centerX - 25, centerY + 85);
       };
 
-      drawPie(160, 110, "Year 2010", [45, 30, 25], ["#4f46e5", "#f59e0b", "#10b981"]);
-      drawPie(380, 110, "Year 2024", [20, 35, 45], ["#4f46e5", "#f59e0b", "#10b981"]);
+      drawPie(160, 110, "Year 2010", [45, 30, 25], ["#06b6d4", "#f59e0b", "#10b981"]);
+      drawPie(380, 110, "Year 2024", [20, 35, 45], ["#06b6d4", "#f59e0b", "#10b981"]);
 
       // Legend
-      ctx.fillStyle = "#4f46e5"; ctx.fillRect(140, 240, 12, 10);
+      ctx.fillStyle = "#06b6d4"; ctx.fillRect(140, 240, 12, 10);
       ctx.fillStyle = textCol; ctx.fillText("Fossil Fuels", 160, 249);
       ctx.fillStyle = "#f59e0b"; ctx.fillRect(250, 240, 12, 10);
       ctx.fillStyle = textCol; ctx.fillText("Nuclear", 270, 249);
@@ -219,9 +219,9 @@ class WritingSimulator {
       const steps = ["1. Sorting", "2. Shredding", "3. Melting", "4. Spinning", "5. Weaving"];
       steps.forEach((step, i) => {
         const x = 35 + i * 100;
-        ctx.fillStyle = isDark ? "#1e293b" : "#f1f5f9";
+        ctx.fillStyle = isDark ? "#07252e" : "#f1f5f9";
         ctx.fillRect(x, 100, 80, 50);
-        ctx.strokeStyle = "#4f46e5";
+        ctx.strokeStyle = "#06b6d4";
         ctx.strokeRect(x, 100, 80, 50);
         
         ctx.fillStyle = textCol;
@@ -229,7 +229,7 @@ class WritingSimulator {
         ctx.fillText(step, x + 8, 130);
 
         if (i < 4) {
-          ctx.fillStyle = "#7c3aed";
+          ctx.fillStyle = "#10b981";
           ctx.fillText("➔", x + 85, 130);
         }
       });

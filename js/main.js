@@ -109,14 +109,50 @@ const FluentPath = {
 
   // 3. Navigation Bar & Mobile Drawer
   initNavbar() {
+    const navbar = document.querySelector(".navbar");
+    if (navbar) {
+      const handleScroll = () => {
+        if (window.scrollY > 20) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      };
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+    }
+
     const mobileToggle = document.querySelector(".mobile-toggle");
     const navLinks = document.querySelector(".nav-links");
 
     if (mobileToggle && navLinks) {
-      mobileToggle.addEventListener("click", () => {
+      mobileToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
         navLinks.classList.toggle("active");
         const isOpen = navLinks.classList.contains("active");
         mobileToggle.innerHTML = isOpen ? "✕" : "☰";
+        mobileToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      // Close mobile navbar drawer when tapping outside
+      document.addEventListener("click", (e) => {
+        if (navLinks.classList.contains("active") && !navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
+          navLinks.classList.remove("active");
+          mobileToggle.innerHTML = "☰";
+          mobileToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Auto close drawer when clicking a navigation link
+      const linksInside = navLinks.querySelectorAll("a:not([href='javascript:void(0)'])");
+      linksInside.forEach(link => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 1250) {
+            navLinks.classList.remove("active");
+            mobileToggle.innerHTML = "☰";
+            mobileToggle.setAttribute("aria-expanded", "false");
+          }
+        });
       });
     }
 
@@ -124,10 +160,12 @@ const FluentPath = {
     const dropdowns = document.querySelectorAll(".nav-dropdown");
     dropdowns.forEach(drop => {
       const toggle = drop.querySelector(".nav-link");
-      if (toggle && window.innerWidth <= 768) {
+      if (toggle) {
         toggle.addEventListener("click", (e) => {
-          e.preventDefault();
-          drop.classList.toggle("open");
+          if (window.innerWidth <= 1250) {
+            e.preventDefault();
+            drop.classList.toggle("open");
+          }
         });
       }
     });

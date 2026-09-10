@@ -946,20 +946,84 @@ const DuoLevels = {
     }
   },
 
+  pendingChestReward: null,
+
+  openTreasureChest(levelId) {
+    const isCompleted = this.progress.completedLevels.includes(levelId);
+    const modal = document.getElementById("duo-chest-modal");
+    if (!modal) return;
+
+    this.pendingChestReward = levelId;
+    const titleEl = document.getElementById("chest-modal-title");
+    const descEl = document.getElementById("chest-modal-desc");
+    const badgeEl = document.getElementById("chest-modal-badge");
+
+    const badges = {
+      5: "🦉 Wise Owl",
+      10: "🦁 Safari Hero",
+      15: "👑 Grammar King",
+      20: "💼 Executive Pro",
+      25: "🏆 Grand Master"
+    };
+
+    if (titleEl) titleEl.textContent = `Milestone Level ${levelId} Reward Chest!`;
+    if (descEl) descEl.textContent = isCompleted 
+      ? `You completed Unit ${Math.ceil(levelId / 5)} Checkpoint!` 
+      : `Complete Level ${levelId} to unlock this Milestone Chest!`;
+    if (badgeEl) badgeEl.textContent = badges[levelId] || "🏆";
+
+    modal.style.display = "flex";
+  },
+
+  claimChestReward() {
+    const modal = document.getElementById("duo-chest-modal");
+    if (modal) modal.style.display = "none";
+
+    const levelId = this.pendingChestReward || 5;
+    const claimedKey = `fluentpath_chest_claimed_${levelId}`;
+    if (localStorage.getItem(claimedKey)) {
+      FluentPath.showToast(`Milestone Chest Level ${levelId} rewards already claimed!`, "info");
+      return;
+    }
+
+    localStorage.setItem(claimedKey, "true");
+    FluentPath.addGameCredits(100, `Milestone Chest Level ${levelId}`);
+    const user = FluentPath.getUser() || FluentPath.defaultUser;
+    user.xp = (user.xp || 1850) + 250;
+    FluentPath.saveUser(user);
+    this.updateUI();
+
+    FluentPath.playSuccessChime();
+    FluentPath.showToast(`🎉 Claimed 100 Star Coins & 250 Bonus XP for Level ${levelId}!`, "success");
+  },
+
   renderUnits() {
     const container = document.getElementById("duo-units-container");
     if (!container) return;
 
-    container.innerHTML = this.units.map(unit => `
+    const unitBanners = [
+      "images/kids_welcome_animals.jpg",
+      "images/kids_learning_hero.jpg",
+      "images/cleo-cat-jump.jpg",
+      "images/game_credits_mascot.jpg",
+      "images/victory-trophy-cat.jpg"
+    ];
+
+    container.innerHTML = this.units.map((unit, uIdx) => {
+      const bannerImg = unitBanners[uIdx % unitBanners.length];
+      return `
       <section class="duo-unit">
-        <div class="duo-unit-header">
-          <div>
+        <div class="duo-unit-header" style="position:relative; overflow:hidden; display:flex; justify-content:space-between; align-items:center;">
+          <div style="z-index:2; max-width:65%;">
             <span class="duo-unit-badge">Unit ${unit.unitNumber}</span>
             <h2 style="font-size: 1.5rem; font-weight:800; margin:0.2rem 0;">${unit.title}</h2>
             <p style="color: var(--text-muted); font-size: 0.95rem;">${unit.desc}</p>
           </div>
-          <div style="background:var(--vibe-gradient-soft); padding:0.5rem 1rem; border-radius:var(--radius-full); font-weight:800; font-size:0.9rem; color:var(--primary);">
-            ⭐ 5 Levels
+          <div style="z-index:2; display:flex; flex-direction:column; align-items:flex-end; gap:0.5rem;">
+            <div style="background:var(--vibe-gradient-soft); padding:0.4rem 0.9rem; border-radius:var(--radius-full); font-weight:800; font-size:0.85rem; color:var(--primary); border:1px solid var(--border-color);">
+              ⭐ 5 Levels
+            </div>
+            <img src="${bannerImg}" alt="Unit ${unit.unitNumber} Cover" class="ai-generated-card-img" style="width:65px; height:65px; object-fit:cover; border-radius:var(--radius-md);">
           </div>
         </div>
 
@@ -978,6 +1042,8 @@ const DuoLevels = {
             if (idx % 4 === 1) offsetClass = "offset-left";
             if (idx % 4 === 3) offsetClass = "offset-right";
 
+            const isMilestone = (level.id % 5 === 0);
+
             return `
               <div class="duo-node-row ${offsetClass}">
                 ${isActive ? `
@@ -994,16 +1060,26 @@ const DuoLevels = {
                     ${isLocked ? "disabled" : ""}
                   >
                     ${isCompleted ? `<div class="duo-crown-badge">👑</div>` : ""}
-                    <div class="duo-node-icon">${level.icon}</div>
+                    <div class="duo-node-icon">
+                      <img src="${level.icon}" alt="${level.title}" style="width:34px; height:34px; object-fit:contain; display:block;">
+                    </div>
                   </button>
-                  <div class="duo-node-label">${level.title}</div>
+                  <div class="duo-node-label" style="display:flex; align-items:center; gap:0.3rem; justify-content:center;">
+                    <span>${level.title}</span>
+                    ${isMilestone ? `
+                      <button onclick="DuoLevels.openTreasureChest(${level.id})" title="Milestone Reward Chest" style="background:none; border:none; cursor:pointer; font-size:1.1rem; padding:0;" ${isLocked ? 'disabled' : ''}>
+                        🎁
+                      </button>
+                    ` : ''}
+                  </div>
                 </div>
               </div>
             `;
           }).join("")}
         </div>
       </section>
-    `).join("");
+      `;
+    }).join("");
   },
 
   bindEvents() {

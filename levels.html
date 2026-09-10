@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning Path & Duolingo Levels | FluentPath</title>
+  <link rel="icon" type="image/svg+xml" href="images/fluentpath-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,6 +27,8 @@
         <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
         <a href="communication.html" class="nav-link">🗣️ Communication</a>
         
+        <div class="nav-divider"></div>
+
         <!-- IELTS Dropdown -->
         <div class="nav-item nav-dropdown">
           <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
@@ -36,6 +39,8 @@
             <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
           </div>
         </div>
+
+        <div class="nav-divider"></div>
 
         <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
         <a href="grammar.html" class="nav-link">🔤 Grammar</a>
@@ -77,7 +82,7 @@
           <img src="images/icon-flame.svg" class="stat-icon-img" alt="Streak">
           <span id="duo-streak-display">14 Day Streak</span>
         </div>
-        <div class="duo-stat-item" style="color: #6366f1;">
+        <div class="duo-stat-item" style="color: #06b6d4;">
           <img src="images/icon-star.svg" class="stat-icon-img" alt="XP">
           <span id="duo-xp-display">1,850 XP</span>
         </div>
@@ -153,6 +158,40 @@
         </button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Milestone Treasure Chest Modal -->
+  <div class="duo-modal-backdrop" id="duo-chest-modal">
+    <div class="duo-modal-box" style="max-width: 480px; text-align: center;">
+      <div style="padding: 2rem 1.5rem;">
+        <div style="font-size: 4rem; animation: floatAvatar 2s ease-in-out infinite;" id="chest-modal-icon">🎁</div>
+        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--accent-amber); margin: 0.8rem 0 0.4rem;" id="chest-modal-title">Milestone Chest Unlocked!</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;" id="chest-modal-desc">
+          You reached a Unit Checkpoint! Open your chest to claim exclusive rewards.
+        </p>
+
+        <div style="background: rgba(224, 122, 95, 0.12); border: 1px dashed var(--primary); border-radius: var(--radius-lg); padding: 1.2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-around; align-items: center;">
+          <div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-amber);">+100</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">🪙 Star Coins</div>
+          </div>
+          <div style="height: 30px; border-left: 1px solid var(--border-color);"></div>
+          <div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-emerald);">+250</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">⭐ Bonus XP</div>
+          </div>
+          <div style="height: 30px; border-left: 1px solid var(--border-color);"></div>
+          <div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-rose);" id="chest-modal-badge">🏆</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Mascot Badge</div>
+          </div>
+        </div>
+
+        <button class="btn btn-emerald btn-lg" onclick="DuoLevels.claimChestReward()" style="width: 100%;">
+          ✨ Claim Milestone Rewards ✨
+        </button>
+      </div>
     </div>
   </div>
 
