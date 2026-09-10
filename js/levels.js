@@ -930,19 +930,28 @@ const DuoLevels = {
     }
   },
 
-  speakText(text) {
-    if (this.isVoiceMuted || !("speechSynthesis" in window)) return;
-    try {
-      window.speechSynthesis.cancel();
-      const clean = text.replace(/<[^>]*>/g, "").trim();
-      if (!clean) return;
-      const utterance = new SpeechSynthesisUtterance(clean);
-      utterance.rate = 0.95;
-      utterance.pitch = 1.1;
-      utterance.lang = "en-US";
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.warn("Speech Synthesis error:", e);
+  speakText(text, activeBtn = null) {
+    if (typeof FluentPath !== "undefined" && FluentPath.speakLikePerson) {
+      const btn = activeBtn || document.getElementById("coach-repeat-audio-btn");
+      FluentPath.speakLikePerson(text, {
+        activeElement: btn,
+        rate: 0.94,
+        pitch: 1.02
+      });
+    } else {
+      if (this.isVoiceMuted || !("speechSynthesis" in window)) return;
+      try {
+        window.speechSynthesis.cancel();
+        const clean = text.replace(/<[^>]*>/g, "").trim();
+        if (!clean) return;
+        const utterance = new SpeechSynthesisUtterance(clean);
+        utterance.rate = 0.94;
+        utterance.pitch = 1.02;
+        utterance.lang = "en-US";
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        console.warn("Speech Synthesis error:", e);
+      }
     }
   },
 
@@ -950,60 +959,87 @@ const DuoLevels = {
     const container = document.getElementById("duo-units-container");
     if (!container) return;
 
-    container.innerHTML = this.units.map(unit => `
-      <section class="duo-unit">
-        <div class="duo-unit-header">
-          <div>
-            <span class="duo-unit-badge">Unit ${unit.unitNumber}</span>
-            <h2 style="font-size: 1.5rem; font-weight:800; margin:0.2rem 0;">${unit.title}</h2>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">${unit.desc}</p>
-          </div>
-          <div style="background:var(--vibe-gradient-soft); padding:0.5rem 1rem; border-radius:var(--radius-full); font-weight:800; font-size:0.9rem; color:var(--primary);">
-            ⭐ 5 Levels
-          </div>
-        </div>
+    const unitDetails = [
+      { cefr: "A1 Breakthrough", focus: "Phonetics & Everyday Greetings", words: "250 Words", time: "1.5 Hrs" },
+      { cefr: "B1 Threshold", focus: "Office Dialogue & Career English", words: "500 Words", time: "2.5 Hrs" },
+      { cefr: "B2 Vantage", focus: "IELTS Academic & Discourse Markers", words: "750 Words", time: "3.5 Hrs" },
+      { cefr: "C1 Operational", focus: "Debate Tactics, Rhetoric & Idioms", words: "1,000 Words", time: "4.5 Hrs" },
+      { cefr: "C2 Mastery", focus: "Diplomatic Fluency & Spontaneous Speech", words: "1,500 Words", time: "5.0 Hrs" }
+    ];
 
-        <div class="duo-path-container">
-          ${unit.levels.map((level, idx) => {
-            const isCompleted = this.progress.completedLevels.includes(level.id);
-            const isActive = this.progress.currentLevel === level.id;
-            const isLocked = !isCompleted && !isActive;
-
-            let stateClass = "locked";
-            if (isCompleted) stateClass = "completed";
-            else if (isActive) stateClass = "active";
-
-            // Offset layout: 0 = center, 1 = left, 2 = center, 3 = right, 4 = center
-            let offsetClass = "";
-            if (idx % 4 === 1) offsetClass = "offset-left";
-            if (idx % 4 === 3) offsetClass = "offset-right";
-
-            return `
-              <div class="duo-node-row ${offsetClass}">
-                ${isActive ? `
-                  <div class="cleo-mascot-trail-node">
-                    <img src="images/cat-avatar.svg" class="cleo-trail-cat-img ${this.isCatJumping ? 'cleo-jump-anim' : ''}" alt="Cleo the Cat">
-                    <div class="cleo-speech-mini">Level ${level.id}! 🐾</div>
-                  </div>
-                ` : ""}
-                <div style="display:flex; flex-direction:column; align-items:center;">
-                  <button 
-                    class="duo-node-btn ${stateClass}" 
-                    title="${level.title}"
-                    onclick="DuoLevels.startLevel(${level.id})"
-                    ${isLocked ? "disabled" : ""}
-                  >
-                    ${isCompleted ? `<div class="duo-crown-badge">👑</div>` : ""}
-                    <div class="duo-node-icon">${level.icon}</div>
-                  </button>
-                  <div class="duo-node-label">${level.title}</div>
+    container.innerHTML = this.units.map((unit, unitIdx) => {
+      const info = unitDetails[unitIdx] || unitDetails[0];
+      return `
+        <section class="duo-unit">
+          <div class="duo-unit-banner-card unit-${unit.unitNumber || (unitIdx + 1)}">
+            <div class="duo-unit-header">
+              <div>
+                <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; margin-bottom:0.5rem;">
+                  <span class="duo-unit-badge" style="color:#ffffff; background:rgba(79,70,229,0.9); padding:0.25rem 0.75rem; border-radius:var(--radius-full); font-weight:800;">
+                    Unit ${unit.unitNumber} Milestone
+                  </span>
+                  <span style="color:#ffffff; background:rgba(16,185,129,0.85); padding:0.25rem 0.75rem; border-radius:var(--radius-full); font-size:0.75rem; font-weight:800;">
+                    ${info.cefr}
+                  </span>
+                </div>
+                <h2 style="font-size: 1.65rem; font-weight:800; margin:0.25rem 0; color:#ffffff; text-shadow: 0 2px 5px rgba(0,0,0,0.6);">${unit.title}</h2>
+                <p style="color: rgba(255,255,255,0.95); font-size: 0.95rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5); max-width: 620px; line-height:1.5;">${unit.desc}</p>
+                
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.75rem; font-size:0.8rem; color:rgba(255,255,255,0.9); font-weight:600;">
+                  <span>🎯 Focus: ${info.focus}</span>
+                  <span>📚 Vocab Target: ${info.words}</span>
+                  <span>⏱️ Est. Time: ${info.time}</span>
                 </div>
               </div>
-            `;
-          }).join("")}
-        </div>
-      </section>
-    `).join("");
+
+              <div style="background:rgba(255,255,255,0.22); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.35); padding:0.6rem 1.25rem; border-radius:var(--radius-full); font-weight:800; font-size:0.95rem; color:#ffffff; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+                ⭐ 5 Levels in Unit
+              </div>
+            </div>
+          </div>
+
+          <div class="duo-path-container">
+            ${unit.levels.map((level, idx) => {
+              const isCompleted = this.progress.completedLevels.includes(level.id);
+              const isActive = this.progress.currentLevel === level.id;
+              const isLocked = !isCompleted && !isActive;
+
+              let stateClass = "locked";
+              if (isCompleted) stateClass = "completed";
+              else if (isActive) stateClass = "active";
+
+              // Offset layout: 0 = center, 1 = left, 2 = center, 3 = right, 4 = center
+              let offsetClass = "";
+              if (idx % 4 === 1) offsetClass = "offset-left";
+              if (idx % 4 === 3) offsetClass = "offset-right";
+
+              return `
+                <div class="duo-node-row ${offsetClass}">
+                  ${isActive ? `
+                    <div class="cleo-mascot-trail-node">
+                      <img src="images/cat-avatar.svg" class="cleo-trail-cat-img ${this.isCatJumping ? 'cleo-jump-anim' : ''}" alt="Cleo the Cat">
+                      <div class="cleo-speech-mini">Level ${level.id}! 🐾</div>
+                    </div>
+                  ` : ""}
+                  <div style="display:flex; flex-direction:column; align-items:center;">
+                    <button 
+                      class="duo-node-btn ${stateClass}" 
+                      title="${level.title}"
+                      onclick="DuoLevels.startLevel(${level.id})"
+                      ${isLocked ? "disabled" : ""}
+                    >
+                      ${isCompleted ? `<div class="duo-crown-badge">👑</div>` : ""}
+                      <div class="duo-node-icon">${level.icon}</div>
+                    </button>
+                    <div class="duo-node-label">${level.title}</div>
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </section>
+      `;
+    }).join("");
   },
 
   bindEvents() {
@@ -1090,18 +1126,36 @@ const DuoLevels = {
     this.selectedChoiceIdx = null;
     this.isAnswerChecked = false;
 
-    // Automatic Speech Voice (Without clicking button)
+    // Automatic Speech Voice (Without clicking button) with Natural Human cadence
     this.speakText(q.prompt);
+
+    const coachCardHtml = `
+      <div class="coach-prompt-card">
+        <div class="coach-avatar-wrapper">
+          <img src="images/speaking_coach_avatar.jpg" alt="Coach Emily" class="coach-avatar-img">
+          <div class="coach-online-dot" title="Coach Online"></div>
+        </div>
+        <div class="coach-speech-bubble">
+          <div class="coach-identity-row">
+            <span class="coach-name">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+              Coach Emily • Native Speaker
+            </span>
+            <button type="button" class="coach-audio-btn" id="coach-repeat-audio-btn" title="Listen to Coach Emily speak">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <span>Hear Coach</span>
+            </button>
+          </div>
+          <div style="font-size:1.15rem; font-weight:700; line-height:1.45; color:var(--text-main); margin-top:0.35rem;">
+            ${q.prompt}
+          </div>
+        </div>
+      </div>
+    `;
 
     if (q.type === "multiple_choice") {
       modalBody.innerHTML = `
-        <div class="duo-prompt-bubble">
-          <div style="font-size:2.2rem;">🦉</div>
-          <div>
-            <span class="badge badge-vibe" style="font-size:0.75rem;">Question ${this.currentQuestionIdx + 1} of ${questions.length}</span>
-            <div style="font-size:1.2rem; font-weight:700; margin-top:0.4rem;">${q.prompt}</div>
-          </div>
-        </div>
+        ${coachCardHtml}
         <div class="quiz-options-grid" id="duo-options-container">
           ${q.options.map((opt, i) => `
             <button class="quiz-option-btn duo-choice-btn" data-index="${i}" onclick="DuoLevels.selectOption(${i})">
@@ -1112,13 +1166,7 @@ const DuoLevels = {
       `;
     } else if (q.type === "translate") {
       modalBody.innerHTML = `
-        <div class="duo-prompt-bubble">
-          <div style="font-size:2.2rem;">🦉</div>
-          <div>
-            <span class="badge badge-vibe" style="font-size:0.75rem;">Sentence Construction (Question ${this.currentQuestionIdx + 1} of ${questions.length})</span>
-            <div style="font-size:1.2rem; font-weight:700; margin-top:0.4rem;">${q.prompt}</div>
-          </div>
-        </div>
+        ${coachCardHtml}
         
         <div class="duo-word-chips-container" id="duo-selected-box">
           <span style="color:var(--text-muted); font-size:0.9rem; align-self:center;">(Tap word chips below to build the phrase)</span>
@@ -1132,6 +1180,12 @@ const DuoLevels = {
           `).join("")}
         </div>
       `;
+    }
+
+    // Attach repeat audio click listener
+    const repeatBtn = document.getElementById("coach-repeat-audio-btn");
+    if (repeatBtn) {
+      repeatBtn.onclick = () => this.speakText(q.prompt, repeatBtn);
     }
   },
 

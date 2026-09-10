@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -7,58 +7,223 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/fluentpath-mark.svg">
+  <link rel="alternate icon" href="images/fluentpath-mark.svg">
+  <link rel="apple-touch-icon" href="images/fluentpath-mark.svg">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <!-- Navigation Bar -->
+  <!-- Navigation Bar -->
   <header class="navbar">
     <div class="container nav-container">
-      <a href="dashboard.html" class="brand-logo">
-        <div class="brand-icon"><img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath"></div>
+      <a href="dashboard.html" class="brand-logo" aria-label="FluentPath Home">
+        <div class="brand-icon">
+          <img class="brand-icon-image" src="images/fluentpath-mark.svg" alt="FluentPath">
+        </div>
         <span>Fluent<span class="brand-highlight">Path</span></span>
       </a>
 
-      <nav class="nav-links">
-        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
-        <a href="levels.html" class="nav-link active">🗺️ Levels</a>
-        <a href="kids-learning.html" class="nav-link">🐣 Kids Corner</a>
-        <a href="adult-tasks.html" class="nav-link">🎯 Adult Tasks</a>
-        <a href="communication.html" class="nav-link">🗣️ Communication</a>
-        
-        <!-- IELTS Dropdown -->
+      <nav class="nav-links" id="main-nav-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg class="nav-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Dashboard</span>
+        </a>
+
+        <!-- Classifications & Tracks Dropdown -->
         <div class="nav-item nav-dropdown">
-          <a href="ielts.html" class="nav-link">🎓 IELTS ▾</a>
+          <button type="button" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            <svg class="nav-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            <span>Learning Tracks</span>
+            <svg class="nav-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
           <div class="dropdown-menu">
-            <a href="listening.html" class="dropdown-item">🎧 Listening Module</a>
-            <a href="reading.html" class="dropdown-item">📖 Reading Module</a>
-            <a href="writing.html" class="dropdown-item">✍️ Writing Module</a>
-            <a href="ielts-speaking.html" class="dropdown-item">🎤 Speaking Simulator</a>
+            <a href="kids-learning.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-emerald">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Kids Corner</span>
+                <span class="dropdown-sub">Phonics, alphabet, songs & stories</span>
+              </div>
+            </a>
+            <a href="adult-tasks.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-violet">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Adult Tasks Hub</span>
+                <span class="dropdown-sub">Diplomatic dilemmas & 60s idiom blitz</span>
+              </div>
+            </a>
+            <a href="levels.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-amber">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Level Path (A1–C2)</span>
+                <span class="dropdown-sub">25 Duolingo milestone stepping stones</span>
+              </div>
+            </a>
+            <a href="communication.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-cyan">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Real-World Dialogues</span>
+                <span class="dropdown-sub">10 practical situational roleplays</span>
+              </div>
+            </a>
           </div>
         </div>
 
-        <a href="vocabulary.html" class="nav-link">📚 Vocabulary</a>
-        <a href="grammar.html" class="nav-link">🔤 Grammar</a>
-        <a href="mocktest.html" class="nav-link">📝 Mock Test</a>
-        <a href="daily-challenge.html" class="nav-link">🔥 Daily Challenge</a>
-        <a href="progress.html" class="nav-link">📊 Progress</a>
+        <!-- IELTS Master Prep Dropdown -->
+        <div class="nav-item nav-dropdown">
+          <button type="button" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            <svg class="nav-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>IELTS Prep</span>
+            <svg class="nav-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="ielts.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-indigo">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">IELTS Overview</span>
+                <span class="dropdown-sub">Format, scoring & band targets</span>
+              </div>
+            </a>
+            <a href="listening.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-cyan">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Listening Module</span>
+                <span class="dropdown-sub">Audio drills & comprehension</span>
+              </div>
+            </a>
+            <a href="reading.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-emerald">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Reading Module</span>
+                <span class="dropdown-sub">Academic & General passage tests</span>
+              </div>
+            </a>
+            <a href="writing.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-rose">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Writing Module</span>
+                <span class="dropdown-sub">Task 1 & Task 2 essay evaluation</span>
+              </div>
+            </a>
+            <a href="ielts-speaking.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-amber">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Speaking Simulator</span>
+                <span class="dropdown-sub">AI mock examiner with voice prompts</span>
+              </div>
+            </a>
+            <a href="mocktest.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-violet">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Full Mock Exam</span>
+                <span class="dropdown-sub">Timed complete 4-skill evaluation</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Skills & Practice Dropdown -->
+        <div class="nav-item nav-dropdown">
+          <button type="button" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            <svg class="nav-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span>Skills & Practice</span>
+            <svg class="nav-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown-menu">
+            <a href="vocabulary.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-emerald">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Vocabulary Builder</span>
+                <span class="dropdown-sub">Collocations & high-yield flashcards</span>
+              </div>
+            </a>
+            <a href="grammar.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-indigo">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Grammar Master</span>
+                <span class="dropdown-sub">Tenses, articles & sentence rules</span>
+              </div>
+            </a>
+            <a href="speaking.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-amber">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Speaking Practice</span>
+                <span class="dropdown-sub">Spontaneous fluency & speed drills</span>
+              </div>
+            </a>
+            <a href="daily-challenge.html" class="dropdown-item">
+              <div class="dropdown-icon-box icon-rose">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+              </div>
+              <div class="dropdown-text">
+                <span class="dropdown-title">Daily Challenge</span>
+                <span class="dropdown-sub">Quests, streak boosts & coin rewards</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <a href="progress.html" class="nav-link">
+          <svg class="nav-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+          <span>Progress</span>
+        </a>
       </nav>
 
+      <!-- Right Header Actions -->
       <div class="nav-actions">
-        <div class="stat-pill credits" title="Star Coins">
-          <span>🪙</span> <span class="user-credits-display">150 Coins</span>
+        <div class="stat-pill credits" title="Star Coins Balance">
+          <svg class="stat-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10a2.5 2.5 0 0 1 5 0c0 1.5-1.5 2-2.5 2.5s-2.5 1-2.5 2.5a2.5 2.5 0 0 0 5 0"/></svg>
+          <span class="user-credits-display">150 Coins</span>
         </div>
-        <div class="stat-pill streak">
-          <span>🔥</span> <span class="user-streak-display">14 Days</span>
+        <div class="stat-pill streak" title="Learning Day Streak">
+          <svg class="stat-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          <span class="user-streak-display">14 Days</span>
         </div>
-        <div class="stat-pill xp">
-          <span>⭐</span> <span class="user-xp-display">1,850 XP</span>
+        <div class="stat-pill xp" title="Total XP Earned">
+          <svg class="stat-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span class="user-xp-display">1,850 XP</span>
         </div>
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
-        <a href="profile.html" class="user-avatar-btn">
+
+        <button type="button" class="theme-toggle-btn" aria-label="Toggle visual theme">
+          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <a href="profile.html" class="user-avatar-btn" title="View Student Profile">
           <div class="user-avatar-img user-avatar-initial">A</div>
         </a>
-        <button class="mobile-toggle" aria-label="Toggle mobile menu">☰</button>
+
+        <button type="button" class="mobile-toggle" aria-label="Toggle navigation menu" aria-controls="main-nav-menu" aria-expanded="false">
+          ☰
+        </button>
       </div>
     </div>
   </header>
@@ -169,3 +334,5 @@
   <script src="js/levels.js"></script>
 </body>
 </html>
+
+
