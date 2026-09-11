@@ -118,6 +118,19 @@ const FluentPath = {
 
   // 3. Navigation Bar & Mobile Drawer with Classification Dropdowns
   initNavbar() {
+    const navbar = document.querySelector(".navbar");
+    if (navbar) {
+      const handleScroll = () => {
+        if (window.scrollY > 20) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      };
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+    }
+
     const mobileToggle = document.querySelector(".mobile-toggle");
     const navLinks = document.querySelector(".nav-links");
 
@@ -128,6 +141,27 @@ const FluentPath = {
         mobileToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
         mobileToggle.innerHTML = isOpen ? "✕" : "☰";
       });
+
+      // Close mobile navbar drawer when tapping outside
+      document.addEventListener("click", (e) => {
+        if (navLinks.classList.contains("active") && !navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
+          navLinks.classList.remove("active");
+          mobileToggle.innerHTML = "☰";
+          mobileToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Auto close drawer when clicking a navigation link
+      const linksInside = navLinks.querySelectorAll("a:not([href='javascript:void(0)'])");
+      linksInside.forEach(link => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 1250) {
+            navLinks.classList.remove("active");
+            mobileToggle.innerHTML = "☰";
+            mobileToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      });
     }
 
     // Dropdown toggling for mobile / click interaction
@@ -136,7 +170,7 @@ const FluentPath = {
       const toggleBtn = drop.querySelector(".dropdown-toggle") || drop.querySelector(".nav-link");
       if (toggleBtn) {
         toggleBtn.addEventListener("click", (e) => {
-          if (window.innerWidth <= 992) {
+          if (window.innerWidth <= 1250) {
             e.preventDefault();
             e.stopPropagation();
             const isOpen = drop.classList.toggle("open");

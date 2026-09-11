@@ -10,8 +10,8 @@
       <stop offset="100%" stop-color="#fdba74"/>
     </linearGradient>
     <linearGradient id="scarfGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#10b981"/>
     </linearGradient>
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity="0.25"/>
@@ -45,7 +45,7 @@
 
     <!-- Scarf around neck -->
     <path d="M 70 95 Q 95 108 120 95 Q 115 106 95 108 Q 75 106 70 95 Z" fill="url(#scarfGradient)"/>
-    <rect x="102" y="102" width="12" height="24" rx="4" fill="#4f46e5" transform="rotate(15 102 102)"/>
+    <rect x="102" y="102" width="12" height="24" rx="4" fill="#06b6d4" transform="rotate(15 102 102)"/>
 
     <!-- Ears -->
     <path d="M 72 55 C 55 20 62 10 74 35 Z" fill="#f97316"/>

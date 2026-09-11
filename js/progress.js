@@ -39,8 +39,8 @@ function renderWeeklyActivityChart() {
 
     // Active filled bar with gradient
     const grad = ctx.createLinearGradient(0, y, 0, h - 40);
-    grad.addColorStop(0, "#6366f1");
-    grad.addColorStop(1, "#a855f7");
+    grad.addColorStop(0, "#06b6d4");
+    grad.addColorStop(1, "#10b981");
     ctx.fillStyle = grad;
     ctx.beginPath();
     ctx.roundRect(x, y, barWidth, barHeight, 6);
