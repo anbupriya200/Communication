@@ -169,6 +169,33 @@ const KidsCorner = {
     this.renderRhymes();
     this.renderPhonics();
     this.renderStory();
+    this.speakWelcome();
+  },
+
+  speakWelcome() {
+    setTimeout(() => {
+      if (typeof FluentPath !== "undefined" && FluentPath.speakLikePerson) {
+        FluentPath.speakLikePerson("Yay! Welcome to Kids Corner! Touch any letter, number, or picture to hear its name!", {
+          pitch: 1.18,
+          rate: 0.96,
+          ignoreMute: true
+        });
+      }
+    }, 400);
+  },
+
+  playAudio(text) {
+    if (typeof FluentPath !== "undefined" && FluentPath.speakLikePerson) {
+      FluentPath.speakLikePerson(text, {
+        pitch: 1.18,
+        rate: 0.94,
+        lang: "en-US",
+        ignoreMute: true
+      });
+      FluentPath.showToast(`Pronouncing: "${text}"`, "info");
+    } else {
+      FluentPath.speakText(text);
+    }
   },
 
   bindEvents() {
@@ -271,13 +298,6 @@ const KidsCorner = {
   singRhyme(index) {
     const rhyme = this.rhymesData[index];
     if (!rhyme) return;
-    if (!('speechSynthesis' in window)) return;
-
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(rhyme.lyrics);
-    utterance.pitch = rhyme.audioPitch || 1.15;
-    utterance.rate = 0.88;
-    utterance.lang = "en-GB";
 
     const box = document.getElementById(`lyrics-${index}`);
     if (box) {
@@ -285,7 +305,7 @@ const KidsCorner = {
       box.style.background = "var(--primary-light)";
     }
 
-    utterance.onend = () => {
+    const onEndCallback = () => {
       if (box) {
         box.style.borderLeftColor = "var(--accent-emerald)";
         box.style.background = "var(--bg-card)";
@@ -293,7 +313,24 @@ const KidsCorner = {
       FluentPath.addGameCredits(15, `Sing-Along: ${rhyme.title}`);
     };
 
-    window.speechSynthesis.speak(utterance);
+    if (typeof FluentPath !== "undefined" && FluentPath.speakLikePerson) {
+      FluentPath.speakLikePerson(rhyme.lyrics, {
+        pitch: rhyme.audioPitch || 1.15,
+        rate: 0.88,
+        lang: "en-GB",
+        activeElement: box,
+        onEnd: onEndCallback
+      });
+    } else {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(rhyme.lyrics);
+      utterance.pitch = rhyme.audioPitch || 1.15;
+      utterance.rate = 0.88;
+      utterance.lang = "en-GB";
+      utterance.onend = onEndCallback;
+      window.speechSynthesis.speak(utterance);
+    }
     FluentPath.showToast(`Singing: "${rhyme.title}"! 🎵`, "success");
   },
 
@@ -382,7 +419,7 @@ const KidsCorner = {
 
   pronouncePhonicsWord() {
     const item = this.phonicsData[this.phonicsIndex];
-    FluentPath.speakText(item.word);
+    this.playAudio(item.word);
   },
 
   // 6. PICTURE STORYBOOK
@@ -453,7 +490,7 @@ const KidsCorner = {
 
   readStoryPage() {
     const page = this.storyPages[this.storyPage];
-    FluentPath.speakText(page.text);
+    this.playAudio(page.text);
   },
 
   nextStoryPage() {

@@ -382,13 +382,18 @@ const AdultTasks = {
   },
 
   speakTwister(text, speed = 1.0) {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = speed;
-    utterance.lang = "en-GB";
-    window.speechSynthesis.speak(utterance);
-    FluentPath.showToast(`Pronouncing at ${speed}x speed`, "info");
+    if (typeof FluentPath !== "undefined" && FluentPath.speakLikePerson) {
+      FluentPath.speakLikePerson(text, { rate: speed, lang: "en-GB" });
+      FluentPath.showToast(`Pronouncing at ${speed}x speed`, "info");
+    } else {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = speed;
+      utterance.lang = "en-GB";
+      window.speechSynthesis.speak(utterance);
+      FluentPath.showToast(`Pronouncing at ${speed}x speed`, "info");
+    }
   },
 
   // --- WORD SCRAMBLE ---
@@ -501,13 +506,18 @@ const AdultTasks = {
   },
 
   speakDebate(text) {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-GB";
-    utterance.rate = 0.92;
-    window.speechSynthesis.speak(utterance);
-    FluentPath.showToast("Speaking rhetorical rebuttal template", "info");
+    if (typeof FluentPath !== "undefined" && FluentPath.speakLikePerson) {
+      FluentPath.speakLikePerson(text, { rate: 0.92, lang: "en-GB" });
+      FluentPath.showToast("Speaking rhetorical rebuttal template", "info");
+    } else {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-GB";
+      utterance.rate = 0.92;
+      window.speechSynthesis.speak(utterance);
+      FluentPath.showToast("Speaking rhetorical rebuttal template", "info");
+    }
   },
 
   nextDebate() {

@@ -3096,3 +3096,186 @@ h4 { font-size: 1.1rem; }
     text-align: center;
   }
 }
+
+/* ==========================================================================
+   Dynamic JS Background & Global Dynamic Voice Engine Styles
+   ========================================================================== */
+
+/* 1. Dynamic Canvas Background */
+#fluent-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.85;
+  transition: opacity 0.5s ease;
+}
+
+[data-theme="light"] #fluent-bg-canvas {
+  opacity: 0.55;
+}
+
+/* 2. Global Dynamic Voice Floating Widget */
+.global-voice-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card-glass, rgba(22, 27, 46, 0.88));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 15px rgba(99, 102, 241, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .global-voice-widget {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 0 15px rgba(99, 102, 241, 0.15);
+}
+
+.voice-widget-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-widget-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.6);
+}
+
+.voice-widget-toggle.speaking::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--vibe-cyan, #06b6d4);
+  animation: voicePulse 1.2s infinite ease-out;
+}
+
+@keyframes voicePulse {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+.voice-widget-body {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease;
+  white-space: nowrap;
+}
+
+.global-voice-widget.expanded .voice-widget-body {
+  max-width: 420px;
+  opacity: 1;
+  padding: 0 0.35rem;
+}
+
+.voice-btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.voice-btn-pill:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Soundwave animation bars */
+.soundwave-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.soundwave-bar {
+  width: 3px;
+  height: 6px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: height 0.15s ease;
+}
+
+.speaking .soundwave-bar,
+.soundwave-container.active .soundwave-bar {
+  animation: soundwaveBounce 0.8s infinite ease-in-out alternate;
+}
+
+.speaking .soundwave-bar:nth-child(1), .soundwave-container.active .soundwave-bar:nth-child(1) { animation-delay: 0.1s; }
+.speaking .soundwave-bar:nth-child(2), .soundwave-container.active .soundwave-bar:nth-child(2) { animation-delay: 0.3s; }
+.speaking .soundwave-bar:nth-child(3), .soundwave-container.active .soundwave-bar:nth-child(3) { animation-delay: 0.2s; }
+.speaking .soundwave-bar:nth-child(4), .soundwave-container.active .soundwave-bar:nth-child(4) { animation-delay: 0.4s; }
+.speaking .soundwave-bar:nth-child(5), .soundwave-container.active .soundwave-bar:nth-child(5) { animation-delay: 0.15s; }
+
+@keyframes soundwaveBounce {
+  0% { height: 4px; }
+  100% { height: 16px; background: var(--vibe-cyan, #06b6d4); }
+}
+
+/* 3. Dynamic Text Selection Reader Popover */
+.selection-speak-popover {
+  position: absolute;
+  z-index: 10000;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-surface));
+  border: 1.5px solid var(--primary);
+  color: var(--text-main);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px rgba(99, 102, 241, 0.3);
+  animation: popoverFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate(-50%, -100%) translateY(-10px);
+}
+
+.selection-speak-popover:hover {
+  background: var(--primary);
+  color: #ffffff;
+  transform: translate(-50%, -100%) translateY(-12px) scale(1.04);
+}
+
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translate(-50%, -100%) translateY(0px) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -100%) translateY(-10px) scale(1); }
+}
+

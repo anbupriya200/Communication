@@ -62,9 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const studentNameInput = document.getElementById("student-name");
+  const freshStartCheck = document.getElementById("fresh-start-check");
+
   // Quick Demo Fill
   if (demoFillBtn) {
     demoFillBtn.addEventListener("click", () => {
+      if (studentNameInput) studentNameInput.value = "Aarav Sharma";
       studentIdInput.value = "FP-2026-88";
       mobileInput.value = "9876543210";
       if (idError) idError.classList.remove("visible");
@@ -80,8 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       let isValid = true;
+      const studentName = studentNameInput ? studentNameInput.value.trim() : "";
       const studentId = studentIdInput.value.trim();
       const mobile = mobileInput.value.trim();
+      const forceFresh = freshStartCheck ? freshStartCheck.checked : false;
 
       // Student ID validation: at least 4 characters
       if (!studentId || studentId.length < 4) {
@@ -121,32 +127,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Show Loading state
       loginBtn.disabled = true;
-      loginBtn.innerHTML = `<span class="spinner"></span> <span>Signing In...</span>`;
+      loginBtn.innerHTML = `<span class="spinner"></span> <span>Initializing Session...</span>`;
 
-      // Simulate authentication check
       setTimeout(() => {
-        let existingUser = FluentPath.getUser();
-        const studentUser = {
-          id: studentId,
-          name: existingUser?.name || "Aarav Sharma",
-          mobile: mobile,
-          streak: existingUser?.streak || 14,
-          xp: existingUser?.xp || 1850,
-          currentBand: existingUser?.currentBand || 6.5,
-          vocabLearned: existingUser?.vocabLearned || 248,
-          completedTests: existingUser?.completedTests || 6,
-          lastLogin: new Date().toISOString()
-        };
+        // Multi-User Accounts Database
+        let usersDB = {};
+        try {
+          const storedDB = localStorage.getItem("fluentpath_users_db");
+          if (storedDB) usersDB = JSON.parse(storedDB);
+        } catch (err) {
+          usersDB = {};
+        }
 
-        FluentPath.saveUser(studentUser);
+        const existingRecord = usersDB[studentId];
+        let activeUser = null;
+
+        // Clear temporary session storage so new user gets a completely fresh webpage experience
+        sessionStorage.clear();
+
+        if (forceFresh || !existingRecord) {
+          // CREATE BRAND NEW FRESH STUDENT PROFILE
+          const displayName = studentName || `Student ${studentId.replace(/[^a-zA-Z0-9]/g, '')}`;
+          activeUser = {
+            id: studentId,
+            name: displayName,
+            mobile: mobile,
+            streak: 1,
+            xp: 0,
+            gameCredits: 50, // Welcome gift coins for new student
+            currentBand: 5.0,
+            vocabLearned: 0,
+            completedTests: 0,
+            lastLogin: new Date().toISOString(),
+            isNewUser: true
+          };
+          FluentPath.showToast(`🎉 Welcome New Student: ${displayName}! Fresh session started.`, "success");
+        } else {
+          // LOAD EXISTING STUDENT PROFILE
+          activeUser = existingRecord;
+          if (studentName) activeUser.name = studentName;
+          activeUser.mobile = mobile;
+          activeUser.lastLogin = new Date().toISOString();
+          FluentPath.showToast(`Welcome back, ${activeUser.name}! Session loaded.`, "success");
+        }
+
+        // Save to User Database and Active User Session
+        usersDB[studentId] = activeUser;
+        localStorage.setItem("fluentpath_users_db", JSON.stringify(usersDB));
+        FluentPath.saveUser(activeUser);
         FluentPath.playSuccessChime();
-        FluentPath.showToast(`Welcome back, ${studentUser.name}!`, "success");
 
         // Navigate to Dashboard
         setTimeout(() => {
           window.location.href = "dashboard.html";
-        }, 600);
-      }, 900);
+        }, 700);
+      }, 750);
     });
   }
 });

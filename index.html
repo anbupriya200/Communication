@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -79,6 +79,15 @@
       </div>
 
       <form id="login-form">
+        <!-- Student Name Input (Optional / New User) -->
+        <div class="form-group">
+          <label class="form-label" for="student-name">Student Full Name</label>
+          <div class="input-icon-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" id="student-name" class="form-control" placeholder="e.g. Priya Sharma (Leave blank for auto)" autocomplete="name">
+          </div>
+        </div>
+
         <!-- Student ID Input -->
         <div class="form-group">
           <label class="form-label" for="student-id">Student ID</label>
@@ -99,20 +108,26 @@
           <div id="mobile-error" class="form-feedback"></div>
         </div>
 
-        <!-- Remember Me & Forgot ID -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.875rem;">
+        <!-- Options: Remember Me & Fresh Account -->
+        <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; font-size: 0.875rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label class="checkbox-label">
+              <input type="checkbox" id="fresh-start-check">
+              <span style="font-weight:600; color:var(--primary);">🌱 Start Fresh Account for New User</span>
+            </label>
+            <button type="button" id="demo-fill-btn" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 0.35rem 0.65rem;">
+              ⚡ Demo Quick-Fill
+            </button>
+          </div>
           <label class="checkbox-label">
-            <input type="checkbox" id="remember-me">
-            <span>Remember Me</span>
+            <input type="checkbox" id="remember-me" checked>
+            <span>Remember ID on this device</span>
           </label>
-          <button type="button" id="demo-fill-btn" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 0.35rem 0.65rem;">
-            ⚡ Demo Quick-Fill
-          </button>
         </div>
 
         <!-- Login Button -->
         <button type="submit" id="login-btn" class="btn btn-primary btn-block btn-lg" style="margin-bottom: 1.25rem;">
-          <span>Login to Dashboard</span> <span>➔</span>
+          <span>Login / Start Session</span> <span>➔</span>
         </button>
       </form>
 

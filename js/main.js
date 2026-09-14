@@ -4,6 +4,10 @@
  */
 
 const FluentPath = {
+  // Global voice state & settings
+  currentSpeechSpeed: 1.0,
+  isVoiceMuted: false,
+
   // Default demo user profile if none exists
   defaultUser: {
     id: "FP-2026-88",
@@ -21,11 +25,288 @@ const FluentPath = {
   init() {
     this.initTheme();
     this.initVibeMesh();
+    this.initCanvasBackground();
     this.checkSession();
     this.initNavbar();
     this.updateUserUI();
     this.initAudioContext();
+    this.initVoiceEngine();
+    this.initGlobalVoiceWidget();
+    this.initSelectionReader();
     this.initWelcomeVoice();
+  },
+
+  // Dynamic HTML5 Cartoon Interactive Background Engine
+  initCanvasBackground() {
+    if (document.getElementById("fluent-bg-canvas")) return;
+
+    const canvas = document.createElement("canvas");
+    canvas.id = "fluent-bg-canvas";
+    document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    let mouse = { x: width / 2, y: height / 2, radius: 160 };
+
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initElements();
+    });
+
+    let sparkleTrail = [];
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+
+      // Spawn cartoon mouse sparkle
+      if (Math.random() < 0.45) {
+        sparkleTrail.push({
+          x: e.clientX + (Math.random() - 0.5) * 16,
+          y: e.clientY + (Math.random() - 0.5) * 16,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: -Math.random() * 1.2 - 0.5,
+          size: Math.random() * 8 + 4,
+          life: 1.0,
+          color: ["#f43f5e", "#06b6d4", "#a855f7", "#eab308", "#10b981"][Math.floor(Math.random() * 5)]
+        });
+      }
+    });
+
+    // 1. Cartoon Cloud Class
+    class CartoonCloud {
+      constructor() {
+        this.reset(true);
+      }
+      reset(initial = false) {
+        this.x = initial ? Math.random() * width : -180;
+        this.y = Math.random() * (height * 0.45) + 30;
+        this.scale = Math.random() * 0.5 + 0.6;
+        this.speed = Math.random() * 0.35 + 0.15;
+        this.alpha = Math.random() * 0.18 + 0.12;
+      }
+      update() {
+        this.x += this.speed;
+        if (this.x > width + 180) this.reset(false);
+      }
+      draw(isDark) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.scale, this.scale);
+        ctx.fillStyle = isDark ? `rgba(148, 163, 184, ${this.alpha})` : `rgba(255, 255, 255, ${this.alpha * 1.8})`;
+        ctx.beginPath();
+        ctx.arc(0, 0, 30, Math.PI * 0.5, Math.PI * 1.5);
+        ctx.arc(25, -20, 35, Math.PI * 1.0, Math.PI * 1.85);
+        ctx.arc(65, -15, 28, Math.PI * 1.3, Math.PI * 1.9);
+        ctx.arc(90, 0, 25, Math.PI * 1.5, Math.PI * 0.5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // 2. Cartoon Twinkling Star Class
+    class CartoonStar {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 6 + 4;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.02;
+        this.pulse = Math.random() * Math.PI;
+        this.color = ["#facc15", "#38bdf8", "#f472b6", "#c084fc", "#4ade80"][Math.floor(Math.random() * 5)];
+      }
+      update() {
+        this.rotation += this.rotSpeed;
+        this.pulse += 0.03;
+      }
+      draw() {
+        const alpha = Math.sin(this.pulse) * 0.25 + 0.35;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = alpha;
+
+        // 4-point cartoon star
+        ctx.beginPath();
+        for (let i = 0; i < 8; i++) {
+          const r = i % 2 === 0 ? this.size : this.size * 0.35;
+          const a = (i * Math.PI) / 4;
+          ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // 3. Floating Cartoon Rainbow Bubble Class
+    class CartoonBubble {
+      constructor() {
+        this.reset(true);
+      }
+      reset(initial = false) {
+        this.x = Math.random() * width;
+        this.y = initial ? Math.random() * height : height + 40;
+        this.radius = Math.random() * 16 + 8;
+        this.speed = Math.random() * 0.5 + 0.3;
+        this.sway = Math.random() * Math.PI * 2;
+        this.color = ["#818cf8", "#f472b6", "#38bdf8", "#34d399", "#fbbf24"][Math.floor(Math.random() * 5)];
+        this.alpha = Math.random() * 0.25 + 0.15;
+      }
+      update() {
+        this.y -= this.speed;
+        this.sway += 0.02;
+        this.x += Math.sin(this.sway) * 0.4;
+        if (this.y < -50) this.reset(false);
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        
+        // Outer bubble sphere
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+
+        // Glossy cartoon crescent reflection inside bubble
+        ctx.beginPath();
+        ctx.arc(this.x - this.radius * 0.3, this.y - this.radius * 0.3, this.radius * 0.3, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    // 4. Cartoon Floating Emojis / Symbols (for Kids Corner & portal vibe)
+    class CartoonFloatingIcon {
+      constructor(emoji) {
+        this.emoji = emoji;
+        this.reset(true);
+      }
+      reset(initial = false) {
+        this.x = Math.random() * width;
+        this.y = initial ? Math.random() * height : height + 50;
+        this.speed = Math.random() * 0.4 + 0.25;
+        this.size = Math.random() * 14 + 18;
+        this.alpha = Math.random() * 0.35 + 0.25;
+        this.sway = Math.random() * Math.PI * 2;
+      }
+      update() {
+        this.y -= this.speed;
+        this.sway += 0.015;
+        this.x += Math.sin(this.sway) * 0.5;
+        if (this.y < -60) this.reset(false);
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.font = `${this.size}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.fillText(this.emoji, this.x, this.y);
+        ctx.restore();
+      }
+    }
+
+    let clouds = [];
+    let stars = [];
+    let bubbles = [];
+    let cartoonIcons = [];
+
+    function initElements() {
+      clouds = Array.from({ length: 6 }, () => new CartoonCloud());
+      stars = Array.from({ length: 22 }, () => new CartoonStar());
+      bubbles = Array.from({ length: 18 }, () => new CartoonBubble());
+
+      const isKids = window.location.pathname.includes("kids-learning.html");
+      const kidEmojis = ["⭐", "🎈", "🎵", "🎨", "🚀", "🐱", "🐶", "🐻", "🦄"];
+      const generalEmojis = ["⭐", "✨", "🎵", "💡", "🚀"];
+      const targetList = isKids ? kidEmojis : generalEmojis;
+      cartoonIcons = targetList.map(e => new CartoonFloatingIcon(e));
+    }
+
+    initElements();
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      const isDark = document.documentElement.getAttribute("data-theme") !== "light";
+
+      // Ambient Cartoon Soft Gradient Orbs
+      const time = Date.now() * 0.0005;
+      const orb1X = width * 0.25 + Math.sin(time) * 100;
+      const orb1Y = height * 0.3 + Math.cos(time * 0.8) * 80;
+      const orb2X = width * 0.75 + Math.cos(time * 1.1) * 120;
+      const orb2Y = height * 0.7 + Math.sin(time * 0.9) * 90;
+
+      const grad1 = ctx.createRadialGradient(orb1X, orb1Y, 10, orb1X, orb1Y, 340);
+      grad1.addColorStop(0, isDark ? "rgba(99, 102, 241, 0.12)" : "rgba(129, 140, 248, 0.1)");
+      grad1.addColorStop(1, "transparent");
+      ctx.fillStyle = grad1;
+      ctx.fillRect(0, 0, width, height);
+
+      const grad2 = ctx.createRadialGradient(orb2X, orb2Y, 10, orb2X, orb2Y, 360);
+      grad2.addColorStop(0, isDark ? "rgba(236, 72, 153, 0.1)" : "rgba(244, 114, 182, 0.08)");
+      grad2.addColorStop(1, "transparent");
+      ctx.fillStyle = grad2;
+      ctx.fillRect(0, 0, width, height);
+
+      // Render Floating Cartoon Clouds
+      clouds.forEach(cloud => {
+        cloud.update();
+        cloud.draw(isDark);
+      });
+
+      // Render Floating Cartoon Rainbow Bubbles
+      bubbles.forEach(bubble => {
+        bubble.update();
+        bubble.draw();
+      });
+
+      // Render Twinkling Cartoon Stars
+      stars.forEach(star => {
+        star.update();
+        star.draw();
+      });
+
+      // Render Cartoon Floating Icons
+      cartoonIcons.forEach(icon => {
+        icon.update();
+        icon.draw();
+      });
+
+      // Render Mouse Cursor Cartoon Sparkle Trail
+      for (let i = sparkleTrail.length - 1; i >= 0; i--) {
+        const s = sparkleTrail[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life -= 0.025;
+
+        if (s.life <= 0) {
+          sparkleTrail.splice(i, 1);
+        } else {
+          ctx.save();
+          ctx.globalAlpha = s.life * 0.75;
+          ctx.fillStyle = s.color;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   },
 
   initVibeMesh() {
@@ -110,7 +391,8 @@ const FluentPath = {
 
   logout() {
     localStorage.removeItem("fluentpath_user");
-    this.showToast("Logged out successfully", "info");
+    sessionStorage.clear();
+    this.showToast("Logged out successfully. Starting new session.", "info");
     setTimeout(() => {
       window.location.href = "index.html";
     }, 400);
@@ -219,135 +501,126 @@ const FluentPath = {
     });
   },
 
-  // 4. Update Header User Information
+  // 4. Dynamic User Profile & XP / Credits Updater
   updateUserUI() {
     const user = this.getUser() || this.defaultUser;
-    if (typeof user.gameCredits === "undefined") {
-      user.gameCredits = 150;
-    }
-    
-    // Streak Pill
-    const streakElements = document.querySelectorAll(".user-streak-display");
-    streakElements.forEach(el => el.textContent = `${user.streak} Days`);
 
-    // XP Pill
-    const xpElements = document.querySelectorAll(".user-xp-display");
-    xpElements.forEach(el => el.textContent = `${user.xp.toLocaleString()} XP`);
+    const nameEls = document.querySelectorAll(".user-display-name");
+    nameEls.forEach(el => (el.textContent = user.name));
 
-    // Game Credits Pill
-    const creditsElements = document.querySelectorAll(".user-credits-display");
-    creditsElements.forEach(el => el.textContent = `${(user.gameCredits || 0).toLocaleString()} Coins`);
+    const xpEls = document.querySelectorAll(".user-xp-count");
+    xpEls.forEach(el => (el.textContent = user.xp.toLocaleString()));
 
-    // Avatar Initial
-    const avatarElements = document.querySelectorAll(".user-avatar-initial");
-    const initial = (user.name || "S").charAt(0).toUpperCase();
-    avatarElements.forEach(el => el.textContent = initial);
+    const streakEls = document.querySelectorAll(".user-streak-count");
+    streakEls.forEach(el => (el.textContent = `${user.streak} Days`));
 
-    // Student Name
-    const nameElements = document.querySelectorAll(".user-name-display");
-    nameElements.forEach(el => el.textContent = user.name || "Student");
+    const creditEls = document.querySelectorAll(".user-credits-count");
+    creditEls.forEach(el => (el.textContent = user.gameCredits));
 
-    // Student ID
-    const idElements = document.querySelectorAll(".user-id-display");
-    idElements.forEach(el => el.textContent = user.id || "FP-2026-88");
+    const bandEls = document.querySelectorAll(".user-band-score");
+    bandEls.forEach(el => (el.textContent = user.currentBand));
   },
 
-  addGameCredits(amount, reason = "Game Reward") {
+  addXP(amount, reason = "") {
+    const user = this.getUser() || this.defaultUser;
+    user.xp += amount;
+    this.saveUser(user);
+    this.showToast(`+${amount} XP ${reason ? "(" + reason + ")" : ""}`, "success");
+
+    const soundwave = document.querySelector(".soundwave-container");
+    if (soundwave) soundwave.classList.add("active");
+    setTimeout(() => {
+      if (soundwave) soundwave.classList.remove("active");
+    }, 1200);
+  },
+
+  addGameCredits(amount, reason = "") {
     const user = this.getUser() || this.defaultUser;
     user.gameCredits = (user.gameCredits || 0) + amount;
     this.saveUser(user);
-    this.playSuccessChime();
-    this.showToast(`+${amount} Star Coins earned! (${reason})`, "success");
-    return user.gameCredits;
+    this.showToast(`+${amount} Credits ${reason ? "(" + reason + ")" : ""}`, "info");
   },
 
-  spendGameCredits(amount, item = "Reward Item") {
-    const user = this.getUser() || this.defaultUser;
-    const current = user.gameCredits || 0;
-    if (current < amount) {
-      this.showToast(`Need ${amount - current} more Star Coins to unlock!`, "error");
-      return false;
-    }
-    user.gameCredits = current - amount;
-    this.saveUser(user);
-    this.playSuccessChime();
-    this.showToast(`Unlocked ${item} for ${amount} Star Coins! 🎁`, "success");
-    return true;
-  },
+  // 5. Audio Synthesizer Beeps (Web Audio API)
+  audioCtx: null,
 
-  // 5. Native Web Audio Effects (Synthesizer Chimes)
   initAudioContext() {
-    this.audioCtx = null;
-  },
-
-  getAudioContext() {
-    if (!this.audioCtx) {
+    try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       if (AudioContext) {
         this.audioCtx = new AudioContext();
       }
-    }
-    if (this.audioCtx && this.audioCtx.state === "suspended") {
-      this.audioCtx.resume();
-    }
-    return this.audioCtx;
-  },
-
-  playSuccessChime() {
-    try {
-      const ctx = this.getAudioContext();
-      if (!ctx) return;
-      const now = ctx.currentTime;
-
-      // Note 1 (E5 = 659.25 Hz)
-      const osc1 = ctx.createOscillator();
-      const gain1 = ctx.createGain();
-      osc1.type = "sine";
-      osc1.frequency.setValueAtTime(659.25, now);
-      gain1.gain.setValueAtTime(0.12, now);
-      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-      osc1.connect(gain1);
-      gain1.connect(ctx.destination);
-      osc1.start(now);
-      osc1.stop(now + 0.35);
-
-      // Note 2 (A5 = 880 Hz)
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      osc2.type = "sine";
-      osc2.frequency.setValueAtTime(880, now + 0.12);
-      gain2.gain.setValueAtTime(0.15, now + 0.12);
-      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-      osc2.connect(gain2);
-      gain2.connect(ctx.destination);
-      osc2.start(now + 0.12);
-      osc2.stop(now + 0.6);
     } catch (e) {
-      console.warn("Audio Context playback unavailable", e);
+      console.warn("Web Audio API not supported", e);
     }
   },
 
   playClickBeep() {
+    if (!this.audioCtx) return;
     try {
-      const ctx = this.getAudioContext();
-      if (!ctx) return;
-      const now = ctx.currentTime;
+      if (this.audioCtx.state === "suspended") {
+        this.audioCtx.resume();
+      }
+      const ctx = this.audioCtx;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.type = "triangle";
-      osc.frequency.setValueAtTime(520, now);
-      gain.gain.setValueAtTime(0.06, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(580, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.05);
+
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+
       osc.connect(gain);
       gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 0.08);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
     } catch (e) {
-      // Ignore audio failure on silent browsers
+      // Ignore audio failure
     }
   },
 
-  // 6. Speech Synthesis - "Speak Like A Person" Natural Human Voice Engine
+  playSuccessChime() {
+    if (!this.audioCtx) return;
+    try {
+      if (this.audioCtx.state === "suspended") {
+        this.audioCtx.resume();
+      }
+      const ctx = this.audioCtx;
+      const now = ctx.currentTime;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(523.25, now); // C5
+      osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+      osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.28);
+    } catch (e) {
+      // Ignore audio failure
+    }
+  },
+
+  // 6. Speech Synthesis - Perfect Dynamic Natural Human Voice Engine
+  initVoiceEngine() {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        this.getNaturalHumanVoice();
+      };
+    }
+  },
+
   getNaturalHumanVoice(preferredLang = "en-US") {
     if (!('speechSynthesis' in window)) return null;
     const voices = window.speechSynthesis.getVoices();
@@ -394,19 +667,27 @@ const FluentPath = {
       return;
     }
 
+    if (this.isVoiceMuted && !options.ignoreMute) {
+      this.showToast("Voice is currently muted in Assistant Bar", "info");
+      return;
+    }
+
     const {
       lang = "en-US",
-      rate = 0.94,       // Natural human conversational pace
-      pitch = 1.02,      // Warm, natural pitch
+      rate = this.currentSpeechSpeed || 0.95,
+      pitch = 1.02,
       volume = 1.0,
       activeElement = null,
       onStart = null,
       onEnd = null
     } = options;
 
-    window.speechSynthesis.cancel(); // Stop any overlapping speech
+    window.speechSynthesis.cancel(); // Clear queued speech
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    const cleanText = text.replace(/<[^>]*>/g, "").trim();
+    if (!cleanText) return;
+
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = lang;
     utterance.rate = rate;
     utterance.pitch = pitch;
@@ -417,18 +698,23 @@ const FluentPath = {
       utterance.voice = naturalVoice;
     }
 
+    const widgetToggle = document.querySelector(".voice-widget-toggle");
+
     utterance.onstart = () => {
       if (activeElement) activeElement.classList.add("speaking");
+      if (widgetToggle) widgetToggle.classList.add("speaking");
       if (typeof onStart === "function") onStart();
     };
 
     utterance.onend = () => {
       if (activeElement) activeElement.classList.remove("speaking");
+      if (widgetToggle) widgetToggle.classList.remove("speaking");
       if (typeof onEnd === "function") onEnd();
     };
 
     utterance.onerror = () => {
       if (activeElement) activeElement.classList.remove("speaking");
+      if (widgetToggle) widgetToggle.classList.remove("speaking");
       if (typeof onEnd === "function") onEnd();
     };
 
@@ -437,7 +723,148 @@ const FluentPath = {
 
   speakText(text, lang = "en-US") {
     this.speakLikePerson(text, { lang });
-    this.showToast(`Pronouncing: "${text}"`, "info");
+    this.showToast(`Pronouncing: "${text.substring(0, 30)}${text.length > 30 ? '...' : ''}"`, "info");
+  },
+
+  readCurrentPageSummary() {
+    const heading = document.querySelector("h1") || document.querySelector("h2");
+    const leadParam = document.querySelector(".hero-subtitle") || document.querySelector("p");
+    
+    let summaryText = "";
+    if (heading) summaryText += heading.textContent.trim() + ". ";
+    if (leadParam) summaryText += leadParam.textContent.trim();
+
+    if (!summaryText) summaryText = "Welcome to FluentPath English Learning Portal!";
+
+    this.showToast("Reading page summary out loud...", "info");
+    this.speakLikePerson(summaryText, { ignoreMute: true });
+  },
+
+  // Global Dynamic Voice Floating Assistant Widget across ALL pages
+  initGlobalVoiceWidget() {
+    if (document.getElementById("global-voice-assistant")) return;
+
+    const widget = document.createElement("div");
+    widget.id = "global-voice-assistant";
+    widget.className = "global-voice-widget";
+    widget.innerHTML = `
+      <button class="voice-widget-toggle" id="voice-widget-toggle-btn" title="Toggle Voice Assistant Controls">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      </button>
+      <div class="voice-widget-body" id="voice-widget-body-box">
+        <button class="voice-btn-pill" id="voice-read-page-btn" title="Listen to Page Overview">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>Read Page</span>
+        </button>
+        <button class="voice-btn-pill" id="voice-speed-toggle-btn" title="Change Speech Speed">
+          <span>Speed: 1.0x</span>
+        </button>
+        <button class="voice-btn-pill" id="voice-mute-toggle-btn" title="Toggle Mute Voice">
+          <span>🔊 Voice ON</span>
+        </button>
+        <div class="soundwave-container" id="global-widget-soundwave" style="margin-left: 2px;">
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+          <div class="soundwave-bar"></div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(widget);
+
+    const toggleBtn = widget.querySelector("#voice-widget-toggle-btn");
+    const readBtn = widget.querySelector("#voice-read-page-btn");
+    const speedBtn = widget.querySelector("#voice-speed-toggle-btn");
+    const muteBtn = widget.querySelector("#voice-mute-toggle-btn");
+
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      widget.classList.toggle("expanded");
+    });
+
+    readBtn.addEventListener("click", () => {
+      this.readCurrentPageSummary();
+    });
+
+    const speeds = [0.8, 1.0, 1.25];
+    let speedIdx = 1;
+    speedBtn.addEventListener("click", () => {
+      speedIdx = (speedIdx + 1) % speeds.length;
+      this.currentSpeechSpeed = speeds[speedIdx];
+      speedBtn.querySelector("span").textContent = `Speed: ${this.currentSpeechSpeed}x`;
+      this.showToast(`Speech speed set to ${this.currentSpeechSpeed}x`, "info");
+    });
+
+    muteBtn.addEventListener("click", () => {
+      this.isVoiceMuted = !this.isVoiceMuted;
+      if (this.isVoiceMuted && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      muteBtn.querySelector("span").textContent = this.isVoiceMuted ? "🔇 Muted" : "🔊 Voice ON";
+      muteBtn.style.color = this.isVoiceMuted ? "var(--vibe-pink, #f43f5e)" : "var(--text-main)";
+      this.showToast(this.isVoiceMuted ? "Voice audio muted" : "Voice audio active", "info");
+    });
+
+    // Close expanded widget when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!widget.contains(e.target)) {
+        widget.classList.remove("expanded");
+      }
+    });
+  },
+
+  // Dynamic Text Selection Reader (Highlight text on ANY page to listen)
+  initSelectionReader() {
+    let popover = null;
+
+    const removePopover = () => {
+      if (popover && popover.parentNode) {
+        popover.parentNode.removeChild(popover);
+        popover = null;
+      }
+    };
+
+    document.addEventListener("mouseup", (e) => {
+      if (popover && popover.contains(e.target)) return;
+
+      const selection = window.getSelection();
+      const selectedText = selection ? selection.toString().trim() : "";
+
+      if (selectedText.length >= 3 && selectedText.length < 500) {
+        removePopover();
+
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+
+        popover = document.createElement("div");
+        popover.className = "selection-speak-popover";
+        popover.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <span>Speak Selection</span>
+        `;
+
+        popover.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`;
+        popover.style.top = `${rect.top + window.scrollY}px`;
+
+        popover.addEventListener("click", (evt) => {
+          evt.stopPropagation();
+          this.speakLikePerson(selectedText, { ignoreMute: true });
+          removePopover();
+        });
+
+        document.body.appendChild(popover);
+      } else {
+        removePopover();
+      }
+    });
+
+    document.addEventListener("mousedown", (e) => {
+      if (popover && !popover.contains(e.target)) {
+        removePopover();
+      }
+    });
   },
 
   // 7. Toast Notification System
@@ -472,12 +899,39 @@ const FluentPath = {
   },
 
   // 8. Automatic Welcome Voice & Interactive Banner
+  getPageGreeting() {
+    const page = window.location.pathname.split("/").pop() || "index.html";
+    const greetings = {
+      "index.html": "Welcome to FluentPath! Enter your Student ID to start your learning journey!",
+      "dashboard.html": "Welcome back to your Student Dashboard! Check your daily streak, band score trajectory, and recommended lessons.",
+      "kids-learning.html": "Welcome to Kids Corner! Let's learn phonics, alphabet games, rhymes, and stories together!",
+      "adult-tasks.html": "Welcome to the Adult Tasks Hub! Master diplomatic dilemmas, fast tongue twisters, and 60-second idiom blitz.",
+      "speaking.html": "Welcome to the Speaking Practice Lab! Record your voice and receive instant pronunciation feedback.",
+      "levels.html": "Welcome to the Duolingo-style Learning Path! Choose a level and start your interactive challenge.",
+      "vocabulary.html": "Welcome to Vocabulary Booster! Expand your lexical resource with academic and topic-based words.",
+      "grammar.html": "Welcome to Grammar Mastery! Master complex tenses, articles, and sentence structures.",
+      "grammar-detail.html": "Welcome to Grammar Lessons! Study detailed rules and test your knowledge.",
+      "reading.html": "Welcome to IELTS Reading Mastery! Practice speed reading, skimming, and comprehension.",
+      "writing.html": "Welcome to IELTS Writing Assistant! Practice Task 1 charts and Task 2 essays with instant AI scoring.",
+      "listening.html": "Welcome to Listening Practice! Listen to dialogues and test your retention.",
+      "ielts-speaking.html": "Welcome to IELTS Speaking Exam Simulation! Practice Part 1, Part 2 cue cards, and Part 3 discussion.",
+      "daily-challenge.html": "Welcome to Daily Quest Challenge! Complete today's targets to earn bonus XP and credits.",
+      "mocktest.html": "Welcome to IELTS Full Mock Exam! Test your skills under timed exam conditions.",
+      "progress.html": "Welcome to Progress Analytics! Review your band score growth and study activity.",
+      "profile.html": "Welcome to Your Student Profile! Customize your settings and track your badges.",
+      "about.html": "Welcome to About FluentPath! Learn more about our English training methodology.",
+      "contact.html": "Welcome to Contact Us! We are here to support your learning journey."
+    };
+    return greetings[page] || "Welcome to FluentPath English Learning Portal!";
+  },
+
   initWelcomeVoice() {
-    const mainContainer = document.querySelector(".main-content .container") || document.querySelector(".auth-card");
+    const mainContainer = document.querySelector(".main-content .container") || document.querySelector(".auth-card") || document.querySelector(".container");
     if (mainContainer && !document.getElementById("welcome-voice-banner")) {
       const banner = document.createElement("div");
       banner.id = "welcome-voice-banner";
       banner.className = "welcome-voice-banner";
+      const greetingMsg = this.getPageGreeting();
       banner.innerHTML = `
         <div class="welcome-voice-left">
           <div class="welcome-voice-avatar">
@@ -485,7 +939,7 @@ const FluentPath = {
           </div>
           <div>
             <div class="welcome-voice-text">
-              <span>Welcome to FluentPath! Let's embark on your English learning journey together.</span>
+              <span>${greetingMsg}</span>
             </div>
             <div style="font-size:0.8rem; color:var(--text-muted); display:flex; align-items:center; gap:0.5rem; margin-top:2px;">
               <span>Interactive Audio Greeting</span>
@@ -526,18 +980,14 @@ const FluentPath = {
       }
     }
 
-    // Try automatic voice greeting after short delay
+    // Play greeting audio automatically after brief delay
     setTimeout(() => {
-      if (!sessionStorage.getItem("fluentpath_welcomed")) {
-        this.playWelcomeVoice();
-      }
-    }, 750);
+      this.playWelcomeVoice();
+    }, 600);
 
-    // If browser autoplay policy requires user gesture, speak on first interaction
+    // Fallback gesture listener if browser blocks autoplay audio until user interaction
     const handleFirstGesture = () => {
-      if (!sessionStorage.getItem("fluentpath_welcomed")) {
-        this.playWelcomeVoice();
-      }
+      this.playWelcomeVoice();
       document.removeEventListener("click", handleFirstGesture);
       document.removeEventListener("keydown", handleFirstGesture);
       document.removeEventListener("touchstart", handleFirstGesture);
@@ -549,17 +999,22 @@ const FluentPath = {
 
   playWelcomeVoice(force = false) {
     if (!('speechSynthesis' in window)) return;
-    if (!force && sessionStorage.getItem("fluentpath_welcomed")) return;
+    const page = window.location.pathname.split("/").pop() || "index.html";
+    const lastSpokenPage = sessionStorage.getItem("fluentpath_last_spoken_page");
     
-    sessionStorage.setItem("fluentpath_welcomed", "true");
+    if (!force && lastSpokenPage === page) return;
+    sessionStorage.setItem("fluentpath_last_spoken_page", page);
 
     const soundwave = document.getElementById("welcome-soundwave");
-    const greeting = "Welcome to FluentPath! Your interactive portal for English communication and IELTS preparation. Let's make learning exciting today!";
+    const greeting = this.getPageGreeting();
     
+    const isKidsPage = page === "kids-learning.html";
+
     this.speakLikePerson(greeting, {
       activeElement: soundwave,
-      rate: 0.94,
-      pitch: 1.02
+      rate: isKidsPage ? 0.96 : 0.94,
+      pitch: isKidsPage ? 1.18 : 1.02,
+      ignoreMute: force || isKidsPage
     });
   }
 };
