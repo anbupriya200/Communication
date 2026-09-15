@@ -12,6 +12,28 @@ const KidsCorner = {
   phonicsIndex: 0,
   storyPage: 0,
 
+  showCartoonClap(message = "Great job! 🎉") {
+    const existing = document.getElementById("kids-cartoon-clap-popup");
+    if (existing) existing.remove();
+
+    const popup = document.createElement("div");
+    popup.id = "kids-cartoon-clap-popup";
+    popup.className = "kids-cartoon-clap-popup";
+    popup.innerHTML = `
+      <div class="cartoon-clap-inner">
+        <span class="cartoon-clap-animal">🦁</span>
+        <span class="cartoon-clap-text">${message}</span>
+        <span class="cartoon-clap-icons">👏 👏</span>
+      </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+      if (popup.parentNode) popup.parentNode.removeChild(popup);
+    }, 1400);
+  },
+
   illustrations: {
     Apple: `<svg viewBox="0 0 100 100" class="kids-img-badge"><circle cx="50" cy="55" r="38" fill="#ef4444"/><path d="M48 20 Q54 10 65 14 Q58 24 48 20" fill="#22c55e"/><path d="M50 20 Q50 30 50 35" stroke="#78350f" stroke-width="4" stroke-linecap="round"/><circle cx="38" cy="45" r="4" fill="#fff" opacity="0.6"/></svg>`,
     Bear: `<svg viewBox="0 0 100 100" class="kids-img-badge"><circle cx="28" cy="30" r="16" fill="#92400e"/><circle cx="72" cy="30" r="16" fill="#92400e"/><circle cx="50" cy="58" r="36" fill="#b45309"/><circle cx="50" cy="65" r="20" fill="#fde68a"/><circle cx="40" cy="52" r="4.5" fill="#1e1b4b"/><circle cx="60" cy="52" r="4.5" fill="#1e1b4b"/><ellipse cx="50" cy="63" rx="7" ry="5" fill="#78350f"/><path d="M46 70 Q50 74 54 70" stroke="#78350f" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`,
@@ -198,6 +220,26 @@ const KidsCorner = {
     }
   },
 
+  playAudio(text = "") {
+    const cleanText = String(text || "").replace(/[^a-zA-Z0-9\s,.-]/g, "").trim();
+    if (!cleanText) return;
+
+    if (window.FluentPath && typeof window.FluentPath.speakText === "function") {
+      window.FluentPath.speakText(cleanText);
+      return;
+    }
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = "en-US";
+      utterance.rate = 0.88;
+      utterance.pitch = 1.05;
+      utterance.volume = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+  },
+
   bindEvents() {
     const tabs = document.querySelectorAll(".kids-tab-btn");
     tabs.forEach(tab => {
@@ -209,6 +251,26 @@ const KidsCorner = {
         this.showTabContent(target);
       });
     });
+  },
+
+  playAudio(text = "") {
+    const cleanText = String(text || "").replace(/[^a-zA-Z0-9\s,.-]/g, "").trim();
+    if (!cleanText) return;
+
+    if (window.FluentPath && typeof window.FluentPath.speakText === "function") {
+      window.FluentPath.speakText(cleanText);
+      return;
+    }
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = "en-US";
+      utterance.rate = 0.88;
+      utterance.pitch = 1.05;
+      utterance.volume = 1;
+      window.speechSynthesis.speak(utterance);
+    }
   },
 
   showTabContent(tabName) {
@@ -233,8 +295,8 @@ const KidsCorner = {
     const container = document.getElementById("alphabet-grid");
     if (!container) return;
     container.innerHTML = this.alphabetData.map(item => `
-      <div class="kids-card" onclick="KidsCorner.playAudio('${item.audioText}')">
-        <span class="kids-card-speaker">🔊</span>
+      <div class="kids-card">
+        <span class="kids-card-speaker" title="Click voice note" onclick="event.stopPropagation(); KidsCorner.playAudio('${item.audioText}')">🔊</span>
         <div class="kids-card-symbol">${item.letter}</div>
         ${this.getIllustration(item.imageName)}
         <div class="kids-card-sub">${item.word}</div>
@@ -247,8 +309,8 @@ const KidsCorner = {
     const container = document.getElementById("numbers-grid");
     if (!container) return;
     container.innerHTML = this.numbersData.map(item => `
-      <div class="kids-card" onclick="KidsCorner.playAudio('${item.num}, ${item.countText}')">
-        <span class="kids-card-speaker">🔊</span>
+      <div class="kids-card">
+        <span class="kids-card-speaker" title="Click voice note" onclick="event.stopPropagation(); KidsCorner.playAudio('${item.num}, ${item.countText}')">🔊</span>
         <div class="kids-card-symbol" style="color: var(--vibe-pink);">${item.num}</div>
         ${this.getIllustration(item.imageName)}
         <div class="kids-card-sub">${item.word}</div>
@@ -256,16 +318,17 @@ const KidsCorner = {
     `).join("");
   },
 
-  // 3. COLORS & SHAPES WITH RICH GRAPHICS
+  // 3. COLORS ONLY WITH VOICE NOTE
   renderColors() {
     const container = document.getElementById("colors-grid");
     if (!container) return;
     container.innerHTML = this.colorsData.map(item => `
-      <div class="kids-card" onclick="KidsCorner.playAudio('${item.name}, ${item.sample}')">
-        <span class="kids-card-speaker">🔊</span>
-        <div style="width:45px; height:45px; border-radius:50%; background:${item.hex}; margin: 0 auto 0.5rem; border:2px solid #fff; box-shadow:0 4px 10px rgba(0,0,0,0.15);"></div>
-        ${this.getIllustration(item.imageName)}
-        <div class="kids-card-sub" style="font-weight:700;">${item.name}</div>
+      <div class="kids-card kids-color-card">
+        <span class="kids-card-speaker" title="Click voice note" onclick="event.stopPropagation(); KidsCorner.playAudio('${item.name} color')">🔊</span>
+        <div class="kids-color-swatch-wrap">
+          <div class="kids-color-swatch" style="background:${item.hex};"></div>
+          <span class="kids-color-name-mini">${item.name}</span>
+        </div>
       </div>
     `).join("");
   },
@@ -285,6 +348,22 @@ const KidsCorner = {
             <h3 style="font-size:1.25rem; font-weight:800; margin-top:0.25rem;">${rhyme.title}</h3>
           </div>
         </div>
+        <div class="rhyme-voice-row">
+          <div class="rhyme-voice-card">
+            <span class="rhyme-voice-icon">🎙️</span>
+            <span class="rhyme-voice-label">Cartoon Voice</span>
+            <button class="rhyme-voice-play" onclick="KidsCorner.playCartoonVoice(${index})">▶</button>
+          </div>
+          <label class="rhyme-upload-area" for="rhyme-file-${index}">
+            <span class="rhyme-upload-icon">📁</span>
+            <span class="rhyme-upload-label">Upload Rhyme File</span>
+            <input class="rhyme-file-input" type="file" id="rhyme-file-${index}" accept="audio/*,image/*,.pdf,.txt">
+          </label>
+        </div>
+        <div class="rhyme-file-result">
+          <span class="rhyme-file-name">No file selected</span>
+          <button class="rhyme-file-play" type="button" disabled>▶ Play</button>
+        </div>
         <div class="rhyme-lyrics-box" id="lyrics-${index}">
           ${rhyme.lyrics.replace(/\n/g, "<br>")}
         </div>
@@ -293,6 +372,64 @@ const KidsCorner = {
         </button>
       </div>
     `).join("");
+
+    this.attachRhymeFileEvents();
+  },
+
+  attachRhymeFileEvents() {
+    const inputs = Array.from(document.querySelectorAll(".rhyme-file-input"));
+    inputs.forEach(input => {
+      const card = input.closest(".rhyme-card");
+      const fileName = card.querySelector(".rhyme-file-name");
+      const filePlay = card.querySelector(".rhyme-file-play");
+      const fileText = card.querySelector(".rhyme-upload-label");
+
+      input.addEventListener("change", () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+
+        const objectUrl = URL.createObjectURL(file);
+        input.dataset.objectUrl = objectUrl;
+        fileName.textContent = file.name;
+        fileText.textContent = "Uploaded";
+        filePlay.disabled = false;
+        filePlay.dataset.objectUrl = objectUrl;
+      });
+
+      filePlay.addEventListener("click", () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+
+        const objectUrl = input.dataset.objectUrl || filePlay.dataset.objectUrl;
+        if (!objectUrl) return;
+
+        const audio = new Audio(objectUrl);
+        audio.play().catch(() => {
+          FluentPath.showToast("This uploaded file cannot be played here", "info");
+        });
+      });
+    });
+  },
+
+  playCartoonVoice(index) {
+    const rhyme = this.rhymesData[index];
+    if (!rhyme) return;
+
+    if (!('speechSynthesis' in window)) {
+      FluentPath.showToast("Cartoon voice is unavailable in this browser", "info");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(`${rhyme.title}. ${rhyme.lyrics}`);
+    utterance.lang = "en-GB";
+    utterance.rate = 0.84;
+    utterance.pitch = 1.35;
+    utterance.volume = 1;
+    utterance.onstart = () => {
+      FluentPath.showToast(`Cartoon voice: ${rhyme.title}`, "info");
+    };
+    window.speechSynthesis.speak(utterance);
   },
 
   singRhyme(index) {
@@ -394,6 +531,7 @@ const KidsCorner = {
         const expected = this.phonicsData[this.phonicsIndex].word;
         if (fullWord === expected) {
           FluentPath.playSuccessChime();
+          this.showCartoonClap(`Yay! You spelled ${fullWord}! 👏`);
           FluentPath.showToast(`🎉 Correct! You spelled ${fullWord}! +20 Coins!`, "success");
           FluentPath.addGameCredits(20, `Spelled ${fullWord}`);
 
@@ -479,6 +617,7 @@ const KidsCorner = {
       btn.style.background = "var(--accent-emerald)";
       btn.style.color = "#fff";
       FluentPath.playSuccessChime();
+      this.showCartoonClap("Great listening! 👏");
       FluentPath.addGameCredits(15, "Story Reader Comprehension");
       FluentPath.showToast("Great listening! Correct answer! ⭐", "success");
     } else {
@@ -545,6 +684,7 @@ const KidsCorner = {
         this.matchedPairs++;
         this.flippedCards = [];
         FluentPath.playSuccessChime();
+        this.showCartoonClap(`Match found! ${first.item} 👏`);
 
         if (this.matchedPairs === 6) {
           const statusEl = document.getElementById("memory-status");
@@ -594,6 +734,7 @@ const KidsCorner = {
     if (selected === correct) {
       btn.classList.add("correct");
       FluentPath.playSuccessChime();
+      this.showCartoonClap("Correct! Amazing clap! 👏");
       FluentPath.addGameCredits(25, "Quiz Correct Answer");
 
       setTimeout(() => {

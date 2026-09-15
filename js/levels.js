@@ -917,6 +917,32 @@ const DuoLevels = {
   isVoiceMuted: false,
   isCatJumping: false,
 
+  jumpPanda(imgEl) {
+    if (!imgEl) return;
+
+    imgEl.classList.remove('cleo-jump-anim');
+    void imgEl.offsetWidth;
+    imgEl.classList.add('cleo-jump-anim');
+
+    const movement = document.createElement('span');
+    movement.className = 'panda-jump-spark';
+    movement.textContent = '🐾';
+    movement.style.position = 'absolute';
+    movement.style.pointerEvents = 'none';
+    movement.style.left = '50%';
+    movement.style.top = '-14px';
+    movement.style.transform = 'translateX(-50%)';
+    movement.style.fontSize = '1.4rem';
+
+    const node = imgEl.closest('.cleo-mascot-trail-node');
+    if (node) {
+      node.appendChild(movement);
+      setTimeout(() => {
+        if (movement.parentNode) movement.parentNode.removeChild(movement);
+      }, 650);
+    }
+  },
+
   toggleVoice() {
     this.isVoiceMuted = !this.isVoiceMuted;
     const btn = document.getElementById("duo-voice-toggle");
@@ -1070,7 +1096,7 @@ const DuoLevels = {
                 <div class="duo-node-row ${offsetClass}">
                   ${isActive ? `
                     <div class="cleo-mascot-trail-node">
-                      <img src="images/cat-avatar.svg" class="cleo-trail-cat-img ${this.isCatJumping ? 'cleo-jump-anim' : ''}" alt="Cleo the Cat">
+                      <img src="images/panda.svg" class="cleo-trail-cat-img ${this.isCatJumping ? 'cleo-jump-anim' : ''}" alt="Panda Next Level" title="Click panda to jump" onclick="DuoLevels.jumpPanda(this)">
                       <div class="cleo-speech-mini">Level ${level.id}! 🐾</div>
                     </div>
                   ` : ""}
@@ -1385,7 +1411,7 @@ const DuoLevels = {
 
     FluentPath.playSuccessChime();
 
-    // Trigger Cleo the Cat jumping animation on the path
+    // Trigger panda jumping animation on the path
     this.isCatJumping = true;
 
     // Mark completed
@@ -1414,10 +1440,18 @@ const DuoLevels = {
     this.updateUI();
 
     const hasNextLevel = (nextLevelId <= 25);
-    this.speakText(`Congratulations! Level ${this.currentLevel.id} completed! Cleo the cat is jumping to level ${nextLevelId}!`);
+    this.speakText(`Congratulations! Level ${this.currentLevel.id} completed! Panda is jumping to level ${nextLevelId}!`);
 
     modalBody.innerHTML = `
       <div style="text-align:center; padding: 1.5rem 1rem;">
+        <div class="duo-panda-jump-zone">
+          <div class="duo-panda-jump-wrap">
+            <img src="images/panda.svg" alt="Panda Jump" class="duo-panda-jump-image">
+            <span class="duo-panda-jump-label">Next Level!</span>
+            <span class="duo-panda-jump-spark">🐾</span>
+          </div>
+        </div>
+
         <div style="position:relative; display:inline-block; margin-bottom:1rem;">
           <img src="images/victory-trophy-cat.jpg" alt="Victory Cleo" style="width:200px; height:200px; border-radius:var(--radius-xl); object-fit:cover; border:3px solid var(--accent-amber); box-shadow:0 0 35px rgba(245, 158, 11, 0.45); animation: cleoJumpBadge 1.2s ease-in-out infinite alternate;">
           <div style="position:absolute; bottom:-8px; right:-8px; font-size:2.5rem; animation: floatAvatar 2s ease-in-out infinite;">🏆</div>
@@ -1426,7 +1460,7 @@ const DuoLevels = {
           Level ${this.currentLevel.id} Completed!
         </h2>
         <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 440px; margin: 0 auto 1.2rem;">
-          Outstanding work! <b>Cleo the Cat</b> has leaped forward to unlock <b>Level ${nextLevelId <= 25 ? nextLevelId : 'Mastery'}</b>!
+          Outstanding work! <b>Panda</b> has leaped forward to unlock <b>Level ${nextLevelId <= 25 ? nextLevelId : 'Mastery'}</b>!
         </p>
 
         <div style="display:flex; justify-content:center; gap:1.5rem; margin-bottom: 1.8rem;">

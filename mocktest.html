@@ -66,6 +66,302 @@
       height: 14px;
       border-radius: 3px;
     }
+    .adult-benefit-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
+      background: var(--vibe-gradient-soft);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 800;
+    }
+    .adult-benefit-strip .benefit-title {
+      color: var(--primary);
+      font-weight: 900;
+      letter-spacing: 0.03em;
+    }
+    .adult-benefit-chip {
+      background: var(--bg-surface-solid);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 0.35rem 0.8rem;
+      color: var(--text-main);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .adult-answer-feedback {
+      display: none;
+      margin-top: 0.9rem;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      font-size: 0.86rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .adult-answer-feedback.correct {
+      display: block;
+      border-color: var(--accent-emerald);
+      background: var(--accent-emerald-light);
+      color: var(--text-main);
+    }
+    .adult-answer-feedback.wrong {
+      display: block;
+      border-color: var(--accent-rose);
+      background: var(--accent-rose-light);
+      color: var(--text-main);
+    }
+    .adult-answer-feedback .feedback-title {
+      display: block;
+      font-weight: 900;
+      margin-bottom: 0.3rem;
+    }
+
+    .mocktest-benefit-panel {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--vibe-gradient-soft);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .mocktest-benefit-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .mocktest-benefit-title {
+      color: var(--text-main);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    .mocktest-benefit-tag {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.78rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      padding: 0.35rem 0.8rem;
+    }
+
+    .mocktest-benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .mocktest-benefit-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.85rem;
+      min-height: 110px;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mocktest-benefit-card .benefit-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-full);
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .mocktest-benefit-card .benefit-label {
+      font-size: 0.82rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .mocktest-benefit-card .benefit-text {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .mocktest-extra-section {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .mocktest-extra-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .mocktest-extra-title {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .mocktest-extra-tag {
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface-solid);
+      padding: 0.35rem 0.8rem;
+    }
+
+    .mocktest-extra-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .mocktest-extra-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.9rem;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.55rem;
+      box-shadow: var(--shadow-soft);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .mocktest-extra-card:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .mocktest-extra-card .extra-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .mocktest-extra-card .extra-label {
+      font-size: 0.84rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .mocktest-extra-card .extra-text {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .mocktest-extra-card .extra-link {
+      margin-top: auto;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-decoration: none;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.55rem;
+      width: 100%;
+    }
+
+    .mocktest-roadmap-section {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--vibe-gradient-soft);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .mocktest-roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .mocktest-roadmap-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.9rem;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      color: var(--text-main);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mocktest-roadmap-card .roadmap-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .mocktest-roadmap-card .roadmap-label {
+      font-size: 0.84rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .mocktest-roadmap-card .roadmap-text {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .mocktest-roadmap-card .roadmap-meter {
+      margin-top: auto;
+      height: 4px;
+      border-radius: var(--radius-full);
+      background: var(--primary);
+      width: var(--meter-width, 60%);
+    }
+
   </style>
 </head>
 <body>
@@ -273,6 +569,77 @@
   <!-- Main Content -->
   <main class="main-content">
     <div class="container">
+      <div class="adult-benefit-strip">
+        <span class="benefit-title">Adult Benefits</span>
+        <span class="adult-benefit-chip">📈 Score Clarity</span>
+        <span class="adult-benefit-chip">🎧 Listening Skill</span>
+        <span class="adult-benefit-chip">🧠 Confidence Boost</span>
+      </div>
+
+      <section class="mocktest-benefit-panel">
+        <div class="mocktest-benefit-panel-head">
+          <span class="mocktest-benefit-title">Mock Test Learning Benefits</span>
+          <span class="mocktest-benefit-tag">Practice Flow</span>
+        </div>
+
+        <div class="mocktest-benefit-grid">
+          <div class="mocktest-benefit-card">
+            <span class="benefit-icon">📚</span>
+            <span class="benefit-label">Skill Growth</span>
+            <span class="benefit-text">Improve reading, writing, listening and speaking with real test pressure.</span>
+          </div>
+          <div class="mocktest-benefit-card">
+            <span class="benefit-icon">⚡</span>
+            <span class="benefit-label">Fast Feedback</span>
+            <span class="benefit-text">Understand your answer pattern and focus on high-impact improvement areas.</span>
+          </div>
+          <div class="mocktest-benefit-card">
+            <span class="benefit-icon">🎯</span>
+            <span class="benefit-label">Band Planning</span>
+            <span class="benefit-text">Use progress insight to build a smarter preparation plan for your next test.</span>
+          </div>
+          <div class="mocktest-benefit-card">
+            <span class="benefit-icon">🌍</span>
+            <span class="benefit-label">Exam Confidence</span>
+            <span class="benefit-text">Train in a calm, structured mock environment and reduce nervousness.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="mocktest-roadmap-section">
+        <div class="mocktest-extra-section-head">
+          <span class="mocktest-extra-title">Adult Learning Roadmap</span>
+          <span class="mocktest-extra-tag">Career Growth</span>
+        </div>
+
+        <div class="mocktest-roadmap-grid">
+          <div class="mocktest-roadmap-card">
+            <span class="roadmap-icon">🎤</span>
+            <span class="roadmap-label">Interview Skill</span>
+            <span class="roadmap-text">Build answer structure for short interview and work communication rounds.</span>
+            <span class="roadmap-meter" style="--meter-width: 76%;"></span>
+          </div>
+          <div class="mocktest-roadmap-card">
+            <span class="roadmap-icon">📘</span>
+            <span class="roadmap-label">Business Grammar</span>
+            <span class="roadmap-text">Practice formal sentence control for professional writing and speaking.</span>
+            <span class="roadmap-meter" style="--meter-width: 82%;"></span>
+          </div>
+          <div class="mocktest-roadmap-card">
+            <span class="roadmap-icon">🧑‍💼</span>
+            <span class="roadmap-label">Workplace English</span>
+            <span class="roadmap-text">Improve polite email, briefing, and teamwork communication skills.</span>
+            <span class="roadmap-meter" style="--meter-width: 68%;"></span>
+          </div>
+          <div class="mocktest-roadmap-card">
+            <span class="roadmap-icon">📈</span>
+            <span class="roadmap-label">Skill Score</span>
+            <span class="roadmap-text">Track confidence, accuracy and real adult communication progress.</span>
+            <span class="roadmap-meter" style="--meter-width: 90%;"></span>
+          </div>
+        </div>
+      </section>
+
       
       <!-- Exam Control Bar -->
       <div class="card" style="margin-bottom: 1.5rem; padding: 1.1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
@@ -304,6 +671,7 @@
             <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.4rem;" id="q-instruction">
               Select the one best response from the options below.
             </p>
+            <div id="adult-answer-feedback" class="adult-answer-feedback"></div>
           </div>
 
           <!-- Options List -->
@@ -496,6 +864,12 @@
 
       renderQuestion() {
         const q = this.questions[this.currentIndex];
+        const feedback = document.getElementById("adult-answer-feedback");
+        if (feedback) {
+          feedback.className = "adult-answer-feedback";
+          feedback.innerHTML = "";
+        }
+
         document.getElementById("question-tracker-text").textContent = `Question ${this.currentIndex + 1} / ${this.questions.length}`;
         document.getElementById("q-text").textContent = q.text;
         document.getElementById("question-skill-tag").textContent = `Skill: ${q.skill}`;
@@ -547,7 +921,31 @@
         this.userAnswers[this.currentIndex] = optionIndex;
         FluentPath.playClickBeep();
         this.renderPalette();
+
+        const q = this.questions[this.currentIndex];
+        const correct = optionIndex === q.correct;
+        this.showAdultFeedback(q, optionIndex, correct);
+
         this.renderQuestion();
+      }
+
+      showAdultFeedback(q, optionIndex, isCorrect) {
+        const feedback = document.getElementById("adult-answer-feedback");
+        if (!feedback) return;
+
+        const selectedText = q.options[optionIndex];
+        const correctText = q.options[q.correct];
+
+        if (isCorrect) {
+          feedback.className = "adult-answer-feedback correct";
+          feedback.innerHTML = `<span class="feedback-title">✅ Excellent answer</span>You selected <b>${selectedText}</b>. Strong adult strategy: keep the answer clear, precise, and confident.`;
+          FluentPath.showToast("Great answer! Adult strategy boost ✔", "success");
+          return;
+        }
+
+        feedback.className = "adult-answer-feedback wrong";
+        feedback.innerHTML = `<span class="feedback-title">🔎 Review this option</span>The stronger adult answer is <b>${correctText}</b>. Keep your language purposeful and precise.`;
+        FluentPath.showToast("Review the answer and try the next one.", "info");
       }
 
       toggleFlag() {
