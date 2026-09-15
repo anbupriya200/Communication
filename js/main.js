@@ -22,10 +22,18 @@ const FluentPath = {
     lastActive: new Date().toISOString()
   },
 
+  isKidsPage() {
+    const path = (window.location.pathname || "").toLowerCase();
+    const page = path.split("/").pop() || "";
+    return page === "kids-learning.html" || path.includes("kids-learning");
+  },
+
   init() {
     this.initTheme();
-    this.initVibeMesh();
-    this.initCanvasBackground();
+    if (this.isKidsPage()) {
+      this.initVibeMesh();
+      this.initCanvasBackground();
+    }
     this.checkSession();
     this.initNavbar();
     this.updateUserUI();
@@ -38,6 +46,7 @@ const FluentPath = {
 
   // Dynamic HTML5 Cartoon Interactive Background Engine
   initCanvasBackground() {
+    if (!this.isKidsPage()) return;
     if (document.getElementById("fluent-bg-canvas")) return;
 
     const canvas = document.createElement("canvas");
@@ -310,6 +319,7 @@ const FluentPath = {
   },
 
   initVibeMesh() {
+    if (!this.isKidsPage()) return;
     if (!document.querySelector(".vibe-mesh-bg")) {
       const mesh = document.createElement("div");
       mesh.className = "vibe-mesh-bg";
